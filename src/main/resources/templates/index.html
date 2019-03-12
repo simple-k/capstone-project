@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" >
+<head th:replace="fragments/header :: header('Welcome')"></head>
+<body>
+<h1 id="logo" style="text-align:center; font-size: 8em;"> Hello, World! </h1>
+<p id="welcome" style="text-align: center"><a th:href="@{/home}">Enter Site</a></p>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
