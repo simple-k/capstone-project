@@ -1,5 +1,4 @@
-package com.capstone.simplek.User;
-import com.capstone.simplek.Children.Children;
+package com.capstone.simplek.Model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
