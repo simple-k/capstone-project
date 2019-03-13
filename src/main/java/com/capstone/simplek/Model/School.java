@@ -10,11 +10,49 @@ public class School {
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
-    private String name;
+
+    @Column(nullable = false, length = 150)
+    private String stateSchoolId;
+
+    @Column(nullable = false, length = 10)
+    private String lowGrade;
+
+    @Column(nullable = false, length = 10)
+    private String highGrade;
+
+    @Column(nullable = false, length = 150)
+    private String schoolName;
 
     @Column(nullable = false)
-    private String address;
+    private String streetAddress;
+
+    @Column(nullable = false, length = 5)
+    private String zipCode;
+
+    @Column(nullable = false, length = 14)
+    private String phone;
+
+    @Column(nullable = false)
+    private boolean charter;
+
+    @Column(nullable = false)
+    private boolean magnet;
+
+    @Column(nullable = false)
+    private boolean titleISchool;
+
+    @Column(nullable = false)
+    private boolean title1SchoolWide;
+
+    @Column(nullable = false, length = 5)
+    private String students;
+
+    @Column(nullable = false, length = 5)
+    private String teachers;
+
+    @Column(nullable = false, length = 5)
+    private String studentTeacherRatio;
+
 
     @ManyToOne
     @JoinColumn(name = "district_id")
@@ -31,14 +69,24 @@ public class School {
     public School() {
     }
 
-    public School(long id, String name, String address, District district, List<Service> services) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.district = district;
-        this.services = services;
-    }
 
+    public School(long id, String stateSchoolId, String lowGrade, String highGrade, String schoolName, String address, String zipCode, String phone, boolean charter, boolean magnet, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, District district, List<Service> services) {
+        this.id = id;
+        this.stateSchoolId = stateSchoolId;
+        this.lowGrade = lowGrade;
+        this.highGrade = highGrade;
+        this.schoolName = schoolName;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.phone = phone;
+        this.charter = charter;
+        this.magnet = magnet;
+        this.titleISchool = titleISchool;
+        this.title1SchoolWide = title1SchoolWide;
+        this.students = students;
+        this.teachers = teachers;
+        this.studentTeacherRatio = studentTeacherRatio;
+}
     public long getId() {
         return id;
     }
@@ -47,6 +95,38 @@ public class School {
         this.id = id;
     }
 
+
+    public String getStateSchoolId() {
+        return stateSchoolId;
+    }
+
+    public void setStateSchoolId(String stateSchoolId) {
+        this.stateSchoolId = stateSchoolId;
+    }
+
+    public String getLowGrade() {
+        return lowGrade;
+    }
+
+    public void setLowGrade(String lowGrade) {
+        this.lowGrade = lowGrade;
+    }
+
+    public String getHighGrade() {
+        return highGrade;
+    }
+
+    public void setHighGrade(String highGrade) {
+        this.highGrade = highGrade;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+      
     public String getName() {
         return name;
     }
@@ -63,6 +143,79 @@ public class School {
         this.address = address;
     }
 
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isCharter() {
+        return charter;
+    }
+
+    public void setCharter(boolean charter) {
+        this.charter = charter;
+    }
+
+    public boolean isMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(boolean magnet) {
+        this.magnet = magnet;
+    }
+
+    public boolean isTitleISchool() {
+        return titleISchool;
+    }
+
+    public void setTitleISchool(boolean titleISchool) {
+        this.titleISchool = titleISchool;
+    }
+
+    public boolean isTitle1SchoolWide() {
+        return title1SchoolWide;
+    }
+
+    public void setTitle1SchoolWide(boolean title1SchoolWide) {
+        this.title1SchoolWide = title1SchoolWide;
+    }
+
+    public String getStudents() {
+        return students;
+    }
+
+    public void setStudents(String students) {
+        this.students = students;
+    }
+
+    public String getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(String teachers) {
+        this.teachers = teachers;
+    }
+
+    public String getStudentTeacherRatio() {
+        return studentTeacherRatio;
+    }
+
+    public void setStudentTeacherRatio(String studentTeacherRatio) {
+        this.studentTeacherRatio = studentTeacherRatio;
+    }
+      
     public District getDistrict() {
         return district;
     }

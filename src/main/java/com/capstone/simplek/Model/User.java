@@ -1,5 +1,4 @@
 package com.capstone.simplek.Model;
-import com.capstone.simplek.Model.Children;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -147,4 +146,4 @@ public class User {
         this.children = children;
     }
 
-}
+}// class
