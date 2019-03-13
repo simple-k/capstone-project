@@ -1,0 +1,24 @@
+USE simple_k_db;
+
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE districts;
+SET FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO districts (name, state_district_id)
+VALUES ('ALAMO HEIGHTS ISD', 'TX-015901'),
+       ('EAST CENTRAL ISD', 'TX-015911'),
+       ('EDGEWOOD ISD', 'TX-015905'),
+       ('FLORESVILLE ISD', 'TX-247901'),
+       ('FORT SAM HOUSTON ISD', 'TX-015914'),
+       ('HARLANDALE ISD', 'TX-015904'),
+       ('JUDSON ISD', 'TX-015916'),
+       ('LACKLAND ISD', 'TX-015913'),
+       ('MEDINA VALLEY ISD', 'TX-163908'),
+       ('NORTH EAST ISD', 'TX-015910'),
+       ('NORTHSIDE ISD', 'TX-015915'),
+       ('RANDOLPH FIELD ISD', 'TX-015906'),
+       ('SAN ANTONIO ISD', 'TX-015907'),
+       ('SCHERTZ-CIBOLO-UNIVERSAL CITY ISD', ''),
+       ('SOUTH SAN ANTONIO ISD', 'TX-015908'),
+       ('SOUTHSIDE ISD', 'TX-015917'),
+       ('SOUTHWEST ISD', 'TX-015912');
