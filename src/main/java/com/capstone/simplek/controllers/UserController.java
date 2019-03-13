@@ -1,7 +1,7 @@
 package com.capstone.simplek.controllers;
 
-import com.capstone.simplek.User.User;
-import com.capstone.simplek.User.UserRepository;
+import com.capstone.simplek.Model.User;
+import com.capstone.simplek.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

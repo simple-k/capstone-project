@@ -1,5 +1,5 @@
-package com.capstone.simplek.District;
-import com.capstone.simplek.School.School;
+package com.capstone.simplek.Model;
+import com.capstone.simplek.Model.School;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

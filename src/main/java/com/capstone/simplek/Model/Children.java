@@ -1,6 +1,4 @@
-package com.capstone.simplek.Children;
-import com.capstone.simplek.Service.Service;
-import com.capstone.simplek.User.User;
+package com.capstone.simplek.Model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;

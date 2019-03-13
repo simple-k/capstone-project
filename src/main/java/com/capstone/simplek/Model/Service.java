@@ -1,6 +1,6 @@
-package com.capstone.simplek.Service;
-import com.capstone.simplek.Children.Children;
-import com.capstone.simplek.School.School;
+package com.capstone.simplek.Model;
+import com.capstone.simplek.Model.Children;
+import com.capstone.simplek.Model.School;
 import javax.persistence.*;
 import java.util.List;
 
