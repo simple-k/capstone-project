@@ -1,3 +1,18 @@
 body{
     background-image: url("../img/dust_scratches.png");
+    background-color: floralwhite;
+}
+#container {
+
+}
+#logo {
+    text-align: center;
+    margin: 1em auto 1em auto;
+    padding: 1em 1em 1em 1em;
+}
+#banner {
+    width: 320px;
+    height: 183px;
+    background-color: white;
+    text-align: center;
 }
