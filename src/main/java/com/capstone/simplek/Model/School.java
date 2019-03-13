@@ -1,4 +1,5 @@
 package com.capstone.simplek.Model;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class School {
 
     @Id @GeneratedValue
     private long id;
+
 
     @Column(nullable = false, length = 150)
     private String stateSchoolId;
@@ -22,7 +24,7 @@ public class School {
     private String schoolName;
 
     @Column(nullable = false)
-    private String address;
+    private String streetAddress;
 
     @Column(nullable = false, length = 5)
     private String zipCode;
@@ -51,6 +53,7 @@ public class School {
     @Column(nullable = false, length = 5)
     private String studentTeacherRatio;
 
+
     @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;
@@ -65,6 +68,7 @@ public class School {
 
     public School() {
     }
+
 
     public School(long id, String stateSchoolId, String lowGrade, String highGrade, String schoolName, String address, String zipCode, String phone, boolean charter, boolean magnet, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, District district, List<Service> services) {
         this.id = id;
@@ -82,10 +86,7 @@ public class School {
         this.students = students;
         this.teachers = teachers;
         this.studentTeacherRatio = studentTeacherRatio;
-        this.district = district;
-        this.services = services;
-    }
-
+}
     public long getId() {
         return id;
     }
@@ -93,6 +94,7 @@ public class School {
     public void setId(long id) {
         this.id = id;
     }
+
 
     public String getStateSchoolId() {
         return stateSchoolId;
@@ -124,6 +126,13 @@ public class School {
 
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
+      
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
@@ -133,6 +142,7 @@ public class School {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     public String getZipCode() {
         return zipCode;
@@ -205,7 +215,7 @@ public class School {
     public void setStudentTeacherRatio(String studentTeacherRatio) {
         this.studentTeacherRatio = studentTeacherRatio;
     }
-
+      
     public District getDistrict() {
         return district;
     }
