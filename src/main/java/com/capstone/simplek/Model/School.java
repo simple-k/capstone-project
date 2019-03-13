@@ -1,5 +1,4 @@
 package com.capstone.simplek.Model;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,7 +8,6 @@ public class School {
 
     @Id @GeneratedValue
     private long id;
-
 
     @Column(nullable = false, length = 150)
     private String stateSchoolId;
@@ -38,10 +36,10 @@ public class School {
     @Column(nullable = false)
     private boolean magnet;
 
-    @Column(nullable = false)
+    @Column(name = "title_i_school", nullable = false)
     private boolean titleISchool;
 
-    @Column(nullable = false)
+    @Column(name = "title_1_school_wide", nullable = false)
     private boolean title1SchoolWide;
 
     @Column(nullable = false, length = 5)
@@ -52,7 +50,6 @@ public class School {
 
     @Column(nullable = false, length = 5)
     private String studentTeacherRatio;
-
 
     @ManyToOne
     @JoinColumn(name = "district_id")
@@ -69,14 +66,13 @@ public class School {
     public School() {
     }
 
-
-    public School(long id, String stateSchoolId, String lowGrade, String highGrade, String schoolName, String address, String zipCode, String phone, boolean charter, boolean magnet, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, District district, List<Service> services) {
+    public School(long id, String stateSchoolId, String lowGrade, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean magnet, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, District district, List<Service> services) {
         this.id = id;
         this.stateSchoolId = stateSchoolId;
         this.lowGrade = lowGrade;
         this.highGrade = highGrade;
         this.schoolName = schoolName;
-        this.address = address;
+        this.streetAddress = streetAddress;
         this.zipCode = zipCode;
         this.phone = phone;
         this.charter = charter;
@@ -126,23 +122,15 @@ public class School {
 
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
-      
-    public String getName() {
-        return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public String getAddress() {
-        return address;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
 
     public String getZipCode() {
         return zipCode;
