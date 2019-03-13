@@ -4,6 +4,7 @@ import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +15,15 @@ public class UserController {
     @Autowired
     private UserRepository userDao;
 
-    @GetMapping("/user/register")
-    public String register(){
-        return"user/registration";
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("user", new User());
+        return"user/register";
     }
 
-    @PostMapping("/user/register")
+    @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
         userDao.save(user);
-        return "redirect:user/login/registered";
+        return "redirect:login/registered";
     }
 }
