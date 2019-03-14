@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('Welcome')"></head>
 <body>
-<div id="container">
-    <div id="logo">
-        <h3>Simple K</h3>
-        <h6>Pre-K Enrollment Made Easy</h6>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <div id="logo">
+            <h3>Simple K</h3>
+            <h6>Pre-K Enrollment Made Easy</h6>
+        </div>
+        <div id="banner">
+            BANNER BOX
+            <!--SCROLLING IMAGES GO HERE. -->
+            <!--THIS BOX WILL NEED TO BE SET TO SPECIFIC PIXEL WIDTHS WITH MEDIA QUERIES.-->
+        </div>
+        <p><a th:href="@{/register}">Find Schools</a></p>
+
+        <div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/scripts :: scripts"></div>
     </div>
-    <div id="banner">
-        BANNER BOX
-        <!--SCROLLING IMAGES GO HERE. -->
-        <!--THIS BOX WILL NEED TO BE SET TO SPECIFIC PIXEL WIDTHS WITH MEDIA QUERIES.-->
-    </div>
-    <p style="text-align: center"><a th:href="@{/register}">Find Schools</a></p>
-    <div th:replace="fragments/scripts :: scripts"></div>
-</div>
 </body>
 </html>
