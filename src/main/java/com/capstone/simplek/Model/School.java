@@ -9,19 +9,20 @@ public class School {
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 19)
     private String stateSchoolId;
 
-    @Column(nullable = false, length = 10)
-    private String lowGrade;
+    @ManyToOne
+    @JoinColumn(name = "district_id")
+    private District district;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 2)
     private String highGrade;
 
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 32)
     private String schoolName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32)
     private String streetAddress;
 
     @Column(nullable = false, length = 5)
@@ -30,36 +31,23 @@ public class School {
     @Column(nullable = false, length = 14)
     private String phone;
 
-    @Column(nullable = false, length = 3)
-    private String charter;
+    @Column
+    private boolean charter;
 
-    @Column(nullable = false, length = 3)
-    private String magnet;
+    @Column(name = "title_i_school")
+    private boolean titleISchool;
 
-    @Column(name = "title_i_school", nullable = false, length = 3)
-    private String titleISchool;
+    @Column(name = "title_1_school_wide")
+    private boolean title1SchoolWide;
 
-    @Column(name = "title_1_school_wide", nullable = false, length = 3)
-    private String title1SchoolWide;
+    @Column(length = 10)
+    private int students;
 
-    @Column(nullable = false, length = 10)
-    private String students;
+    @Column(length = 10)
+    private int teachers;
 
-    @Column(nullable = false, length = 10)
-    private String teachers;
-
-    @Column(nullable = false, length = 10)
-    private String studentTeacherRatio;
-
-    @Column(nullable = false, length = 10)
-    private String freeLunch;
-
-    @Column(nullable = false, length = 10)
-    private String reducedLunch;
-
-    @ManyToOne
-    @JoinColumn(name = "district_id")
-    private District district;
+    @Column
+    private double studentTeacherRatio;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -72,25 +60,21 @@ public class School {
     public School() {
     }
 
-    public School(long id, String stateSchoolId, String lowGrade, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, String charter, String magnet, String titleISchool, String title1SchoolWide, String students, String teachers, String studentTeacherRatio, String freeLunch, String reducedLunch, District district, List<Service> services) {
+    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, int students, int teachers, double studentTeacherRatio, List<Service> services) {
         this.id = id;
         this.stateSchoolId = stateSchoolId;
-        this.lowGrade = lowGrade;
+        this.district = district;
         this.highGrade = highGrade;
         this.schoolName = schoolName;
         this.streetAddress = streetAddress;
         this.zipCode = zipCode;
         this.phone = phone;
         this.charter = charter;
-        this.magnet = magnet;
         this.titleISchool = titleISchool;
         this.title1SchoolWide = title1SchoolWide;
         this.students = students;
         this.teachers = teachers;
         this.studentTeacherRatio = studentTeacherRatio;
-        this.freeLunch = freeLunch;
-        this.reducedLunch = reducedLunch;
-        this.district = district;
         this.services = services;
     }
 
@@ -102,21 +86,12 @@ public class School {
         this.id = id;
     }
 
-
     public String getStateSchoolId() {
         return stateSchoolId;
     }
 
     public void setStateSchoolId(String stateSchoolId) {
         this.stateSchoolId = stateSchoolId;
-    }
-
-    public String getLowGrade() {
-        return lowGrade;
-    }
-
-    public void setLowGrade(String lowGrade) {
-        this.lowGrade = lowGrade;
     }
 
     public String getHighGrade() {
@@ -159,76 +134,52 @@ public class School {
         this.phone = phone;
     }
 
-    public String isCharter() {
+    public boolean isCharter() {
         return charter;
     }
 
-    public void setCharter(String charter) {
+    public void setCharter(boolean charter) {
         this.charter = charter;
     }
 
-    public String isMagnet() {
-        return magnet;
-    }
-
-    public void setMagnet(String magnet) {
-        this.magnet = magnet;
-    }
-
-    public String isTitleISchool() {
+    public boolean isTitleISchool() {
         return titleISchool;
     }
 
-    public void setTitleISchool(String titleISchool) {
+    public void setTitleISchool(boolean titleISchool) {
         this.titleISchool = titleISchool;
     }
 
-    public String isTitle1SchoolWide() {
+    public boolean isTitle1SchoolWide() {
         return title1SchoolWide;
     }
 
-    public void setTitle1SchoolWide(String title1SchoolWide) {
+    public void setTitle1SchoolWide(boolean title1SchoolWide) {
         this.title1SchoolWide = title1SchoolWide;
     }
 
-    public String getStudents() {
+    public int getStudents() {
         return students;
     }
 
-    public void setStudents(String students) {
+    public void setStudents(int students) {
         this.students = students;
     }
 
-    public String getTeachers() {
+    public int getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(String teachers) {
+    public void setTeachers(int teachers) {
         this.teachers = teachers;
     }
 
-    public String getStudentTeacherRatio() {
+    public double getStudentTeacherRatio() {
         return studentTeacherRatio;
     }
 
-    public void setStudentTeacherRatio(String studentTeacherRatio) {
+    public void setStudentTeacherRatio(double studentTeacherRatio) {
         this.studentTeacherRatio = studentTeacherRatio;
-    }
-
-    public String getFreeLunch() {
-        return freeLunch;
-    }
-
-    public void setFreeLunch(String freeLunch) {
-        this.freeLunch = freeLunch;
-    }
-
-    public String getReducedLunch() {
-        return reducedLunch;
-    }
-
-    public void setReducedLunch(String reducedLunch) {
-        this.reducedLunch = reducedLunch;
     }
 
     public District getDistrict() {

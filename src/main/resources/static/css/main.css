@@ -1,9 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
 body{
     background-image: url("../img/dust_scratches.png");
     background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
 }
-#container {
-
+.container {
+    margin: 100px auto 50px auto;
+    padding-bottom: 50px;
+    text-align: center;
 }
 #logo {
     text-align: center;
@@ -18,4 +29,103 @@ body{
     background-color: white;
     text-align: center;
     border-radius: 10px;
+}
+/*---NavBar---*/
+.navbar {
+    background-color: transparent;
+    background-image: linear-gradient(rgba(140, 140, 140, 0.8), rgba(140, 140, 140, 0.8));
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    padding: 16px;
+    width: 100%;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+.nav-logo-c {
+    padding-left: 15px;
+}
+.nav-link-toggle-c {
+    display: none;
+}
+.nav-items-c {
+    display: flex;
+    margin-left: auto;
+}
+.nav-link-c {
+    padding-right: 20px;
+}
+.nav-logo-c a, .nav-items-c a {
+    color: #fff;
+    text-decoration: none;
+}
+.nav-logo-c a.active, .nav-items-c a.active {
+    color: #f00;
+}
+.navbar.scrolled {
+    background-color: #fff;
+    box-shadow: 0 2px 6px -4px #080808;
+    transition: background-color 200ms linear;
+    color: #080808;
+}
+.nav-logo-c a.scrolld, .nav-items-c a.scrolld {
+    color: #fff;
+}
+.nav-logo-c a.active.scroll, .nav-items-c a.active.scroll {
+    color: #f00;
+}
+a:hover {
+    cursor:pointer;
+}
+/*---Footer---*/
+.footer {
+    background-color: #8c8c8c;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3em;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+/*---Media Queries---*/
+@media only screen and (max-width: 425px) {
+    footer {
+        font-size: .7em;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .nav-items-c,
+    .navbar{
+        flex-direction: column;
+    }
+    .nav-items-c {
+        display: none;
+        margin-left: 0;
+        padding-left: 15px;
+    }
+    .nav-logo-c a:hover, .nav-items-c a:hover {
+        border-left: 3px solid #ff0000;
+        padding-left: 5px;
+    }
+    .nav-toggle-show-c {
+        display: flex;
+    }
+    .nav-link-toggle-c {
+        align-self: flex-end;
+        display: initial;
+        position: absolute;
+        padding-right: 15px;
+        cursor: pointer;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .nav-logo-c a:hover, .nav-items-c a:hover {
+        border-bottom: 3px solid #ff0000;
+        padding-bottom: 13px;
+    }
 }
