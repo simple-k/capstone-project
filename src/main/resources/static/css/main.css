@@ -79,6 +79,15 @@ body{
 a:hover {
     cursor:pointer;
 }
+
+/*---Color Palette*/
+.paper-white {color: #fcfaf6;}
+.click-orange {color: #FFC300;}
+.frame-purple {color: #a75cf2;}
+.confirm-blue {color: #5cf2f2;}
+.success-green {color: #a7f25c;}
+.alert-red {color: #f25c5c;}
+
 /*---Footer---*/
 .footer {
     background-color: #8c8c8c;
