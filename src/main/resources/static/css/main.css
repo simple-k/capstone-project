@@ -1,6 +1,6 @@
 body{
     background-image: url("../img/dust_scratches.png");
-    background-color: floralwhite;
+    background-color: #F5F5F5;
 }
 #container {
 
@@ -13,6 +13,9 @@ body{
 #banner {
     width: 320px;
     height: 183px;
+    margin: 0 auto 0 auto;
+    padding: 1em 1em 1em 1em;
     background-color: white;
     text-align: center;
+    border-radius: 10px;
 }
