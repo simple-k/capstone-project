@@ -1,6 +1,43 @@
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head th:replace="fragments/header :: header('Welcome')"></head>
-<div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+<th:block th:fragment="navbar">
+    <div class="navbar">
+        <div class="nav-logo-c">
+            <a th:href="@{/}">Simple K</a>
+        </div>
+        <div class="nav-link-toggle-c">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-items-c">
+            <div class="nav-link-c">
+                <a th:href="@{/}"></a>
+            </div>
 
-</div>
+            <div class="nav-link-c">
+                <a th:href="@{/}"></a>
+            </div>
+
+            <div class="nav-link-c">
+                <a th:href="@{/}"></a>
+            </div>
+
+            <div class="nav-link-c">
+                <a th:href="@{/register}">Register</a>
+            </div>
+
+            <div class="nav-link-c">
+                <a th:href="@{/login}">Log In</a>
+            </div>
+
+            <div>
+                <form id="logout" th:action="@{/logout}" th:method="post">
+                    <a class="logout">Log Out</a>
+                </form>
+            </div>
+        </nav>
+    </div>
+</th:block>
+</body>
 </html>
