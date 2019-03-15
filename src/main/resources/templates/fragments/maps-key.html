@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<div th:fragment="maps-key">
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9b_bCCv9-bVCglCXWZBExPOXKWNegOgc"></script>
-		<script type="text/javascript" th:src="@{/js/maps.js}"></script>
-	</div>
+	<body>
+		<div th:fragment="map">
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9b_bCCv9-bVCglCXWZBExPOXKWNegOgc"></script>
+			<script type="text/javascript" th:src="@{/js/maps.js}"></script>
+		</div>
+	</body>
 </html>
