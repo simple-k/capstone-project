@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 html {
     position: relative;
@@ -12,7 +12,7 @@ body{
     padding: 0;
 }
 .container {
-    margin: 100px auto 50px auto;
+    margin: 100px auto 1em auto;
     padding-bottom: 50px;
     text-align: center;
 }
@@ -21,14 +21,13 @@ body{
     margin: 1em auto 1em auto;
     padding: 1em 1em 1em 1em;
 }
-#banner {
+#primary-window {
     width: 320px;
     height: 183px;
     margin: 0 auto 0 auto;
     padding: 1em 1em 1em 1em;
     background-color: white;
     text-align: center;
-    border-radius: 10px;
 }
 /*---NavBar---*/
 .navbar {
@@ -79,6 +78,15 @@ body{
 a:hover {
     cursor:pointer;
 }
+
+/*---Color Palette*/
+.paper-white {color: #fcfaf6;}
+.click-orange {color: #FFC300;}
+.frame-purple {color: #a75cf2;}
+.confirm-blue {color: #5cf2f2;}
+.success-green {color: #a7f25c;}
+.alert-red {color: #f25c5c;}
+
 /*---Footer---*/
 .footer {
     background-color: #8c8c8c;
