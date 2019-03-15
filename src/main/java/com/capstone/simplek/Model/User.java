@@ -7,6 +7,14 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        username = copy.email;
+        password = copy.password;
+        isAdmin = copy.isAdmin;
+    }
+
     @Id
     @GeneratedValue
     private long id;
