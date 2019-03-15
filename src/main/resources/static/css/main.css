@@ -8,24 +8,34 @@ html {
 body{
     background-image: url("../img/dust_scratches.png");
     background-color: #F5F5F5;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: auto;
 }
 .container {
-    margin: 100px auto 1em auto;
-    padding-bottom: 50px;
+    width: 100%;
+    margin: 0 auto 0 auto;
+    padding: 0;
     text-align: center;
+}
+section {
+    height: 300px;
+    padding: 0;
+    margin: .5em 0 .5em 0;
 }
 #logo {
     text-align: center;
-    margin: 1em auto 1em auto;
-    padding: 1em 1em 1em 1em;
+    margin: .5em auto .5em auto;
+    /*padding: .5em .5em .5em .5em;*/
+}
+#banner-window {
+    margin: 0 auto 0 auto;
+    padding: 0;
+    background-color: white;
+    text-align: center;
 }
 #primary-window {
-    width: 320px;
-    height: 183px;
     margin: 0 auto 0 auto;
-    padding: 1em 1em 1em 1em;
+    padding: 0;
     background-color: white;
     text-align: center;
 }
@@ -33,14 +43,13 @@ body{
 .navbar {
     background-color: transparent;
     background-image: linear-gradient(rgba(140, 140, 140, 0.8), rgba(140, 140, 140, 0.8));
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
     left: 0;
     display: flex;
-    padding: 16px;
     width: 100%;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 700;
 }
 .nav-logo-c {
@@ -91,7 +100,6 @@ a:hover {
 .footer {
     background-color: #8c8c8c;
     color: #fff;
-    position: absolute;
     left: 0;
     bottom: 0;
     height: 3em;
@@ -101,12 +109,21 @@ a:hover {
     justify-content: center;
 }
 /*---Media Queries---*/
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 375px) {
+    #banner-window {
+        height: 198px;
+    }
     footer {
         font-size: .7em;
     }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 756px) and (max-width: 1024px) {
+    #banner-window {
+        height: 396px;
+    }
+    .container {
+        width: 100%;
+    }
     .nav-items-c,
     .navbar{
         flex-direction: column;
@@ -114,11 +131,10 @@ a:hover {
     .nav-items-c {
         display: none;
         margin-left: 0;
-        padding-left: 15px;
+        /*padding-left: 15px;*/
     }
     .nav-logo-c a:hover, .nav-items-c a:hover {
         border-left: 3px solid #ff0000;
-        padding-left: 5px;
     }
     .nav-toggle-show-c {
         display: flex;
@@ -127,11 +143,11 @@ a:hover {
         align-self: flex-end;
         display: initial;
         position: absolute;
-        padding-right: 15px;
         cursor: pointer;
     }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
+
     .nav-logo-c a:hover, .nav-items-c a:hover {
         border-bottom: 3px solid #ff0000;
         padding-bottom: 13px;
