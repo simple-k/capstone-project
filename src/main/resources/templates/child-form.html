@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Welcome')"></head>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container">
+    <form>
+        <div>
+            <p>
+                <label for="address">Enter your address: </label>
+                <input type="text" id="address" placeholder="1234 Main St."/>
+            </p>
+        </div>
+        <div>
+            <p> Will your child need transportation services? </p>
+                <input type="radio" id="esl-yes" name="esl" value="esl-yes"/>
+                <label for="esl-yes">Yes</label>
+                <input type="radio" id="esl-no" name="esl" value="esl-no"/>
+                <label for="esl-no">No</label>
+        </div>
 
-</body>
+    </form>
+    <!--<form class="bg-light border border-secondary rounded mx-auto w-75 my-3">-->
+        <!--<h3>Find Schools</h3>-->
+        <!--<section>-->
+            <!--DISTRICT-->
+        <!--</section>-->
+        <!--<section>-->
+
+        <!--</section>-->
+
+    <!--</form>-->
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 </html>

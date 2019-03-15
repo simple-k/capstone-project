@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 
 @Controller
 public class ChildController {
@@ -26,5 +28,13 @@ public class ChildController {
     @GetMapping("/child-form")
     public String districtFilter (){
         return "child-form";
+    }
+    @PostMapping("/child-form")
+    public String findSchools (@RequestAttribute (name ="address") String address,
+                               @RequestAttribute (name ="transportation-yes") boolean transportation,
+                               @RequestAttribute (name ="esl-yes") boolean esl)
+    {
+
+        return "redirect/school-results";
     }
 }
