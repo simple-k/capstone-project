@@ -1,5 +1,4 @@
 package com.capstone.simplek.controllers;
-
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private User user;
+
     @Autowired
     private UserRepository userDao;
 
     @GetMapping("/register")
-    public String register(Model model){
+    public String registerForm(Model model){
         model.addAttribute("user", new User());
         return"user/register";
     }
@@ -24,6 +23,6 @@ public class UserController {
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
         userDao.save(user);
-        return "redirect:login/registered";
+        return "redirect:/login";
     }
 }
