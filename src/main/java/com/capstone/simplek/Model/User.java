@@ -25,6 +25,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -52,10 +55,11 @@ public class User {
     public User() {
     }
 
-    public User(long id, String username, String password, String email, String firstName, String lastName, String address, String zipCode, String phoneNumber, boolean isAdmin, List<Children> children) {
+    public User(long id, String username, String password, String confirmPassword, String email, String firstName, String lastName, String address, String zipCode, String phoneNumber, boolean isAdmin, List<Children> children) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -88,6 +92,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
