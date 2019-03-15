@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // JpaRepository implements the same functionality as the CrudRepository
 public interface DistrictRepository extends JpaRepository<District, String> {
 
+
 }
