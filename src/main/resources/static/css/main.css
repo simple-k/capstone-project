@@ -1,5 +1,5 @@
 * {
-    /*box-sizing: border-box;*/
+    box-sizing: border-box;
 }
 html {
     position: relative;
@@ -17,22 +17,13 @@ body{
     padding: 0;
     text-align: center;
 }
-section {
+
+/*section {*/
     /*height: 300px;*/
-    padding: 0;
-    margin: .5em 0 .5em 0;
-}
-#logo {
-    text-align: center;
-    margin: .5em auto .5em auto;
-    /*padding: .5em .5em .5em .5em;*/
-}
-#banner-window {
-    margin: 0 auto 0 auto;
-    padding: 0;
-    background-color: white;
-    text-align: center;
-}
+    /*padding: 0;*/
+    /*margin: .5em 0 .5em 0;*/
+/*}*/
+
 #primary-window {
     margin: 0 auto 0 auto;
     padding: 0;

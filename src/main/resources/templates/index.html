@@ -1,25 +1,233 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('Welcome')"></head>
+<style th:inline="text">
+    section.banner {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("/img/banner.jpg");
+        background-size: auto, cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+    .intro {
+        box-shadow: 3px 3px 5px #080808;
+        border: 5px solid #f00;
+        border-radius: 150px;
+        padding: 25px 150px;
+    }
+    .intro h1, .intro h2 {
+        font-size: 3em;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 3px 3px 5px #080808;
+        text-align: center;
+        padding: 0;
+        margin: 5px;
+    }
+    .intro span {
+        color: #f00;
+    }
+    .intro h2 {
+        font-size: 2em;
+    }
+    .intro a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+    .flex button {
+        background-color: Transparent;
+        border: 3px solid #f00;
+        border-radius: 25px;
+        margin: .25rem;
+        padding: .25rem;
+        cursor:pointer;
+        color: #fff;
+        font-size: x-large;
+        font-weight: bold;
+        text-shadow: 3px 3px 5px #080808;
+        box-shadow: 3px 3px 5px #080808;
+    }
+    .flex button:hover {
+        background-color: Transparent;
+        border: 3px solid #fff;
+        border-radius: 25px;
+        margin: .25rem;
+        padding: .25rem;
+        cursor:pointer;
+        color: #f00;
+        font-size: x-large;
+        font-weight: bold;
+        text-shadow: 3px 3px 5px #080808;
+        box-shadow: 3px 3px 5px #080808;
+    }
+    main {
+        margin: 100px auto 50px auto;
+        padding-bottom: 50px;
+        width: 80%;
+        /*padding-bottom: 25px;*/
+    }
+    .section-big {
+        display: flex;
+    }
+    .section-big, .project-small {
+        /*box-shadow: 5px 10px 8px #888888;*/
+        margin: 20px 0 20px 0;
+    }
+    .image-big {
+        flex: 1;
+    }
+    img {
+        max-width: 100%;
+        vertical-align: top;
+    }
+    .text-big {
+        flex: 2;
+    }
+    .text-big, .text-small {
+        background: #fff;
+        color: #080808;
+    }
+    .text-big a h3, .text-small a h3 {
+        text-align: center;
+        color: #ff0000;
+    }
+    .text-small a h3 {
+        margin: 0;
+        padding-top: 20px;
+    }
+    .text-big a, .text-small a {
+        text-decoration: none;
+    }
+    .text-big p, .text-small p {
+        text-align: justify;
+        padding: 10px;
+    }
+    .text-small p {
+        padding:  10px 10px 20px 10px;
+    }
+    .text-right {
+        text-align: right;
+    }
+    @media all and (min-width: 320px) and (max-width: 750px) {
+        .intro {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            font-size: .9em;
+        }
+        .flex button {
+            font-size: large;
+        }
+    }
+    main a {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen and (max-width: 425px) {
+        main {
+            width: 80%;
+        }
+    }
+    @media only screen and (max-width: 1023px) {
+        .show-big {
+            display: none;
+        }
+    }
+    @media only screen and (min-width: 1024px) {
+        .show-small {
+            display: none;
+        }
+    }
+</style>
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Simple-K</h1>
-            <p class="lead">Pre-K Enrollment Made Easy</p>
-            <hr class="my-4"/>
-            <a class="btn btn-primary btn-lg text-center" th:href="@{/login}" role="button">Child Registration</a>
-            <a class="btn btn-primary btn-lg text-center" th:href="@{/school-results}" role="button">Search Schools</a>
-
+    <section class="banner">
+        <div class="intro">
+            <h1><span>SIMPLE K</span></h1>
+            <h2>Pre-K Enrollment Made Easy</h2>
+            <div class="flex">
+                <button type="button"><a th:href="@{/register}">Register <i class="fas fa-user ml-1"></i></a></button>
+                <button type="button"><a th:href="@{/query/index}">Search <i class="fas fa-search"></i></a></button>
+            </div>
         </div>
-        <section>Section 1</section>
-        <section>Section 2</section>
-        <section>Section 3</section>
-        </div>
-            <!--we should offer to either login or register-->
-            <!--if we want general search, we'll also have third option "Find Schools"-->
+    </section>
 
-        <div th:replace="fragments/footer :: footer"></div>
-        <div th:replace="fragments/scripts :: scripts"></div>
+    <main>
+        <article class="show-big">
+            <section class="section-big">
+                <div class="image-big">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+                <div class="text-big">
+                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </section>
+
+            <section class="section-big">
+                <div class="text-big">
+                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+                <div class="image-big text-right">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+            </section>
+
+            <section class="section-big">
+                <div class="image-big">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+                <div class="text-big">
+                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </section>
+        </article>
+
+        <article class="show-small">
+            <section class="section-small">
+                <div class="image-small">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+                <div class="text-small">
+                    <a th:href="@{/}" target="_blank" rel=""><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </section>
+
+            <section class="section-small">
+                <div class="image-small">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+                <div class="text-small">
+                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </section>
+
+            <section class="section-small">
+                <div class="image-small">
+                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
+                </div>
+                <div class="text-small">
+                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
