@@ -41,13 +41,13 @@ public class School {
     private boolean title1SchoolWide;
 
     @Column(length = 10)
-    private int students;
+    private String students;
 
     @Column(length = 10)
-    private int teachers;
+    private String teachers;
 
     @Column
-    private double studentTeacherRatio;
+    private String studentTeacherRatio ;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -60,7 +60,7 @@ public class School {
     public School() {
     }
 
-    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, int students, int teachers, double studentTeacherRatio, List<Service> services) {
+    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, List<Service> services) {
         this.id = id;
         this.stateSchoolId = stateSchoolId;
         this.district = district;
@@ -158,27 +158,27 @@ public class School {
         this.title1SchoolWide = title1SchoolWide;
     }
 
-    public int getStudents() {
+    public String getStudents() {
         return students;
     }
 
-    public void setStudents(int students) {
+    public void setStudents(String students) {
         this.students = students;
     }
 
-    public int getTeachers() {
+    public String getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(int teachers) {
+    public void setTeachers(String teachers) {
         this.teachers = teachers;
     }
 
-    public double getStudentTeacherRatio() {
+    public String getStudentTeacherRatio() {
         return studentTeacherRatio;
     }
 
-    public void setStudentTeacherRatio(double studentTeacherRatio) {
+    public void setStudentTeacherRatio(String studentTeacherRatio) {
         this.studentTeacherRatio = studentTeacherRatio;
     }
 
