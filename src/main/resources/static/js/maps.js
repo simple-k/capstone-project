@@ -19,10 +19,9 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
 
 // NOTE: This uses cross-domain XHR, and may not work on older browsers.
 map.data.loadGeoJson(
-    'https://opendata.arcgis.com/datasets/e115fed14c0f4ca5b942dc3323626b1c_0.geojson');
+    '../Json/San_Antonio_Districts.geojson');
 
 var geocoder = new google.maps.Geocoder();
-var laPanaderia = "301 E Houston St, San Antonio, TX 78205";
 function locate(address){
     geocoder.geocode({ "address": address }, function(results, status) {
 
