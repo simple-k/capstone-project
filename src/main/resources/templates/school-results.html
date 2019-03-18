@@ -4,10 +4,11 @@
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
 	<body>
 		<div th:replace="fragments/navbar :: navbar"></div>
-		
-		<div id="map-canvas"></div>
-		
-		<div th:replace="fragments/scripts :: scripts"></div>
-		<div th:replace="fragments/maps-key :: maps-key"></div>
+		<div class="container">
+			<div id="map-canvas"></div>
+
+			<div th:replace="fragments/scripts :: scripts"></div>
+			<div th:replace="fragments/maps-key :: maps-key"></div>
+		</div>
 	</body>
 </html>

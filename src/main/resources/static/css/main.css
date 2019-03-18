@@ -17,11 +17,13 @@ body{
     padding: 0;
     text-align: center;
 }
+
 /*section {*/
     /*height: 300px;*/
     /*padding: 0;*/
     /*margin: .5em 0 .5em 0;*/
 /*}*/
+
 #primary-window {
     margin: 0 auto 0 auto;
     padding: 0;
@@ -106,7 +108,7 @@ a:hover {
         font-size: .7em;
     }
 }
-@media only screen and (min-width: 756px) and (max-width: 1024px) {
+@media only screen and (min-width: 376px) and (max-width: 1024px) {
     #banner-window {
         height: 396px;
     }
@@ -135,8 +137,11 @@ a:hover {
         cursor: pointer;
     }
 }
-@media only screen and (min-width: 1024px) {
 
+@media only screen and (min-width: 1024px) {
+    #banner-window {
+        height: 396px;
+    }
     .nav-logo-c a:hover, .nav-items-c a:hover {
         border-bottom: 3px solid #ff0000;
         padding-bottom: 13px;
