@@ -3,7 +3,7 @@
 <head th:replace="fragments/header :: header('Welcome')"></head>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container">
-    <form>
+    <form th:action="@{school-results}" th:method="post">
         <div>
             <p>
                 <label for="address">Enter your address: </label>
@@ -11,12 +11,27 @@
             </p>
         </div>
         <div>
-            <p> Will your child need transportation services? </p>
-                <input type="radio" id="esl-yes" name="esl" value="esl-yes"/>
-                <label for="esl-yes">Yes</label>
-                <input type="radio" id="esl-no" name="esl" value="esl-no"/>
-                <label for="esl-no">No</label>
+            <p> Will your child need bus transportation services? </p>
+            <input type="radio" id="bus-yes" name="bus" value="bus-yes"/>
+            <label for="bus-yes">Yes</label>
+            <input type="radio" id="bus-no" name="bus" value="bus-no"/>
+            <label for="bus-no">No</label>
         </div>
+        <div>
+            <p> Is English your child's primary language? </p>
+            <input type="radio" id="esl-yes" name="idea" value="esl-yes"/>
+            <label for="esl-yes">Yes</label>
+            <input type="radio" id="esl-no" name="idea" value="esl-no"/>
+            <label for="esl-no">No</label>
+        </div>
+        <div>
+            <p> Does your child have a disability or require special education services? </p>
+            <input type="radio" id="idea-yes" name="idea" value="idea-yes"/>
+            <label for="idea-yes">Yes</label>
+            <input type="radio" id="idea-no" name="idea" value="idea-no"/>
+            <label for="idea-no">No</label>
+        </div>
+        <button type="submit">Find Schools</button>
 
     </form>
     <!--<form class="bg-light border border-secondary rounded mx-auto w-75 my-3">-->

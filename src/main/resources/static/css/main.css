@@ -18,7 +18,7 @@ body{
     text-align: center;
 }
 section {
-    height: 300px;
+    /*height: 300px;*/
     padding: 0;
     margin: .5em 0 .5em 0;
 }

@@ -37,4 +37,9 @@ public class ChildController {
 
         return "redirect/school-results";
     }
+
+    @GetMapping("school-results")
+    public String schoolResults () {
+        return "school-results";
+    }
 }

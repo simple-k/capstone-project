@@ -2,38 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('Welcome')"></head>
 <body>
-    <div class="container">
     <div th:replace="fragments/navbar :: navbar"></div>
-        <!--<div id="logo">-->
-            <!--<h3>Simple K</h3>-->
-            <!--<h6>Pre-K Enrollment Made Easy</h6>-->
-        <!--</div>-->
-        <div id="banner-window">
-            BANNER DISPLAY
-            <!--SCROLLING IMAGES GO HERE. -->
-            <!--THIS BOX WILL NEED TO BE SET TO SPECIFIC PIXEL WIDTHS WITH MEDIA QUERIES.-->
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Simple-K</h1>
+            <p class="lead">Pre-K Enrollment Made Easy</p>
+            <hr class="my-4"/>
+            <a class="btn btn-primary btn-lg text-center" th:href="@{/login}" role="button">Child Registration</a>
+            <a class="btn btn-primary btn-lg text-center" th:href="@{/school-results}" role="button">Search Schools</a>
+
         </div>
-        <section>
-            <ul>
-                <li>
-                    <p><a th:href="@{/login}">Login</a></p>
-                </li>
-                <li>
-                    <p><a th:href="@{/register}">Register</a></p>
-                </li>
-                <li>
-                    <p><a th:href="@{/child-form}">Find Schools</a></p>
-                </li>
-            </ul>
-        </section>
         <section>Section 1</section>
         <section>Section 2</section>
         <section>Section 3</section>
-        <div th:replace="fragments/footer :: footer"></div>
         </div>
             <!--we should offer to either login or register-->
             <!--if we want general search, we'll also have third option "Find Schools"-->
 
+        <div th:replace="fragments/footer :: footer"></div>
         <div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
