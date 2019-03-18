@@ -36,7 +36,13 @@ public class Children {
 
     public Children() {
     }
-
+    public Children(long id, String firstName, String lastName, User user, List<Service> services) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.user = user;
+        this.services = services;
+    }
     public Children(long id, String firstName, String lastName, Date dob, char gender, User user, List<Service> services) {
         this.id = id;
         this.firstName = firstName;

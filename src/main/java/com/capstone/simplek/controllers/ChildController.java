@@ -27,17 +27,21 @@ public class ChildController {
     private UserRepository userDao;
 
 //     requests that interact with our Dao Factory
-    @GetMapping("/child-form")
-    public String districtFilter (){
-        return "child-form";
+//    @GetMapping("search")
+//    public String all(Model model) {
+//
+//    }
+    @GetMapping("/search/create")
+    public String viewSearchQuery (){
+        return "search";
     }
-    @PostMapping("/child-form")
-    public String findSchools (@PathVariable long id,
-                               @RequestAttribute (name ="address") String address,
-                               @RequestAttribute (name ="transportation-yes") boolean transportation,
-                               @RequestAttribute (name ="esl-yes") boolean esl,
-                               @RequestAttribute (name ="idea-yes") boolean idea
-                               ) {
+    @PostMapping("/search/create")
+    public String createSearchQuery (@PathVariable long id,
+                                     @RequestAttribute (name ="address") String address,
+                                     @RequestAttribute (name ="transportation-yes") boolean transportation,
+                                     @RequestAttribute (name ="esl-yes") boolean esl,
+                                     @RequestAttribute (name ="idea-yes") boolean idea)
+    {
             User user = userDao.findOne(id);
             user.setAddress(address);
 
