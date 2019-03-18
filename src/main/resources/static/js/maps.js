@@ -11,7 +11,7 @@ var mapOptions = {
     }
 };
 
-var map;
+var map, placeSearch, autocomplete;
 map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 4,
     center: {lat: -28, lng: 137}
@@ -41,4 +41,17 @@ function locate(address){
         }
     });
 }
-locate(laPanaderia);
+function initAutocomplete() {
+    // Create the autocomplete object, restricting the search predictions to
+    // geographical location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'), {types: ['geocode']});
+
+    // Avoid paying for data that you don't need by restricting the set of
+    // place fields that are returned to just the address components.
+    autocomplete.setFields('address_components');
+
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+}
