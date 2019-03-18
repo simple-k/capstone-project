@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 
 @Controller
-public class ChildController {
+public class SearchController {
 
 //    collection of repos referring to our database
     @Autowired
