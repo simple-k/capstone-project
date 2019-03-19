@@ -1,20 +1,18 @@
-"use strict";
-
 var mapOptions = {
     // Set the zoom level
     zoom: 5,
 
     // This sets the center of the map at our location
     center: {
-        lat:  29.426791,
+        lat: 29.426791,
         lng: -98.489602
     }
 };
 
 var map;
 map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 4,
-    center: {lat: -28, lng: 137}
+    zoom: 9,
+    center: {lat: 29.4241, lng: -98.4936}
 });
 
 // NOTE: This uses cross-domain XHR, and may not work on older browsers.
@@ -22,8 +20,9 @@ map.data.loadGeoJson(
     '../Json/San_Antonio_Districts.geojson');
 
 var geocoder = new google.maps.Geocoder();
-function locate(address){
-    geocoder.geocode({ "address": address }, function(results, status) {
+
+function locate(address) {
+    geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result
         if (status == google.maps.GeocoderStatus.OK) {
@@ -41,4 +40,15 @@ function locate(address){
         }
     });
 }
-locate(laPanaderia);
+
+var input = document.getElementById('pac-input');
+var searchBox = new google.maps.places.SearchBox(input);
+map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+// Bias the SearchBox results towards current map's viewport.
+map.addListener('bounds_changed', function () {
+    searchBox.setBounds(map.getBounds());
+});
+
+function buttonTest() {
+    alert('This works!');
+}
