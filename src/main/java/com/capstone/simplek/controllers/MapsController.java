@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MapsController {
     @GetMapping("/test")
     public String transportation (){
-        return "school-results";
+        return "results";
     }
 }
