@@ -32,8 +32,7 @@ body{
 }
 /*---NavBar---*/
 .navbar {
-    background-color: transparent;
-    background-image: linear-gradient(rgba(140, 140, 140, 0.8), rgba(140, 140, 140, 0.8));
+    background-color: #283230;
     /*position: fixed;*/
     top: 0;
     left: 0;
@@ -87,17 +86,31 @@ a:hover {
 .success-green {color: #a7f25c;}
 .alert-red {color: #f25c5c;}
 
+.aa {color: #CA8B3A;}
+.bb {color: #CAC9C8;}
+.cc {color: #A4AEB5;}
+.dd {color: #715C56;}
+.ee {color: #283230;}
+
+
+
+
+
 /*---Footer---*/
 .footer {
-    background-color: #8c8c8c;
+    background-color: #283230;
     color: #fff;
-    left: 0;
-    bottom: 0;
     height: 3em;
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    line-height: normal;
+    position: absolute;
+    bottom: 0;
+}
+.footer p {
+    margin-top: 1em;
 }
 /*---Media Queries---*/
 @media only screen and (max-width: 375px) {
@@ -115,6 +128,9 @@ a:hover {
     .container {
         width: 100%;
     }
+    .navbar {
+        align-items: normal;
+    }
     .nav-items-c,
     .navbar{
         flex-direction: column;
@@ -124,8 +140,11 @@ a:hover {
         margin-left: 0;
         /*padding-left: 15px;*/
     }
+    .nav-link-c {
+        padding-left: 15px;
+    }
     .nav-logo-c a:hover, .nav-items-c a:hover {
-        border-left: 3px solid #ff0000;
+        border-left: 3px solid #CA8B3A;
     }
     .nav-toggle-show-c {
         display: flex;
@@ -143,7 +162,7 @@ a:hover {
         height: 396px;
     }
     .nav-logo-c a:hover, .nav-items-c a:hover {
-        border-bottom: 3px solid #ff0000;
-        padding-bottom: 13px;
+        border-bottom: 3px solid #CA8B3A;
+        padding-bottom: 8px;
     }
 }

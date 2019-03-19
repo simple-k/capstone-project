@@ -27,17 +27,20 @@ public class SearchController {
     private UserRepository userDao;
 
 //     requests that interact with our Dao Factory
-    @GetMapping("/school-results")
+    @GetMapping("/search")
     public String all(Model model) {
         List<School> schools = schoolDao.findAll();
         model.addAttribute("schools", schools);
-        return "school-results";
+        return "search/index";
     }
-    @GetMapping("/search/create")
+
+    @GetMapping("/search/query")
     public String viewSearchQuery (){
         return "search";
     }
-    @PostMapping("/search/create")
+
+
+    @PostMapping("/search/query")
     public String createSearchQuery (@PathVariable long id,
                                      @RequestAttribute (name ="address") String address,
                                      @RequestAttribute (name ="transportation-yes") boolean transportation,
@@ -49,7 +52,7 @@ public class SearchController {
             Children child = new Children();
 
 
-        return "redirect:/school-results";
+        return "redirect:/search";
     }
 
 //    @GetMapping("school-results")
