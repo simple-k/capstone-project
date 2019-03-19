@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/header :: header('test')"></head>
+	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
+	<body>
+		<div th:replace="fragments/navbar :: navbar"></div>
+		<div class="container">
+			<div id="map-canvas"></div>
+			<section id="school-listing-scroll-box" class="py-1" style="overflow: scroll; width: auto; height: 35em">
+				<th:block th:each="school : ${schools}">
+						<div id="school-listing" class="text-left row mx-auto px-1 w-75">
+							<!--<a th:href="@{/schools/{id}(id=${post.id})}">-->
+							<h5 class="col-8 mt-3 p-0" th:text="${school.schoolName}"></h5>
+							<p class="col-4 text-right">IMAGE</p>
+							<!--</a>-->
+							<!--<hr/>-->
+							<p class="col-8 my-1" th:text="${school.streetAddress}"></p>
+							<p class="col-4 my-1 text-right" th:text="${school.district.name}"></p>
+							<p class="col-12 my-1" th:text="${school.phone}"></p>
+						</div>
+				</th:block>
+			</section>
+			<div th:replace="fragments/footer :: footer"></div>
+			<div th:replace="fragments/scripts :: scripts"></div>
+			<!--<div th:replace="fragments/maps-key :: maps-key"></div>-->
+		</div>
+	</body>
+</html>
