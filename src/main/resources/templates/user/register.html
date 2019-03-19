@@ -3,14 +3,16 @@
 <head th:replace="fragments/header :: header('Register')"></head>
 <link rel="stylesheet" th:href="@{/css/user-register-form.css}"/>
 <body>
-<div class="container">
 	<div th:replace="fragments/navbar :: navbar"></div>
 
 	<div class="wrapper">
 		<div class="inner">
+
 			<div class="image-holder">
-				<img src="https://1.cdn.edl.io/okMNL9n6Tp9adRYLbTaHphvpgotBo280UVNzmKw9kPe6bLZh.jpg" alt="register" />
+				<img class="vertical-center" th:src="@{/img/registration.jpg}" alt="" />
 			</div>
+			
+			<!--Register Form-->
 			<form th:action="@{/register}" method="POST" th:object="${user}">
 				<h3>Registration Form</h3>
 				<!--Input Error Messages-->
@@ -30,18 +32,9 @@
 					<i class="fas fa-user"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="text" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>
+					<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>
 					<i class="fas fa-envelope"></i>
 				</div>
-				<!--<div class="form-wrapper">-->
-					<!--<select name="" id="" class="form-control">-->
-						<!--<option value="" disabled="" selected="">Gender</option>-->
-						<!--<option value="male">Male</option>-->
-						<!--<option value="femal">Female</option>-->
-						<!--<option value="other">Other</option>-->
-					<!--</select>-->
-					<!--<i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>-->
-				<!--</div>-->
 				<div class="form-wrapper">
 					<input type="password" th:field="*{password}" placeholder="Password" class="form-control" required=""/>
 					<i class="fas fa-lock"></i>
@@ -54,11 +47,11 @@
 					<i class="fas fa-arrow-right"></i>
 				</button>
 			</form>
+
 		</div>
 	</div>
 
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/scripts :: scripts"></div>
-</div>
 </body>
 </html>

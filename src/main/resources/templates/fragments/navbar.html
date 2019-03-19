@@ -23,15 +23,15 @@
                 <a th:href="@{/}"></a>
             </div>
 
-            <div class="nav-link-c">
+            <div sec:authorize="!isAuthenticated()"  class="nav-link-c">
                 <a th:href="@{/register}">Register</a>
             </div>
 
-            <div class="nav-link-c">
+            <div sec:authorize="!isAuthenticated()"  class="nav-link-c">
                 <a th:href="@{/login}">Log In</a>
             </div>
 
-            <div>
+            <div sec:authorize="isAuthenticated()" >
                 <form id="logout" th:action="@{/logout}" th:method="post">
                     <a class="logout">Log Out</a>
                 </form>
