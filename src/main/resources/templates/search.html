@@ -1,50 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('Welcome')"></head>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container">
-    <form th:action="@{school-results}" th:method="post">
-        <div>
-            <p>
-                <label for="address">Enter your address: </label>
-                <input type="text" id="address" placeholder="1234 Main St."/>
-            </p>
-        </div>
-        <div>
-            <p> Will your child need bus transportation services? </p>
-            <input type="radio" id="bus-yes" name="bus" value="bus-yes"/>
-            <label for="bus-yes">Yes</label>
-            <input type="radio" id="bus-no" name="bus" value="bus-no"/>
-            <label for="bus-no">No</label>
-        </div>
-        <div>
-            <p> Is English your child's primary language? </p>
-            <input type="radio" id="esl-yes" name="idea" value="esl-yes"/>
-            <label for="esl-yes">Yes</label>
-            <input type="radio" id="esl-no" name="idea" value="esl-no"/>
-            <label for="esl-no">No</label>
-        </div>
-        <div>
-            <p> Does your child have a disability or require special education services? </p>
-            <input type="radio" id="idea-yes" name="idea" value="idea-yes"/>
-            <label for="idea-yes">Yes</label>
-            <input type="radio" id="idea-no" name="idea" value="idea-no"/>
-            <label for="idea-no">No</label>
-        </div>
-        <button type="submit">Find Schools</button>
+<style>
+    main {
+        width: 80%;
+        margin: 0 auto;
+    }
+</style>
+<body>
 
-    </form>
-    <!--<form class="bg-light border border-secondary rounded mx-auto w-75 my-3">-->
-        <!--<h3>Find Schools</h3>-->
-        <!--<section>-->
-            <!--DISTRICT-->
-        <!--</section>-->
-        <!--<section>-->
+    <div th:replace="fragments/navbar :: navbar"></div>
 
-        <!--</section>-->
+    <main>
+        <h4>Hi USERNAME! Get started by filling out your info.</h4>
+        <form th:action="@{school-results}" th:method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="inputEmail" class="form-control" id="inputEmail" placeholder="Email" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPhone">Phone</label>
+                    <input type="tel" name="inputPhone" class="form-control" id="inputPhone" placeholder="(210)123-1234" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" name="inputAddress" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label for="inputAddress2">Address 2</label>-->
+                <!--<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">-->
+            <!--</div>-->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="staticCity">City</label>
+                    <input type="text" readonly="" class="form-control-plaintext" id="staticCity" value="San Antonio" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <input type="text" readonly="" class="form-control-plaintext" id="inputState" value="Texas" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" />
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
+                </div>
+            </div>
 
-    <!--</form>-->
-</div>
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+            <hr /><!--Child Info-->
+
+            <h4>Enter your child's info.</h4>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputChildFirstName">First Name</label>
+                    <input type="text" name="inputChildFirstName" class="form-control" id="inputChildFirstName" placeholder="First Name" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputChildLastName">Last Name</label>
+                    <input type="tel" class="form-control" id="inputChildLastName" placeholder="Last Name" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="dob" >Date of Birth</label>
+                    <input type="date" name="dob" id="dob" max="3020-12-31" min="2010-01-01" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" class="form-control">
+                        <option selected="">Male</option>
+                        <option >Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr /><!--Service Needed-->
+
+            <div>
+                <p> Will your child need bus transportation services? </p>
+                <input type="radio" id="bus-yes" name="bus" value="bus-yes"/>
+                <label for="bus-yes">Yes</label>
+                <input type="radio" id="bus-no" name="bus" value="bus-no"/>
+                <label for="bus-no">No</label>
+            </div>
+            <div>
+                <p> Is English your child's primary language? </p>
+                <input type="radio" id="esl-yes" name="idea" value="esl-yes"/>
+                <label for="esl-yes">Yes</label>
+                <input type="radio" id="esl-no" name="idea" value="esl-no"/>
+                <label for="esl-no">No</label>
+            </div>
+            <div>
+                <p> Does your child have a disability or require special education services? </p>
+                <input type="radio" id="idea-yes" name="idea" value="idea-yes"/>
+                <label for="idea-yes">Yes</label>
+                <input type="radio" id="idea-no" name="idea" value="idea-no"/>
+                <label for="idea-no">No</label>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary">Find Schools</button>
+        </form>
+
+    </main>
+
+
+
+
+
+    <!--===================================================-->
+
+    <!--<main>-->
+        <!--<h4>Hi USERNAME! Get started by filling out your info.</h4>-->
+        <!--<form th:action="@{school-results}" th:method="post">-->
+            <!--<div>-->
+                <!--<p>-->
+                    <!--<label for="address">Enter your address: </label>-->
+                    <!--<input type="text" id="address" placeholder="1234 Main St."/>-->
+                <!--</p>-->
+            <!--</div>-->
+            <!--<button type="submit">Find Schools</button>-->
+
+        <!--</form>-->
+        <!--&lt;!&ndash;<form class="bg-light border border-secondary rounded mx-auto w-75 my-3">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h3>Find Schools</h3>&ndash;&gt;-->
+            <!--&lt;!&ndash;<section>&ndash;&gt;-->
+                <!--&lt;!&ndash;DISTRICT&ndash;&gt;-->
+            <!--&lt;!&ndash;</section>&ndash;&gt;-->
+            <!--&lt;!&ndash;<section>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</section>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <!--</main>-->
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
 </html>
