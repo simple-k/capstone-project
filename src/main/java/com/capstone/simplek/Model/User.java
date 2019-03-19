@@ -10,9 +10,15 @@ public class User {
     public User(User copy) {
         id = copy.id;
         email = copy.email;
-        username = copy.email;
+        username = copy.username;
         password = copy.password;
         isAdmin = copy.isAdmin;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        address = copy.address;
+        zipCode = copy.zipCode;
+        phoneNumber = copy.phoneNumber;
+        children = copy.children;
     }
 
     @Id
