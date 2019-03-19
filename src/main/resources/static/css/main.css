@@ -106,6 +106,8 @@ a:hover {
     display: flex;
     justify-content: center;
     line-height: normal;
+    position: absolute;
+    bottom: 0;
 }
 .footer p {
     margin-top: 1em;
