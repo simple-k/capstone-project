@@ -33,10 +33,13 @@ public class SearchController {
         model.addAttribute("schools", schools);
         return "search/index";
     }
+
     @GetMapping("/search/query")
     public String viewSearchQuery (){
         return "search";
     }
+
+
     @PostMapping("/search/query")
     public String createSearchQuery (@PathVariable long id,
                                      @RequestAttribute (name ="address") String address,
