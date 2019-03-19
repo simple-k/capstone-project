@@ -5,6 +5,9 @@ import com.capstone.simplek.Model.School;
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +38,21 @@ public class SearchController {
     }
 
     @GetMapping("/search/query")
-    public String viewSearchQuery (){
+    public String viewSearchQuery (Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAuthenticated;
+        if (authentication != null) {
+            isAuthenticated = authentication instanceof AnonymousAuthenticationToken ? false
+                    : authentication.isAuthenticated();
+            if (isAuthenticated) {
+                User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                model.addAttribute("user", user);
+            }
+        }
+
+
+
+
         return "search";
     }
 
