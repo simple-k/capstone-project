@@ -6,7 +6,6 @@
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div class="container">
 			<div id="map-canvas"></div>
-			<input type="text" id="pac-input"/>
 			<section id="school-listing-scroll-box" class="py-1" style="overflow: scroll; width: auto; height: 35em">
 				<th:block th:each="school : ${schools}">
 						<div id="school-listing" class="text-left row mx-auto px-1 w-75">
@@ -18,6 +17,7 @@
 							<p class="col-8 my-1" th:text="${school.streetAddress}"></p>
 							<p class="col-4 my-1 text-right" th:text="${school.district.name}"></p>
 							<p class="col-12 my-1" th:text="${school.phone}"></p>
+							<button th:onclick="'locate(' + ${school.streetAddress} + ')'">Go to school</button>
 						</div>
 				</th:block>
 			</section>
