@@ -1,5 +1,6 @@
 package com.capstone.simplek.controllers;
 import com.capstone.simplek.Model.Children;
+import com.capstone.simplek.Model.Query;
 import com.capstone.simplek.Model.School;
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.*;
@@ -47,16 +48,15 @@ public class SearchController {
                 User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 User copyUser = userDao.findOne(loggedInUser.getId());
                 model.addAttribute("user", copyUser);
-//                List<Children> children = childrenDao.getAllChildren(user.getId());
-//                Children child = childrenDao.getFirstChild(user.getId());
                 model.addAttribute("child", new Children());
+                model.addAttribute("query", new Query());
             }
         }
         return "search";
     }
 
     @PostMapping("/search/query")
-    public String createSearchQuery (@ModelAttribute Children child, @ModelAttribute User user, HttpSession session) {
+    public String createSearchQuery (@ModelAttribute Children child, @ModelAttribute User user, @ModelAttribute Query query, HttpSession session) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User copyUser = userDao.findOne(loggedInUser.getId());
 
@@ -109,7 +109,9 @@ public class SearchController {
         childrenDao.save(child);
 
         // set session attribute for search results
-//        session.setAttribute();
+        session.setAttribute("query", query);
+        session.setAttribute("user", copyUser);
+        session.setAttribute("child", child);
 
         return "redirect:/search";
     }

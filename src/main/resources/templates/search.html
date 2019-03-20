@@ -112,27 +112,30 @@
             <hr /><!--Service Needed-->
 
             <h4>Enter your child's needs.</h4>
-            <div>
-                <p> Will your child need bus transportation services? </p>
-                <input type="radio" id="bus-yes" name="bus" value="bus-yes"/>
-                <label for="bus-yes">Yes</label>
-                <input type="radio" id="bus-no" name="bus" value="bus-no"/>
-                <label for="bus-no">No</label>
+            <div th:object="${query}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <p> Will your child need bus transportation services?</p>
+                        <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="false" />No</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <p>Is English your child's primary language?</p>
+                        <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="false" />No</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <p>Does your child have a disability or require special education services?</p>
+                        <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="false" />No</label>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p> Is English your child's primary language? </p>
-                <input type="radio" id="esl-yes" name="esl" value="esl-yes"/>
-                <label for="esl-yes">Yes</label>
-                <input type="radio" id="esl-no" name="esl" value="esl-no"/>
-                <label for="esl-no">No</label>
-            </div>
-            <div>
-                <p> Does your child have a disability or require special education services? </p>
-                <input type="radio" id="idea-yes" name="idea" value="idea-yes"/>
-                <label for="idea-yes">Yes</label>
-                <input type="radio" id="idea-no" name="idea" value="idea-no"/>
-                <label for="idea-no">No</label>
-            </div>
+
             <button type="submit" class="btn btn-primary">Find Schools</button>
         </form>
     </main>

@@ -4,6 +4,23 @@
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
 	<body>
 		<div th:replace="fragments/navbar :: navbar"></div>
+
+		<!--====================================================-->
+
+		<!--example check if session exist-->
+		<!--<div th:if="${session.query != null and session.user != null and session.child != null}">-->
+
+			<!--<h1 th:text="${session.query.bus}"></h1>-->
+			<!--<h1 th:text="${session.user.address}"></h1>-->
+			<!--<h1 th:text="${session.child.firstName}"></h1>-->
+			<!--<h1 th:text="${session.query.esl}"></h1>-->
+			<!--<h1 th:text="${session.user.zipCode}"></h1>-->
+			<!--<h1 th:text="${session.child.gender}"></h1>-->
+
+		<!--</div>-->
+
+		<!--====================================================-->
+
 		<div class="container">
 			<div id="map-canvas"></div>
 			<div id="locationField">
