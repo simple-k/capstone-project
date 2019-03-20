@@ -1,6 +1,7 @@
 package com.capstone.simplek.controllers;
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,36 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login";
+    }
+
+    @GetMapping("/user/profile")
+    public String viewProfile (Model model) {
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.findOne(sessionUser.getId());
+        model.addAttribute("user", currentUser);
+        return "user/profile";
+    }
+    @GetMapping("/user/edit")
+    public String editProfile (Model model) {
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", sessionUser);
+        return "user/edit";
+    }
+    @PostMapping("/user/edit")
+    public String updateProfile (Model model,
+                                 @RequestParam(name = "address") String address,
+                                 @RequestParam(name = "username") String username)
+    {
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User updateUser = userDao.findOne(sessionUser.getId());
+        updateUser.setUsername(username);
+        updateUser.setAddress(address);
+        updateUser.setUsername(username);
+        userDao.save(updateUser);
+
+//        model.addAttribute("user", updateUser);
+
+        return "redirect:/user/profile";
     }
 
 }// class
