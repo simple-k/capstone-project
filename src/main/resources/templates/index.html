@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header('Welcome')"></head>
 <style th:inline="text">
     section.banner {
@@ -152,13 +153,15 @@
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <section class="banner">
-        <div class="intro">
+    <section  class="banner">
+        <div  class="intro">
             <h1><span>Explore Simple-K</span></h1>
             <h2>Pre-K Enrollment Made Easy</h2>
             <div class="flex">
-                <button type="button"><a th:href="@{/register}">Register <i class="fas fa-user ml-1"></i></a></button>
-                <button type="button"><a th:href="@{/search}">Search <i class="fas fa-search"></i></a></button>
+                <button sec:authorize="!isAuthenticated()" type="button"><a th:href="@{/register}"> Register <i class="fas fa-user ml-1"></i></a></button>
+                <button sec:authorize="isAuthenticated()" type="button"><a th:href="@{/user/profile}"> Profile <i class="fas fa-user ml-1"></i></a></button>
+
+                <button type="button"><a th:href="@{/search}"> Find Schools <i class="fas fa-search"></i></a></button>
             </div>
         </div>
     </section>
