@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!-- ... -->
+<!--<div sec:authorize="isAuthenticated()">-->
+    <!--This content is only shown to authenticated users.-->
+
+    <!--User ID: <span th:text="${#authentication.principal.id}"/>-->
+    <!--Username: <span th:text="${#authentication.principal.username}"/>-->
+    <!--Email: <span th:text="${#authentication.principal.email}"/>-->
+<!--</div>-->
+<head th:replace="fragments/header :: header('View User')"></head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container">
+    <!--<h1>View Profile</h1>-->
+    <!--<div id="user-profile">-->
+        <!--<h3 th:text="*{user.username}"></h3>-->
+        <!--&lt;!&ndash;<hr/>&ndash;&gt;-->
+        <!--<p th:text="${user.email}"></p>-->
+        <!--<p th:text="${user.address + ' ' + user.zipCode}"></p>-->
+        <!--<p th:text="${user.phoneNumber}"></p>-->
+    <!--</div>-->
+    <div id="user-profile">
+        <form th:action="@{/user/edit}" th:method="post">
+            <h3>Your Profile</h3>
+            <p>
+                <label for="username">Username: </label>
+                <input th:value="${user.username}" name="username" id="username"/>
+            </p>
+            <p>
+                <label for="email">Email: </label>
+                <input th:value="${user.email}" name="email" id="email"/>
+            </p>
+            <p>
+                <label for="address">Address: </label>
+                <input th:value="${user.address}" name="address" id="address"/>
+            </p>
+            <p>
+                <label for="phone">Phone: </label>
+                <input th:value="${user.phoneNumber}" name="phone" id="phone"/>
+            </p>
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

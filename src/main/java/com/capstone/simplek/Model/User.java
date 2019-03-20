@@ -13,8 +13,8 @@ public class User {
         username = copy.username;
         password = copy.password;
         isAdmin = copy.isAdmin;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
+        uFirstName = copy.uFirstName;
+        uLastName = copy.uLastName;
         address = copy.address;
         zipCode = copy.zipCode;
         phoneNumber = copy.phoneNumber;
@@ -38,10 +38,10 @@ public class User {
     private String email;
 
     @Column(name="first_name")
-    private String firstName;
+    private String uFirstName;
 
     @Column(name="last_name")
-    private String lastName;
+    private String uLastName;
 
     @Column(name="address")
     private String address;
@@ -61,14 +61,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, String username, String password, String confirmPassword, String email, String firstName, String lastName, String address, String zipCode, String phoneNumber, boolean isAdmin, List<Children> children) {
+    public User(long id, String username, String password, String confirmPassword, String email, String uFirstName, String uLastName, String address, String zipCode, String phoneNumber, boolean isAdmin, List<Children> children) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.uFirstName = uFirstName;
+        this.uLastName = uLastName;
         this.address = address;
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
@@ -116,20 +116,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getuFirstName() {
+        return uFirstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setuFirstName(String uFirstName) {
+        this.uFirstName = uFirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getuLastName() {
+        return uLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setuLastName(String uLastName) {
+        this.uLastName = uLastName;
     }
 
     public String getAddress() {
