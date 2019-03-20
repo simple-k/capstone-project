@@ -1,4 +1,5 @@
 package com.capstone.simplek.Model;
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Children {
     private String lastName;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
     @Column
