@@ -17,14 +17,21 @@
     <main>
         <h4>Hi, <span th:text="*{user.getUsername()}"></span>! Get started by filling out your info.</h4>
         <form th:action="@{/search/query/}" th:method="post" th:object="${user}">
+            <div th:if="${session.inputErrors != null}">
+                <div class="alert alert-danger alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-times-circle"></i>
+                    <span th:text="${session.inputErrors}"></span>
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputFirstName">First Name</label>
-                    <input type="text" th:field="*{firstName}" class="form-control" id="inputFirstName" placeholder="First Name" />
+                    <input type="text" th:field="*{uFirstName}" class="form-control" id="inputFirstName" placeholder="First Name" />
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputLastName">Last Name</label>
-                    <input type="text" th:field="*{lastName}" class="form-control" id="inputLastName" placeholder="Last Name" />
+                    <input type="text" th:field="*{uLastName}" class="form-control" id="inputLastName" placeholder="Last Name" />
                 </div>
             </div>
             <div class="form-row">
@@ -94,10 +101,9 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="gender">Gender</label>
-                        <select id="gender" th:name="*{gender}" class="form-control">
-                            <option th:text="Choose..."></option>
-                            <option th:value="'M'" th:text="Male"></option>
-                            <option th:value="'F'" th:text="Female"></option>
+                        <select id="gender" th:field="*{gender}" class="form-control">
+                            <option th:value="M" th:text="Male"></option>
+                            <option th:value="F" th:text="Female"></option>
                         </select>
                     </div>
                 </div>
