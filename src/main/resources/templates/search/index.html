@@ -6,6 +6,7 @@
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div class="container">
 			<div id="map-canvas"></div>
+			<input type="text" id="pac-input"/>
 			<section id="school-listing-scroll-box" class="py-1" style="overflow: scroll; width: auto; height: 35em">
 				<th:block th:each="school : ${schools}">
 						<div id="school-listing" class="text-left row mx-auto px-1 w-75">
