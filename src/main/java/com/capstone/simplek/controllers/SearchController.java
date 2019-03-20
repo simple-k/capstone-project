@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class SearchController {
                 model.addAttribute("child", new Children());
             }
         }
-
         return "search";
     }
 
@@ -62,8 +60,15 @@ public class SearchController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User copyUser = userDao.findOne(loggedInUser.getId());
 
+        boolean userInputHasErrors = user.getFirstName().isEmpty()
+                || user.getLastName().isEmpty()
+                || user.getEmail().isEmpty()
+                || user.getAddress().isEmpty()
+                || user.getZipCode().isEmpty()
+                || user.getPhoneNumber().isEmpty();
+
         // check if email input is empty
-        if (user.getEmail().equals("")) {
+        if (userInputHasErrors) {
             session.setAttribute("inputErrors", "No email inputed!");
             return "redirect:/search/query";
         // check if email matches current email in the database
@@ -94,8 +99,14 @@ public class SearchController {
         copyUser.setAddress(user.getAddress());
         copyUser.setZipCode(user.getZipCode());
         userDao.save(copyUser);
-//        child.setUser(user);
-//        childrenDao.save(child);
+
+        // update child
+        child.setUser(user);
+        child.setFirstName(child.getFirstName());
+        child.setLastName(child.getLastName());
+        child.setDob(child.getDob());
+        child.setGender(child.getGender());
+        childrenDao.save(child);
 
         // set session attribute for search results
 //        session.setAttribute();
