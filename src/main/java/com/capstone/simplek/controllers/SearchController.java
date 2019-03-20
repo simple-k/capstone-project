@@ -1,5 +1,4 @@
 package com.capstone.simplek.controllers;
-
 import com.capstone.simplek.Model.Children;
 import com.capstone.simplek.Model.School;
 import com.capstone.simplek.Model.User;
@@ -47,11 +46,10 @@ public class SearchController {
             if (isAuthenticated) {
                 User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 model.addAttribute("user", user);
+                List<Children> children = childrenDao.getAllChildren(user.getId());
+                model.addAttribute("children", children);
             }
         }
-
-
-
 
         return "search";
     }
@@ -76,4 +74,5 @@ public class SearchController {
 //    public String schoolResults () {
 //        return "school-results";
 //    }
+
 }
