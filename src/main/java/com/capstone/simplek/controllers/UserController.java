@@ -42,10 +42,8 @@ public class UserController {
             return "redirect:/register";
         }
 
-        User checkUserName = userDao.findByUsername(user.getUsername());
-        System.out.println("Testing : " + checkUserName);
-
         // check if user already exist in the users table
+        User checkUserName = userDao.findByUsername(user.getUsername());
         if (checkUserName != null) {
             session.setAttribute("inputErrors", "Username already exist!");
             return "redirect:/register";
@@ -58,8 +56,10 @@ public class UserController {
             return "redirect:/register";
         }
 
+        // hash password before saving to database
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        // save new user to database
         userDao.save(user);
         return "redirect:/login";
     }
