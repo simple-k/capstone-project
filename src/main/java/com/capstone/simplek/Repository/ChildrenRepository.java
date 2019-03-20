@@ -14,4 +14,7 @@ public interface ChildrenRepository extends JpaRepository<Children, Long> {
     @Query(value = "SELECT * FROM children WHERE user_id = :user_id", nativeQuery = true)
     List<Children> getAllChildren(@Param("user_id") long user_id);
 
+    @Query(value = "SELECT * FROM children WHERE user_id = :user_id LIMIT 1", nativeQuery = true)
+    Children getFirstChild(@Param("user_id") long user_id);
+
 }
