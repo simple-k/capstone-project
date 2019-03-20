@@ -72,24 +72,27 @@ public class UserController {
         return "user/profile";
     }
     @GetMapping("/user/edit")
-    public String editProfile (Model model) {
+    public String editProfile (Model model,
+                               @ModelAttribute User user) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", sessionUser);
+        User currentUser = userDao.findOne(sessionUser.getId());
+        model.addAttribute("user", currentUser);
         return "user/edit";
     }
     @PostMapping("/user/edit")
     public String updateProfile (Model model,
-                                 @RequestParam(name = "address") String address,
-                                 @RequestParam(name = "username") String username)
+                                 @ModelAttribute User user)
     {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User updateUser = userDao.findOne(sessionUser.getId());
-        updateUser.setUsername(username);
-        updateUser.setAddress(address);
-        updateUser.setUsername(username);
+        updateUser.setUsername(user.getUsername());
+        updateUser.setEmail(user.getEmail());
+        updateUser.setAddress(user.getAddress());
+        updateUser.setZipCode(user.getZipCode());
+        updateUser.setPhoneNumber(user.getPhoneNumber());
         userDao.save(updateUser);
 
-//        model.addAttribute("user", updateUser);
+        model.addAttribute("user", updateUser);
 
         return "redirect:/user/profile";
     }
