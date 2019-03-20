@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class SearchController {
                 model.addAttribute("child", new Children());
             }
         }
-
         return "search";
     }
 
@@ -62,15 +60,22 @@ public class SearchController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User copyUser = userDao.findOne(loggedInUser.getId());
 
+        boolean userInputHasErrors = user.getuFirstName().isEmpty()
+                || user.getuLastName().isEmpty()
+                || user.getEmail().isEmpty()
+                || user.getAddress().isEmpty()
+                || user.getZipCode().isEmpty()
+                || user.getPhoneNumber().isEmpty();
+
         // check if email input is empty
-        if (user.getEmail().equals("")) {
-            session.setAttribute("inputErrors", "No email inputed!");
+        if (userInputHasErrors) {
+            session.setAttribute("inputErrors", "Invalid inputs!");
             return "redirect:/search/query";
         // check if email matches current email in the database
         } else if (user.getEmail().equals(copyUser.getEmail())){
             //update user with same email input as database
-            copyUser.setFirstName(user.getFirstName());
-            copyUser.setLastName(user.getLastName());
+            copyUser.setuFirstName(user.getuFirstName());
+            copyUser.setuLastName(user.getuLastName());
             copyUser.setPhoneNumber(user.getPhoneNumber());
             copyUser.setAddress(user.getAddress());
             copyUser.setZipCode(user.getZipCode());
@@ -87,15 +92,21 @@ public class SearchController {
         }// email check
 
         // update user
-        copyUser.setFirstName(user.getFirstName());
-        copyUser.setLastName(user.getLastName());
+        copyUser.setuFirstName(user.getuFirstName());
+        copyUser.setuLastName(user.getuLastName());
         copyUser.setEmail(user.getEmail());
         copyUser.setPhoneNumber(user.getPhoneNumber());
         copyUser.setAddress(user.getAddress());
         copyUser.setZipCode(user.getZipCode());
         userDao.save(copyUser);
-//        child.setUser(user);
-//        childrenDao.save(child);
+
+        // update child
+        child.setUser(copyUser);
+        child.setFirstName(child.getFirstName());
+        child.setLastName(child.getLastName());
+        child.setDob(child.getDob());
+        child.setGender(child.getGender());
+        childrenDao.save(child);
 
         // set session attribute for search results
 //        session.setAttribute();
