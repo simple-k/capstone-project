@@ -22,23 +22,25 @@
         <!--<p th:text="${user.phoneNumber}"></p>-->
     <!--</div>-->
     <div id="user-profile">
-        <form th:action="@{/user/edit}" th:method="post">
+        <form th:action="@{/user/edit}" th:method="post" th:object="${user}">
             <h3>Your Profile</h3>
             <p>
                 <label for="username">Username: </label>
-                <input th:value="${user.username}" name="username" id="username"/>
+                <input th:field="*{username}" id="username"/>
             </p>
             <p>
                 <label for="email">Email: </label>
-                <input th:value="${user.email}" name="email" id="email"/>
+                <input th:field="*{email}" id="email"/>
             </p>
             <p>
                 <label for="address">Address: </label>
-                <input th:value="${user.address}" name="address" id="address"/>
+                <input th:field="*{address}" name="address" id="address"/>
+                <label for="zip-code">Zip Code: </label>
+                <input th:field="*{zipCode}" id="zip-code"/>
             </p>
             <p>
                 <label for="phone">Phone: </label>
-                <input th:value="${user.phoneNumber}" name="phone" id="phone"/>
+                <input th:field="*{phoneNumber}" id="phone"/>
             </p>
             <button type="submit">Update Profile</button>
         </form>
