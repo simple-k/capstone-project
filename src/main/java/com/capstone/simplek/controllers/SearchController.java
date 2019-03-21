@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class SearchController {
 
-//    collection of repos referring to our database
+    // collection of repos referring to our database
     @Autowired
     private ChildrenRepository childrenDao;
     @Autowired
@@ -29,7 +29,7 @@ public class SearchController {
     @Autowired
     private UserRepository userDao;
 
-//     requests that interact with our Dao Factory
+     // requests that interact with our Dao Factory
     @GetMapping("/search")
     public String all(Model model) {
         List<School> schools = schoolDao.findAll();
@@ -38,7 +38,7 @@ public class SearchController {
     }
 
     @GetMapping("/search/query")
-    public String viewSearchQuery (Model model){
+    public String viewSearchQueryForm (Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated;
         if (authentication != null) {
@@ -47,31 +47,41 @@ public class SearchController {
             if (isAuthenticated) {
                 User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 User copyUser = userDao.findOne(loggedInUser.getId());
+                Children copyChild = childrenDao.getFirstChild(copyUser.getId());
                 model.addAttribute("user", copyUser);
-                model.addAttribute("child", new Children());
                 model.addAttribute("query", new Query());
+                if (copyChild != null) {
+                    model.addAttribute("child", copyChild);
+                } else {
+                    model.addAttribute("child", new Children());
+                }
             }
         }
         return "search";
-    }
+    }// viewSearchQueryForm
 
     @PostMapping("/search/query")
-    public String createSearchQuery (@ModelAttribute Children child, @ModelAttribute User user, @ModelAttribute Query query, HttpSession session) {
+    public String createSearchQuery (@ModelAttribute Children child,
+                                     @ModelAttribute User user,
+                                     @ModelAttribute Query query,
+                                     HttpSession session) {
+
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User copyUser = userDao.findOne(loggedInUser.getId());
+        Children copyChild = childrenDao.getFirstChild(copyUser.getId());
 
         boolean userInputHasErrors = user.getuFirstName().isEmpty()
                 || user.getuLastName().isEmpty()
                 || user.getEmail().isEmpty()
                 || user.getAddress().isEmpty()
-                || user.getZipCode().isEmpty()
+//                || user.getZipCode().isEmpty()
                 || user.getPhoneNumber().isEmpty();
 
-        // check if email input is empty
+        // check if inputs are empty
         if (userInputHasErrors) {
             session.setAttribute("inputErrors", "Invalid inputs!");
             return "redirect:/search/query";
-        // check if email matches current email in the database
+        // check if email matches current user email in the database
         } else if (user.getEmail().equals(copyUser.getEmail())){
             //update user with same email input as database
             copyUser.setuFirstName(user.getuFirstName());
@@ -80,15 +90,13 @@ public class SearchController {
             copyUser.setAddress(user.getAddress());
             copyUser.setZipCode(user.getZipCode());
             userDao.save(copyUser);
-        }
-        else {
+        } else {
         // check if email already exist in the users table
             User checkEmail = userDao.findByEmail(user.getEmail());
             if (checkEmail != null) {
                 session.setAttribute("inputErrors", "Email already exist!");
                 return "redirect:/search/query";
             }
-
         }// email check
 
         // update user
@@ -100,41 +108,39 @@ public class SearchController {
         copyUser.setZipCode(user.getZipCode());
         userDao.save(copyUser);
 
-        // update child
-        child.setUser(copyUser);
-        child.setFirstName(child.getFirstName());
-        child.setLastName(child.getLastName());
-        child.setDob(child.getDob());
-        child.setGender(child.getGender());
-        childrenDao.save(child);
+        // save/update child
+        if (copyChild != null
+                && copyChild.getFirstName().equals(child.getFirstName())
+                && copyChild.getLastName().equals(child.getLastName())) {
+            copyChild.setUser(copyUser);
+            copyChild.setFirstName(child.getFirstName());
+            copyChild.setLastName(child.getLastName());
+            copyChild.setDob(child.getDob());
+            copyChild.setGender(child.getGender());
+            childrenDao.save(copyChild);
+            // set session attribute for child
+            session.setAttribute("child", copyChild);
+        } else {
+            child.setUser(copyUser);
+            child.setFirstName(child.getFirstName());
+            child.setLastName(child.getLastName());
+            child.setDob(child.getDob());
+            child.setGender(child.getGender());
+            childrenDao.save(child);
+            // set session attribute for child
+            session.setAttribute("child", child);
+        }// save/update child
 
         // set session attribute for search results
         session.setAttribute("query", query);
-        session.setAttribute("user", copyUser);
-        session.setAttribute("child", child);
 
         return "redirect:/search";
-    }
 
-
-//    @PostMapping("/search/query")
-//    public String createSearchQuery (@PathVariable long id,
-//                                     @RequestAttribute (name ="address") String address,
-//                                     @RequestAttribute (name ="transportation-yes") boolean transportation,
-//                                     @RequestAttribute (name ="esl-yes") boolean esl,
-//                                     @RequestAttribute (name ="idea-yes") boolean idea)
-//    {
-//            User user = userDao.findOne(id);
-//            user.setAddress(address);
-//            Children child = new Children();
-//
-//
-//        return "redirect:/search";
-//    }
+    }// createSearchQuery
 
 //    @GetMapping("school-results")
 //    public String schoolResults () {
 //        return "school-results";
 //    }
 
-}
+}// class
