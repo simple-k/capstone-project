@@ -80,20 +80,49 @@ public class UserController {
         return "user/edit";
     }
     @PostMapping("/user/edit")
-    public String updateProfile (Model model,
+    public String updateProfile (Model model, HttpSession session,
                                  @ModelAttribute User user)
     {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User updateUser = userDao.findOne(sessionUser.getId());
-        updateUser.setUsername(user.getUsername());
-        updateUser.setEmail(user.getEmail());
-        updateUser.setAddress(user.getAddress());
-        updateUser.setZipCode(user.getZipCode());
-        updateUser.setPhoneNumber(user.getPhoneNumber());
-        userDao.save(updateUser);
-
         model.addAttribute("user", updateUser);
 
+//
+//        boolean userAlreadyExists = updateUser.equals(userDao.findByUsername(user.getUsername()));
+//        boolean emailAlreadyRegistered = updateUser.equals(userDao.findByEmail(user.getEmail()));
+//        boolean emptyInput = user.getuFirstName().isEmpty()
+//                || user.getuLastName().isEmpty()
+//                || user.getEmail().isEmpty()
+//                || user.getAddress().isEmpty()
+//                || user.getZipCode().isEmpty()
+//                || user.getPhoneNumber().isEmpty();
+//
+//        boolean userInputHasErrors = emptyInput || userAlreadyExists || emailAlreadyRegistered;
+//
+//        // check if form input has errors
+//        if (userInputHasErrors) {
+//            session.setAttribute("inputErrors", "Invalid inputs!");
+//            return "redirect:/search/query";
+
+            // check if email matches current email in the database
+//        }
+//        else if (emailAlreadyRegistered && userAlreadyExists){
+//            //update user with same email input as database
+//            updateUser.setUsername(user.getUsername());
+//            updateUser.setEmail(user.getEmail());
+//            updateUser.setAddress(user.getAddress());
+//            updateUser.setZipCode(user.getZipCode());
+//            updateUser.setPhoneNumber(user.getPhoneNumber());
+//            userDao.save(updateUser);
+//        }
+//        else {
+//            // check if email already exist in the users table
+//            User checkEmail = userDao.findByEmail(user.getEmail());
+//            if (checkEmail != null) {
+//                session.setAttribute("inputErrors", "Email already exist!");
+//                return "redirect:/search/query";
+//            }
+//        }
         return "redirect:/user/profile";
     }
 
