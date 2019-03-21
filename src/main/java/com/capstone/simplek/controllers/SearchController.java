@@ -74,7 +74,7 @@ public class SearchController {
                 || user.getuLastName().isEmpty()
                 || user.getEmail().isEmpty()
                 || user.getAddress().isEmpty()
-                || user.getZipCode().isEmpty()
+//                || user.getZipCode().isEmpty()
                 || user.getPhoneNumber().isEmpty();
 
         // check if inputs are empty

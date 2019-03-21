@@ -1,181 +1,151 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('Welcome')"></head>
+<link rel="stylesheet" th:href="@{/css/search.css}"/>
 <style>
-    main {
-        width: 80%;
-        margin: 0 auto;
-    }
-    .hide {
-        display: none;
+    h1{
+        color:#ccc;
+        font-size:36px;
+        text-shadow:1px 1px 1px #fff;
+        padding:20px;
     }
 </style>
 <body>
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <main>
-        <h4>Hi, <span th:text="*{user.getUsername()}"></span>! Get started by filling out your info.</h4>
-        <form th:action="@{/search/query/}" th:method="post" th:object="${user}">
-            <div th:if="${session.inputErrors != null}">
-                <div class="alert alert-danger alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-times-circle"></i>
-                    <span th:text="${session.inputErrors}"></span>
-                </div>
+    <div id="content">
+        <h1>Fancy Sliding Form with jQuery</h1>
+        <div th:if="${session.inputErrors != null}">
+            <div class="alert alert-danger alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-times-circle"></i>
+                <span th:text="${session.inputErrors}"></span>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputFirstName">First Name</label>
-                    <input type="text" th:field="*{uFirstName}" class="form-control" id="inputFirstName" placeholder="First Name" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputLastName">Last Name</label>
-                    <input type="text" th:field="*{uLastName}" class="form-control" id="inputLastName" placeholder="Last Name" />
-                </div>
+        </div>
+        <div id="wrapper">
+            <div id="steps">
+                <form id="formElem" th:action="@{/search/query/}" th:method="post" th:object="${user}">
+                    <fieldset class="step">
+                        <legend>Account</legend>
+                        <p>
+                            <label for="username">User name</label>
+                            <input id="username" th:field="*{username}" />
+                        </p>
+                        <p>
+                            <label for="email">Email</label>
+                            <input id="email" th:field="*{email}" placeholder="info@simple-k.org" type="email" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <p>
+                            <label for="password">Password</label>
+                            <input id="password" th:field="*{password}" type="password" AUTOCOMPLETE="OFF" />
+                        </p>
+                    </fieldset>
+                    <fieldset class="step">
+                        <legend>Personal Details</legend>
+                        <p>
+                            <label for="ufirstName">First Name</label>
+                            <input id="ufirstName" th:field="*{uFirstName}" type="text" AUTOCOMPLETE="OFF" />
+
+                        </p>
+                        <p>
+                            <label for="ulastName">Last Name</label>
+                            <input id="ulastName" th:field="*{uLastName}" type="text" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <p>
+                            <label for="phone">Phone</label>
+                            <input id="phone" th:field="*{phoneNumber}" placeholder="e.g. (351)215-5555" type="tel" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <p>
+                            <label for="address">Address</label>
+                            <input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <!--<p>-->
+                            <!--<label for="zipCode">Zip Code</label>-->
+                            <!--<input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />-->
+                        <!--</p>-->
+                    </fieldset>
+                    <fieldset class="step" th:object="${child}">
+                        <legend>Child Info</legend>
+                        <p>
+                            <label for="firstName">First Name</label>
+                            <input id="firstName" th:field="*{firstName}" type="text" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <p>
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" th:field="*{lastName}" type="text" AUTOCOMPLETE="OFF" />
+                        </p>
+                        <p>
+                            <label for="dob">Date of Birth</label>
+                            <input id="dob" th:field="*{dob}" type="date" />
+                        </p>
+                        <p>
+                            <label for="gender">Gender</label>
+                            <select id="gender" th:field="*{gender}">
+                                <option th:value="M" th:text="Male"></option>
+                                <option th:value="F" th:text="Female"></option>
+                            </select>
+                        </p>
+                    </fieldset>
+                    <fieldset class="step" th:object="${query}">
+                        <legend>Services</legend>
+                        <p>
+                            <span>Will your child need bus transportation services?</span>
+                            <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="true" />Yes</label>
+                            <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="false" />No</label>
+                        </p>
+                        <p>
+                            <span>Is English your child's primary language?</span>
+                            <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="true" />Yes</label>
+                            <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="false" />No</label>
+                        </p>
+                        <p>
+                            <span>Does your child have a disability or require special education services?</span>
+                            <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="true" />Yes</label>
+                            <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="false" />No</label>
+                        </p>
+                    </fieldset>
+                    <fieldset class="step">
+                        <legend>Confirm</legend>
+                        <p>
+                            Everything in the form was correctly filled
+                            if all the steps have a green checkmark icon.
+                            A red checkmark icon indicates that some field
+                            is missing or filled out with invalid data. In this
+                            last step the user can confirm the submission of
+                            the form.
+                        </p>
+                        <p class="submit">
+                            <button id="submitButton" type="submit">Search Schools</button>
+                        </p>
+                    </fieldset>
+                </form>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" th:field="*{email}" class="form-control" id="inputEmail" placeholder="Email" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPhone">Phone</label>
-                    <input type="tel" th:field="*{phoneNumber}" class="form-control" id="inputPhone" placeholder="(210)123-4567" />
-                </div>
+            <div id="navigation" style="display:none;">
+                <ul>
+                    <li class="selected">
+                        <a href="#">Account</a>
+                    </li>
+                    <li>
+                        <a href="#">Personal Details</a>
+                    </li>
+                    <li>
+                        <a href="#">Child Info</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Confirm</a>
+                    </li>
+                </ul>
             </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" th:field="*{address}" class="form-control" id="inputAddress" placeholder="600 Navarro St #350" />
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="staticCity">City</label>
-                    <input type="text" readonly="" class="form-control-plaintext" id="staticCity" value="San Antonio" />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <input type="text" readonly="" class="form-control-plaintext" id="inputState" value="Texas" />
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip Code</label>
-                    <input type="text" th:field="*{zipCode}" class="form-control" id="inputZip" placeholder="78205" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" />
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-
-            <hr /><!--Child Info-->
-
-            <!--<h4>Enter your child's info.</h4>-->
-            <!--<select th:name="child" th:id="child">-->
-                <!--<option th:each="child : ${children}" th:text="${child.firstName}" th:value="${child.firstName}"></option>-->
-            <!--</select>-->
-
-            <div th:object="${child}">
-            <!--<div th:each="child : ${children}">-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputChildFirstName">First Name</label>
-                        <input type="text" th:field="*{firstName}" class="form-control" id="inputChildFirstName" placeholder="First Name" />
-                        <!--<input type="text" th:value="${child.firstName}" th:name="${children[childStat.index].firstName}" class="form-control" id="inputChildFirstName" placeholder="First Name" />-->
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputChildLastName">Last Name</label>
-                        <input type="text" th:field="*{lastName}" class="form-control" id="inputChildLastName" placeholder="Last Name" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="dob" >Date of Birth</label>
-                        <input type="date"  th:field="*{dob}" id="dob" max="3020-12-31" min="2010-01-01" class="form-control" />
-                        <!--<span class="input-group-addon">-->
-                            <!--<span class="glyphicon glyphicon-calendar"></span>-->
-                        <!--</span>-->
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="gender">Gender</label>
-                        <select id="gender" th:field="*{gender}" class="form-control">
-                            <option th:value="M" th:text="Male"></option>
-                            <option th:value="F" th:text="Female"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <hr /><!--Service Needed-->
-
-            <h4>Enter your child's needs.</h4>
-            <div th:object="${query}">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <p> Will your child need bus transportation services?</p>
-                        <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{bus}" th:value="false" />No</label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <p>Is English your child's primary language?</p>
-                        <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{esl}" th:value="false" />No</label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <p>Does your child have a disability or require special education services?</p>
-                        <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="false" />No</label>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Find Schools</button>
-        </form>
-    </main>
-
-    <!--===================================================-->
-
-    <!--<main>-->
-        <!--<h4>Hi USERNAME! Get started by filling out your info.</h4>-->
-        <!--<form th:action="@{school-results}" th:method="post">-->
-            <!--<div>-->
-                <!--<p>-->
-                    <!--<label for="address">Enter your address: </label>-->
-                    <!--<input type="text" id="address" placeholder="1234 Main St."/>-->
-                <!--</p>-->
-            <!--</div>-->
-            <!--<button type="submit">Find Schools</button>-->
-
-        <!--</form>-->
-        <!--&lt;!&ndash;<form class="bg-light border border-secondary rounded mx-auto w-75 my-3">&ndash;&gt;-->
-            <!--&lt;!&ndash;<h3>Find Schools</h3>&ndash;&gt;-->
-            <!--&lt;!&ndash;<section>&ndash;&gt;-->
-                <!--&lt;!&ndash;DISTRICT&ndash;&gt;-->
-            <!--&lt;!&ndash;</section>&ndash;&gt;-->
-            <!--&lt;!&ndash;<section>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;</section>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</form>&ndash;&gt;-->
-    <!--</main>-->
+        </div>
+    </div>
 
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>
-
-    <!--<script>-->
-        <!--$(document).ready(function() {-->
-            <!--$('#child').on('change', function() {-->
-                <!--document.forms[child].submit();-->
-            <!--});-->
-        <!--});-->
-    <!--</script>-->
+    <script type="text/javascript" th:src="@{/js/search.js}"></script>
 
 </body>
 </html>
