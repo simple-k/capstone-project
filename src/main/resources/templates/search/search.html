@@ -9,13 +9,20 @@
         text-shadow:1px 1px 1px #fff;
         padding:20px;
     }
+    .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        width: 100%;
+        margin: 0;
+    }
 </style>
 <body>
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
     <div id="content">
-        <h1>Fancy Sliding Form with jQuery</h1>
+        <h1>Fill out the form to get started</h1>
         <div th:if="${session.inputErrors != null}">
             <div class="alert alert-danger alert-dismissable">
                 <a class="panel-close close" data-dismiss="alert">×</a>
@@ -26,21 +33,21 @@
         <div id="wrapper">
             <div id="steps">
                 <form id="formElem" th:action="@{/search/query/}" th:method="post" th:object="${user}">
-                    <fieldset class="step">
-                        <legend>Account</legend>
-                        <p>
-                            <label for="username">User name</label>
-                            <input id="username" th:field="*{username}" />
-                        </p>
-                        <p>
-                            <label for="email">Email</label>
-                            <input id="email" th:field="*{email}" placeholder="info@simple-k.org" type="email" AUTOCOMPLETE="OFF" />
-                        </p>
-                        <p>
-                            <label for="password">Password</label>
-                            <input id="password" th:field="*{password}" type="password" AUTOCOMPLETE="OFF" />
-                        </p>
-                    </fieldset>
+                    <!--<fieldset class="step">-->
+                        <!--<legend>Account</legend>-->
+                        <!--<p>-->
+                            <!--<label for="username">User name</label>-->
+                            <!--<input id="username" th:field="*{username}" />-->
+                        <!--</p>-->
+                        <!--<p>-->
+                            <!--<label for="email">Email</label>-->
+                            <!--<input id="email" th:field="*{email}" placeholder="info@simple-k.org" type="email" AUTOCOMPLETE="OFF" />-->
+                        <!--</p>-->
+                        <!--<p>-->
+                            <!--<label for="password">Password</label>-->
+                            <!--<input id="password" th:field="*{password}" type="password" AUTOCOMPLETE="OFF" />-->
+                        <!--</p>-->
+                    <!--</fieldset>-->
                     <fieldset class="step">
                         <legend>Personal Details</legend>
                         <p>
@@ -87,7 +94,7 @@
                             </select>
                         </p>
                     </fieldset>
-                    <fieldset class="step" th:object="${query}">
+                    <fieldset class="step" th:object="${queries}">
                         <legend>Services</legend>
                         <p>
                             <span>Will your child need bus transportation services?</span>
@@ -122,11 +129,11 @@
                 </form>
             </div>
             <div id="navigation" style="display:none;">
-                <ul>
+                <ul class="flex-container">
+                    <!--<li class="selected">-->
+                        <!--<a href="#">Account</a>-->
+                    <!--</li>-->
                     <li class="selected">
-                        <a href="#">Account</a>
-                    </li>
-                    <li>
                         <a href="#">Personal Details</a>
                     </li>
                     <li>
