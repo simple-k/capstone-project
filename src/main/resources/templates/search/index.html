@@ -82,7 +82,7 @@
 				<div th:each="school : ${schools}" class="school">
 					<div id="school-listing" class="text-left row mx-auto px-1">
 						<!--<a th:href="@{/schools/{id}(id=${post.id})}">-->
-						<h5 class="mt-1 text-primary cursor-pointer" th:text="${school.schoolName}" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} +'\')'"></h5>
+						<a href="#" class="show"><h5 class="mt-1 text-primary cursor-pointer" th:text="${school.schoolName}" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} +'\')'"></h5></a>
 						<!--<button class="btn btn-secondary btn-sm" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} +'\')'">x</button>-->
 						<!--</a>-->
 						<div class="flex-container mb-1">
@@ -102,7 +102,7 @@
 				</div>
 			</section>
 			<div id="map-canvas" class="grid-item-2"></div>
-			<div class="grid-item-3">
+			<div id="selected_school" class="grid-item-3" style="display: none">
 				<div id="locationField">
 					<input id="autocomplete"
 						   placeholder="Enter your address"
@@ -110,7 +110,7 @@
 						   type="text"/>
 				</div>
 				<!--Selected School Details-->
-				<h1>School of Rock</h1>
+				<h1 th:text="${schools[0].schoolName}">School of Rock</h1>
 				<p>3300 North Loop 1604 West,</p>
 				<p>Shavano Park, TX, 78231</p>
 				<p>Grades: PK-5</p>
@@ -123,6 +123,14 @@
 		<div th:replace="fragments/scripts :: scripts"></div>
 		<div th:replace="fragments/maps-key :: maps-key"></div>
 		<div th:replace="fragments/footer :: footer"></div>
+		<script th:inline="javascript">
+			$(document).ready(
+				function(){
+					$(".show").click(function () {
+						$("#selected_school").show("slow");
+					});
+				});
+		</script>
 
 	</body>
 </html>
