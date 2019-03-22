@@ -77,53 +77,54 @@ public class UserController {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findOne(sessionUser.getId());
         model.addAttribute("user", currentUser);
+
         return "user/edit";
     }
-    @PostMapping("/user/edit")
-    public String updateProfile (Model model, HttpSession session,
-                                 @ModelAttribute User user)
-    {
-        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User updateUser = userDao.findOne(sessionUser.getId());
-        model.addAttribute("user", updateUser);
-
+//    @PostMapping("/user/edit")
+//    public String updateProfile (Model model, HttpSession session,
+//                                 @ModelAttribute User user) {
+////        updateUser is necessary for Spring Boot Security to immediately register/display database changes
+//        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User updateUser = userDao.findOne(sessionUser.getId());
+//        model.addAttribute("user", updateUser);
 //
-//        boolean userAlreadyExists = updateUser.equals(userDao.findByUsername(user.getUsername()));
-//        boolean emailAlreadyRegistered = updateUser.equals(userDao.findByEmail(user.getEmail()));
-//        boolean emptyInput = user.getuFirstName().isEmpty()
-//                || user.getuLastName().isEmpty()
-//                || user.getEmail().isEmpty()
-//                || user.getAddress().isEmpty()
-//                || user.getZipCode().isEmpty()
-//                || user.getPhoneNumber().isEmpty();
+//        User checkIfUsernameExists = userDao.findByUsername(user.getUsername());
+//        User checkIfEmailExists = userDao.findByEmail(user.getEmail());
 //
-//        boolean userInputHasErrors = emptyInput || userAlreadyExists || emailAlreadyRegistered;
 //
-//        // check if form input has errors
-//        if (userInputHasErrors) {
-//            session.setAttribute("inputErrors", "Invalid inputs!");
-//            return "redirect:/search/query";
-
-            // check if email matches current email in the database
-//        }
-//        else if (emailAlreadyRegistered && userAlreadyExists){
-//            //update user with same email input as database
-//            updateUser.setUsername(user.getUsername());
-//            updateUser.setEmail(user.getEmail());
-//            updateUser.setAddress(user.getAddress());
-//            updateUser.setZipCode(user.getZipCode());
-//            updateUser.setPhoneNumber(user.getPhoneNumber());
-//            userDao.save(updateUser);
-//        }
-//        else {
-//            // check if email already exist in the users table
-//            User checkEmail = userDao.findByEmail(user.getEmail());
-//            if (checkEmail != null) {
-//                session.setAttribute("inputErrors", "Email already exist!");
-//                return "redirect:/search/query";
-//            }
-//        }
-        return "redirect:/user/profile";
-    }
-
-}// class
+//        User otherUsername = userDao.findByUsername(user.getUsername());
+//        User otherUserEmail = userDao.findByEmail(user.getEmail());
+//
+//
+////        boolean userAlreadyExists = !usersOwnInfo || newUsername.equalsIgnoreCase(otherUsername);
+////        if (otherUsername == null || otherUserEmail == null) {
+//////            return userAlreadyExists;
+////        }
+////        boolean emailAlreadyRegistered = !usersOwnInfo || newEmail.matches(otherUserEmail);
+////        boolean emptyInput = user.getUsername().isEmpty()
+////                || user.getEmail().isEmpty()
+////                || user.getAddress().isEmpty()
+////                || user.getZipCode().isEmpty()
+////                || user.getPhoneNumber().isEmpty();
+////
+//////        boolean userInputHasErrors = emptyInput || userAlreadyExists || emailAlreadyRegistered;
+//////
+//////        if (usersOwnInfo || !userInputHasErrors){
+//////            System.out.println("DO WE GET HERE?");
+//////            updateUser.setUsername(user.getUsername());
+//////            updateUser.setEmail(user.getEmail());
+//////            updateUser.setAddress(user.getAddress());
+//////            updateUser.setZipCode(user.getZipCode());
+//////            updateUser.setPhoneNumber(user.getPhoneNumber());
+//////            userDao.save(updateUser);
+//////            return "redirect:/user/profile";
+//////        } else {
+////////            individualized "if" statements create error messages on html page independent of each other
+//////            if (userAlreadyExists) { session.setAttribute("userError", "This username is already taken");}
+//////            if (emailAlreadyRegistered) { session.setAttribute("emailError", "This email address has already been registered");}
+//////            if (emptyInput) { session.setAttribute("emptyError", "One or more required fields is empty.");}
+//////            return "redirect:/user/edit";
+//////        }
+//////    }
+////
+////}
