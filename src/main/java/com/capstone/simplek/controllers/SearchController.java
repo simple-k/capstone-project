@@ -38,8 +38,18 @@ public class SearchController {
             }
         }
         model.addAttribute("schools", schoolDao.findAll());
+
+        // TODO Add filters here
+
+
         return "search/index";
     }
+
+//    @GetMapping("/search/{id}")
+//    public String getSchoolById(@PathVariable long id, Model model) {
+//
+//        return "search/index";
+//    }
 
     @GetMapping("/search/query")
     public String viewSearchQueryForm (Model model){
