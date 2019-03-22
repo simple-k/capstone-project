@@ -34,18 +34,18 @@ public class Children {
             joinColumns = {@JoinColumn(name = "children_id")},
             inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
-    private List<Service> services;
+    private List<Services> services;
 
     public Children() {
     }
-    public Children(long id, String firstName, String lastName, User user, List<Service> services) {
+    public Children(long id, String firstName, String lastName, User user, List<Services> services) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.user = user;
         this.services = services;
     }
-    public Children(long id, String firstName, String lastName, Date dob, char gender, User user, List<Service> services) {
+    public Children(long id, String firstName, String lastName, Date dob, char gender, User user, List<Services> services) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -103,11 +103,11 @@ public class Children {
         this.user = user;
     }
 
-    public List<Service> getServices() {
+    public List<Services> getServices() {
         return services;
     }
 
-    public void setServices(List<Service> services) {
+    public void setServices(List<Services> services) {
         this.services = services;
     }
 
