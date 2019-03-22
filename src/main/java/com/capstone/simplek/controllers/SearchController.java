@@ -61,7 +61,7 @@ public class SearchController {
                 }
             }
         }
-        return "search/search";
+        return "search";
     }// viewSearchQueryForm
 
     @PostMapping("/search/query")
@@ -133,6 +133,7 @@ public class SearchController {
 
         // set session attribute for search results
         session.setAttribute("queries", query);
+
         return "redirect:/search";
 
     }// createSearchQuery

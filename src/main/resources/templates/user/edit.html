@@ -21,9 +21,16 @@
         <!--<p th:text="${user.address + ' ' + user.zipCode}"></p>-->
         <!--<p th:text="${user.phoneNumber}"></p>-->
     <!--</div>-->
-    <div id="user-profile">
+    <div class="my-3 text-left" id="user-profile">
         <form th:action="@{/user/edit}" th:method="post" th:object="${user}">
             <h3>Your Profile</h3>
+            <div th:if="${session.userError != null}">
+                <div class="alert alert-danger alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-times-circle"></i>
+                    <span th:text="${session.userError}"></span>
+                </div>
+            </div>
             <p>
                 <label for="username">Username: </label>
                 <input th:field="*{username}" id="username"/>
@@ -42,7 +49,7 @@
                 <label for="phone">Phone: </label>
                 <input th:field="*{phoneNumber}" id="phone"/>
             </p>
-            <button type="submit">Update Profile</button>
+            <button class="btn" type="submit">Update Profile</button>
         </form>
     </div>
 
