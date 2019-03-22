@@ -22,7 +22,7 @@ map.data.loadGeoJson(
 var geocoder = new google.maps.Geocoder();
 
 function locate(address) {
-    alert('thisworks!');
+    // alert('thisworks!');
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result

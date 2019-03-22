@@ -99,13 +99,9 @@ public class UserController {
                 || user.getZipCode().isEmpty()
                 || user.getPhoneNumber().isEmpty();
 
+        boolean inputHasErrors = (userAlreadyExists!=null || emailAlreadyRegistered!=null || emptyInput);
 
 //        creates error messages if any of the user form inputs are already taken
-        if (userAlreadyExists != null)  { session.setAttribute("userError", "This username is already taken");}
-        if (emailAlreadyRegistered != null)  {session.setAttribute("emailError", "This email address has already been registered");}
-        if (emptyInput){ session.setAttribute("emptyError", "One or more required fields is empty.");}
-
-        boolean inputHasErrors = (userAlreadyExists!=null || emailAlreadyRegistered!=null || emptyInput);
 
         if (!inputHasErrors){
                 updateUser.setUsername(user.getUsername());
@@ -116,6 +112,9 @@ public class UserController {
                 userDao.save(updateUser);
                 return "redirect:/user/profile";
         } else {
+            if (userAlreadyExists != null)  { session.setAttribute("userError", "This username is already taken");}
+            if (emailAlreadyRegistered != null)  {session.setAttribute("emailError", "This email address has already been registered");}
+            if (emptyInput){ session.setAttribute("emptyError", "One or more required fields is empty.");}
             return "redirect:/user/edit";
         }
     }
