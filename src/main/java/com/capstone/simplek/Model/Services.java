@@ -4,7 +4,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "services")
-public class Service {
+public class Services {
 
     @Id @GeneratedValue
     private long id;
@@ -18,10 +18,10 @@ public class Service {
     @ManyToMany(mappedBy = "services")
     public List<School> schools;
 
-    public Service() {
+    public Services() {
     }
 
-    public Service(long id, String service, List<Children> children, List<School> schools) {
+    public Services(long id, String service, List<Children> children, List<School> schools) {
         this.id = id;
         this.service = service;
         this.children = children;
