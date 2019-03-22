@@ -21,13 +21,13 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(Model model){
+    public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
-        return"user/register";
+        return "user/register";
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user, HttpSession session){
+    public String saveUser(@ModelAttribute User user, HttpSession session) {
 
         boolean userInputHasErrors = user.getUsername().isEmpty()
                 || user.getEmail().isEmpty()
@@ -65,21 +65,23 @@ public class UserController {
     }
 
     @GetMapping("/user/profile")
-    public String viewProfile (Model model) {
+    public String viewProfile(Model model) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findOne(sessionUser.getId());
         model.addAttribute("user", currentUser);
         return "user/profile";
     }
+
     @GetMapping("/user/edit")
-    public String editProfile (Model model,
-                               @ModelAttribute User user) {
+    public String editProfile(Model model,
+                              @ModelAttribute User user) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findOne(sessionUser.getId());
         model.addAttribute("user", currentUser);
 
         return "user/edit";
     }
+}
 //    @PostMapping("/user/edit")
 //    public String updateProfile (Model model, HttpSession session,
 //                                 @ModelAttribute User user) {
