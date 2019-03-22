@@ -55,12 +55,12 @@ public class School {
             joinColumns = {@JoinColumn(name = "school_id")},
             inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
-    private List<Service> services;
+    private List<Services> services;
 
     public School() {
     }
 
-    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, List<Service> services) {
+    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, List<Services> services) {
         this.id = id;
         this.stateSchoolId = stateSchoolId;
         this.district = district;
@@ -190,11 +190,11 @@ public class School {
         this.district = district;
     }
 
-    public List<Service> getServices() {
+    public List<Services> getServices() {
         return services;
     }
 
-    public void setServices(List<Service> services) {
+    public void setServices(List<Services> services) {
         this.services = services;
     }
 
