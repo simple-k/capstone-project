@@ -66,7 +66,7 @@ function locate(address, id) {
             map.setCenter(results[0].geometry.location);
             map.setZoom(15);
             var marker = new google.maps.Marker({
-                position: results[0],
+                position: results[0].geometry.location,
                 map: map
             });
         } else {
@@ -76,6 +76,25 @@ function locate(address, id) {
         }
     });
 }
+
+function placeMarker(address){
+    geocoder.geocode({"address": address}, function (results, status) {
+
+        // Check for a successful result
+        if (status == google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map
+            });
+            console.log('done with' + address);
+        } else {
+
+            // Show an error Message with the status if our request fails
+            alert("Geocoding was not successful - STATUS: " + status);
+        }
+    });
+}
+
 var placeSearch, autocomplete;
 
 // Create the autocomplete object, restricting the search predictions to
@@ -140,7 +159,25 @@ function testData(){
         let result = data.features;
         console.log(result);
         for(let item of result){
+            console.log(item.properties.NAME);
             console.log(item.geometry.coordinates[0][0]);
+            if(item.properties.NAME == "Lackland ISD" || item.properties.NAME == "San Antonio ISD") {
+                let secondResult = item.geometry.coordinates[0][0];
+                for (let coordinate of secondResult) {
+                    let lat = coordinate[0];
+                    let lng = coordinate[1];
+                    console.log(lat);
+                    console.log(lng);
+                }
+            }
+            // else{
+            //     let i = 0;
+            //     let lat = item.geometry.coordinates[0][i][0];
+            //     let lng = item.geometry.coordinates[0][i++][1];
+            //     i++;
+            //     console.log(lat);
+            //     console.log(lng);
+            // }
         }
     })
 }
