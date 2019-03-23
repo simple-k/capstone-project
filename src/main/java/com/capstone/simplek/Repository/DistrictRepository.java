@@ -14,4 +14,11 @@ public interface DistrictRepository extends JpaRepository<District, String> {
     @Query(value = "SELECT * FROM districts WHERE name = :name", nativeQuery = true)
     List<District> findDistrictbyName (@Param("name") String name);
 
+    @Query("SELECT name, stateDistrictId, image, url FROM District WHERE id = :id")
+    Object findById (@Param("id") long id);
+
+    @Query("SELECT name, stateDistrictId, image, url FROM District")
+    List<Object> findall ();
+
 }
+
