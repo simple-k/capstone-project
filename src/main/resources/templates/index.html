@@ -161,7 +161,7 @@
                 <button sec:authorize="!isAuthenticated()" type="button"><a th:href="@{/register}"> Register <i class="fas fa-user ml-1"></i></a></button>
                 <button sec:authorize="isAuthenticated()" type="button"><a th:href="@{/user/profile}"> Profile <i class="fas fa-user ml-1"></i></a></button>
 
-                <button type="button"><a th:href="@{/search}"> Find Schools <i class="fas fa-search"></i></a></button>
+                <button type="button"><a th:href="@{/search/query}"> Find Schools <i class="fas fa-search"></i></a></button>
             </div>
         </div>
     </section>

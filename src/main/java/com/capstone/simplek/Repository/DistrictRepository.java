@@ -11,7 +11,7 @@ import java.util.List;
 // JpaRepository implements the same functionality as the CrudRepository
 public interface DistrictRepository extends JpaRepository<District, String> {
 
-    @Query(value = "SELECT * FROM districts WHERE name = :name", nativeQuery = true)
-    List<District> findDistrictbyName (@Param("name") String name);
+//    @Query(value = "SELECT * FROM districts WHERE name = :name", nativeQuery = true)
+//    List<District> findDistrictByName (@Param("name") String name);
 
 }

@@ -61,7 +61,7 @@ public class SearchController {
                 }
             }
         }
-        return "search";
+        return "search/search";
     }// viewSearchQueryForm
 
     @PostMapping("/search/query")
