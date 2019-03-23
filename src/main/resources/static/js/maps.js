@@ -93,8 +93,14 @@ function findDistrict(address){
         let resultArray;
         $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
             resultArray = data.features;
-        })
-
+        });
+        let districts = resultArray.properties.NAME;
+        let coordinates = resultArray.geometry.coordinates;
+        for(let i = 0; i < districts.length; i++){
+            for(coordinate of coordinates){
+                console.log(coordinate[0]);
+            }
+        }
     });
 }
 function testData(){
@@ -102,8 +108,17 @@ function testData(){
         console.log(data);
         let result = data.features;
         console.log(result);
-        for(let item of result){
-            console.log(item.geometry.coordinates[0][0]);
+        for(let i = 0; i < result.length; i++){
+            let coordinates = result[i].geometry.coordinates;
+            let districts = result[i].properties.NAME;
+            console.log(districts);
+            for(let coordinate of coordinates){
+                for(let individualCoord of coordinate){
+                    let lat = individualCoord[0];
+                    let lng = individualCoord[1];
+
+                }
+            }
         }
     })
 }
