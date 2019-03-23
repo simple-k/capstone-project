@@ -20,7 +20,42 @@ map.data.loadGeoJson(
 
 var geocoder = new google.maps.Geocoder();
 
-function locate(address) {
+function locate(address, id) {
+    console.log('thisworks!');
+
+    // CSRF token
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    // get selected school from database and return JSON
+    jQuery.ajax({
+        url: '/api/school/selected',
+        type: 'GET',
+        dataType: 'json',
+        data: {"schoolId": id},
+        cache:false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+            success:function(school){
+                // console.log(school);
+                $("#school").remove();
+                $('#selected_school').append("<div id='school'>" +
+                    "<h3>"+school.schoolName+"</h3>" +
+                    "<p>"+school.streetAddress+"</p>" +
+                    "<p>San Antonio, TX, <span>"+school.zipCode+"</span></p>" +
+                    "<p>Grades: PK-<span>"+school.highGrade+"</span></p>" +
+                    "<p>Total students enrolled: <span>"+school.students+"</span></p>" +
+                    "<p>Total teachers: <span>"+school.teachers+"</span></p>" +
+                    "<p>Students per teacher: <span>"+school.studentTeacherRatio+"</span></p>" +
+                    "<p>District: </p></div>");
+        },
+        error:function(jqXhr, textStatus, errorThrown){
+            console.log(jqXhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
+    });
+
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result
@@ -29,16 +64,35 @@ function locate(address) {
             map.setCenter(results[0].geometry.location);
             map.setZoom(15);
             var marker = new google.maps.Marker({
-                position: results[0],
+                position: results[0].geometry.location,
                 map: map
             });
         } else {
 
-            // Show an error message with the status if our request fails
+            // Show an error Message with the status if our request fails
             alert("Geocoding was not successful - STATUS: " + status);
         }
     });
 }
+
+function placeMarker(address){
+    geocoder.geocode({"address": address}, function (results, status) {
+
+        // Check for a successful result
+        if (status == google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map
+            });
+            console.log('done with' + address);
+        } else {
+
+            // Show an error Message with the status if our request fails
+            alert("Geocoding was not successful - STATUS: " + status);
+        }
+    });
+}
+
 var placeSearch, autocomplete;
 
 // Create the autocomplete object, restricting the search predictions to
@@ -108,17 +162,26 @@ function testData(){
         console.log(data);
         let result = data.features;
         console.log(result);
-        for(let i = 0; i < result.length; i++){
-            let coordinates = result[i].geometry.coordinates;
-            let districts = result[i].properties.NAME;
-            console.log(districts);
-            for(let coordinate of coordinates){
-                for(let individualCoord of coordinate){
-                    let lat = individualCoord[0];
-                    let lng = individualCoord[1];
-
+        for(let item of result){
+            console.log(item.properties.NAME);
+            console.log(item.geometry.coordinates[0][0]);
+            if(item.properties.NAME == "Lackland ISD" || item.properties.NAME == "San Antonio ISD") {
+                let secondResult = item.geometry.coordinates[0][0];
+                for (let coordinate of secondResult) {
+                    let lat = coordinate[0];
+                    let lng = coordinate[1];
+                    console.log(lat);
+                    console.log(lng);
                 }
             }
+            // else{
+            //     let i = 0;
+            //     let lat = item.geometry.coordinates[0][i][0];
+            //     let lng = item.geometry.coordinates[0][i++][1];
+            //     i++;
+            //     console.log(lat);
+            //     console.log(lng);
+            // }
         }
     })
 }
