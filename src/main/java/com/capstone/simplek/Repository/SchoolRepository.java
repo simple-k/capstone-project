@@ -1,10 +1,8 @@
 package com.capstone.simplek.Repository;
-
 import com.capstone.simplek.Model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
 // comes with built in findAll, findOne, save, and delete methods
@@ -14,4 +12,13 @@ public interface SchoolRepository extends JpaRepository<School, String> {
             value = "SELECT * FROM schools WHERE district_id = :district_id",
             nativeQuery = true)
     List<School> findSchoolsWithinDistrictById (@Param("district_id") long district_id);
+
+    @Query(value = "SELECT * FROM schools WHERE id = :schoolId", nativeQuery = true)
+    School getById(@Param("schoolId") long schoolId);
+
+//    @Query(
+//            value = "SELECT * FROM schools WHERE ",
+//            nativeQuery = true)
+//    List<School> findAddress ();
+
 }

@@ -8,7 +8,6 @@ var mapOptions = {
         lng: -98.489602
     }
 };
-
 var map;
 map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 9,
@@ -21,8 +20,44 @@ map.data.loadGeoJson(
 
 var geocoder = new google.maps.Geocoder();
 
-function locate(address) {
-    alert('thisworks!');
+function locate(address, id) {
+    console.log('thisworks!');
+
+    // show div with selected school
+    $("#selected_school").show("slow");
+    // CSRF token
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    // get selected school from database and return JSON
+    jQuery.ajax({
+        url: '/api/school/selected',
+        type: 'GET',
+        dataType: 'json',
+        data: {"schoolId": id},
+        cache:false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+            success:function(school){
+                // console.log(school);
+                $("#school").remove();
+                $('#selected_school').append("<div id='school'>" +
+                    "<h3>"+school.schoolName+"</h3>" +
+                    "<p>"+school.streetAddress+"</p>" +
+                    "<p>San Antonio, TX, <span>"+school.zipCode+"</span></p>" +
+                    "<p>Grades: PK-<span>"+school.highGrade+"</span></p>" +
+                    "<p>Total students enrolled: <span>"+school.students+"</span></p>" +
+                    "<p>Total teachers: <span>"+school.teachers+"</span></p>" +
+                    "<p>Students per teacher: <span>"+school.studentTeacherRatio+"</span></p>" +
+                    "<p>District: </p></div>");
+        },
+        error:function(jqXhr, textStatus, errorThrown){
+            console.log(jqXhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
+    });
+
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result
@@ -36,7 +71,7 @@ function locate(address) {
             });
         } else {
 
-            // Show an error message with the status if our request fails
+            // Show an error Message with the status if our request fails
             alert("Geocoding was not successful - STATUS: " + status);
         }
     });
@@ -88,4 +123,24 @@ function geolocate() {
                 {center: geolocation, radius: position.coords.accuracy});
         });
     }
+}
+
+function findDistrict(address){
+    geocoder.geocode({"address": address}, function (results, status) {
+        let resultArray;
+        $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+            resultArray = data.features;
+        })
+
+    });
+}
+function testData(){
+    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+        console.log(data);
+        let result = data.features;
+        console.log(result);
+        for(let item of result){
+            console.log(item.geometry.coordinates[0][0]);
+        }
+    })
 }

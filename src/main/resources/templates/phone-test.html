@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="fragments/header :: header('this is a test')"></head>
+	
+	<body>
+		<div class="header">
+			<input id="bar" placeholder="(123) 456-7890" type="text" name="txtInput" th:onkeydown="'backspacerDOWN(this,event);'" th:onkeyup="'backspacerUP(this,event);'"/>
+			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#bar">COPY</button>
+		</div>
+		<h2>Auto Format Phone Number</h2>
+		<div th:replace="fragments/footer :: footer"></div>
+		<div th:replace="fragments/scripts :: scripts"></div>
+		<script type="text/javascript" th:src="@{/js/phoneFormatter.js}"></script>
+	</body>
+</html>
