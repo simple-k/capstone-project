@@ -36,18 +36,18 @@ function locate(address, id) {
         beforeSend: function(xhr) {
             xhr.setRequestHeader(header, token);
         },
-            success:function(school){
-                // console.log(school);
+            success:function(array){
+                console.log(array);
                 $("#school").remove();
                 $('#selected_school').append("<div id='school'>" +
-                    "<h3>"+school.schoolName+"</h3>" +
-                    "<p>"+school.streetAddress+"</p>" +
-                    "<p>San Antonio, TX, <span>"+school.zipCode+"</span></p>" +
-                    "<p>Grades: PK-<span>"+school.highGrade+"</span></p>" +
-                    "<p>Total students enrolled: <span>"+school.students+"</span></p>" +
-                    "<p>Total teachers: <span>"+school.teachers+"</span></p>" +
-                    "<p>Students per teacher: <span>"+school.studentTeacherRatio+"</span></p>" +
-                    "<p>District: </p></div>");
+                    "<h3>"+array[0].schoolName+"</h3>" +
+                    "<p>"+array[0].streetAddress+"</p>" +
+                    "<p>San Antonio, TX, <span>"+array[0].zipCode+"</span></p>" +
+                    "<p>Grades: PK-<span>"+array[0].high0rade+"</span></p>" +
+                    "<p>Total students enrolled: <span>"+array[0].students+"</span></p>" +
+                    "<p>Total teachers: <span>"+array[0].teachers+"</span></p>" +
+                    "<p>Students per teacher: <span>"+array[0].studentTeacherRatio+"</span></p>" +
+                    "<p>District: <a href='"+array[1][3]+"' target='_blank'><span>"+array[1][0]+"</span></a></p></div>");
         },
         error:function(jqXhr, textStatus, errorThrown){
             console.log(jqXhr);
