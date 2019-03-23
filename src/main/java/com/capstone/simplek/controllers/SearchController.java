@@ -26,17 +26,11 @@ public class SearchController {
      // requests that interact with our Dao Factory
     @GetMapping("/search")
     public String all(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAuthenticated;
-        if (authentication != null) {
-            isAuthenticated = authentication instanceof AnonymousAuthenticationToken ? false
-                    : authentication.isAuthenticated();
-            if (isAuthenticated) {
-                User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User copyUser = userDao.findOne(loggedInUser.getId());
-                model.addAttribute("user", copyUser);
-            }
-        }
+
+//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User copyUser = userDao.findOne(loggedInUser.getId());
+//        model.addAttribute("user", copyUser);
+        model.addAttribute("user", new User());
         model.addAttribute("schools", schoolDao.findAll());
 
         // TODO Add filters here
@@ -71,7 +65,7 @@ public class SearchController {
                 }
             }
         }
-        return "search";
+        return "search/search";
     }// viewSearchQueryForm
 
     @PostMapping("/search/query")
