@@ -23,8 +23,6 @@ var geocoder = new google.maps.Geocoder();
 function locate(address, id) {
     console.log('thisworks!');
 
-    // show div with selected school
-    $("#selected_school").show("slow");
     // CSRF token
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");

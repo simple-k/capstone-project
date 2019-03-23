@@ -102,7 +102,7 @@
 				</div>
 			</section>
 			<div id="map-canvas" class="grid-item-2"></div>
-			<div id="selected_school" class="grid-item-3" style="display: none">
+			<div id="selected_school" class="grid-item-3">
 				<!--google maps search-->
 				<div id="locationField">
 					<input id="autocomplete"
@@ -110,6 +110,11 @@
 						   th:onFocus="'geolocate()'"
 						   type="text"/>
 					<button th:onclick="'testData()'">Test json iteration</button>
+				</div>
+				<!--show on initial load-->
+				<div id='school'>
+					<h3>Select a school for more info.</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
 				</div>
 				<!--selected school div-->
 			</div>
