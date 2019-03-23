@@ -17,7 +17,7 @@
         margin: 0;
     }
 </style>
-<body>
+<body class="mt-5">
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
@@ -63,19 +63,19 @@
                             <label for="phone">Phone</label>
                             <input id="phone" th:field="*{phoneNumber}" placeholder="e.g. (351)215-5555" type="tel" AUTOCOMPLETE="OFF" />
                         </p>
-                        <!--<p>-->
-                            <!--<label for="address">Address</label>-->
-                            <!--<input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" />-->
-                        <!--</p>-->
-                        <p id="locationField">
-                            <!--<div id="locationField">-->
-                        <label for="autocomplete">Address</label>
-                        <input id="autocomplete"
-                                       placeholder="Enter your address"
-                                       th:onFocus="'geolocate()'"
-                                       type="text"/>
-                            <!--</div>-->
+                        <p>
+                            <label for="address">Address</label>
+                            <input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" />
                         </p>
+                        <!--<p id="locationField">-->
+                            <!--&lt;!&ndash;<div id="locationField">&ndash;&gt;-->
+                        <!--<label for="autocomplete">Address</label>-->
+                        <!--<input id="autocomplete"-->
+                                       <!--placeholder="Enter your address"-->
+                                       <!--th:onFocus="'geolocate()'"-->
+                                       <!--type="text"/>-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</p>-->
                         <!--<p>-->
                             <!--<label for="zipCode">Zip Code</label>-->
                             <!--<input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />-->
