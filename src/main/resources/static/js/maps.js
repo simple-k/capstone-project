@@ -8,7 +8,6 @@ var mapOptions = {
         lng: -98.489602
     }
 };
-
 var map;
 map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 9,
@@ -124,4 +123,24 @@ function geolocate() {
                 {center: geolocation, radius: position.coords.accuracy});
         });
     }
+}
+
+function findDistrict(address){
+    geocoder.geocode({"address": address}, function (results, status) {
+        let resultArray;
+        $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+            resultArray = data.features;
+        })
+
+    });
+}
+function testData(){
+    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+        console.log(data);
+        let result = data.features;
+        console.log(result);
+        for(let item of result){
+            console.log(item.geometry.coordinates[0][0]);
+        }
+    })
 }
