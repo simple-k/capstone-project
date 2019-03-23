@@ -60,7 +60,7 @@
 		<!--====================================================-->
 
 		<!--example check if session exist-->
-		<!--<div class="container text-center" th:if="${session.queries != null and session.child != null}">-->
+		<div class="container text-center" th:if="${session.queries != null and session.child != null}">
 
 			<!--<h3>THIS WILL SHOW IF THE FORM IS SUBMITTED!</h3>-->
 			<!--<p th:text="${session.queries.bus}"></p>-->
@@ -70,9 +70,8 @@
 			<!--<p th:text="${user.uFirstName}"></p>-->
 			<!--<p th:text="${user.uLastName}"></p>-->
 			<!--<p th:text="${user.address}"></p>-->
-			<!--&lt;!&ndash;<h1 th:text="${user.zipCode}"></h1>&ndash;&gt;-->
 
-		<!--</div>-->
+		</div>
 
 		<!--====================================================-->
 
@@ -82,7 +81,7 @@
 				<div th:each="school : ${schools}" class="school">
 					<div id="school-listing" class="text-left row mx-auto px-1">
 						<!--<a th:href="@{/schools/{id}(id=${post.id})}">-->
-						<a href="#" class="show"><h5 class="mt-1 text-primary cursor-pointer" th:text="${school.schoolName}" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} +'\')'"></h5></a>
+						<h5 class="mt-1 text-primary cursor-pointer" th:text="${school.schoolName}" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} + '\' ,\' ' + ${school.id} +'\')'"></h5>
 						<!--<button class="btn btn-secondary btn-sm" th:onclick="'locate(\''+ ${school.streetAddress} + ${school.zipCode} +'\')'">x</button>-->
 						<!--</a>-->
 						<div class="flex-container mb-1">
@@ -103,34 +102,20 @@
 			</section>
 			<div id="map-canvas" class="grid-item-2"></div>
 			<div id="selected_school" class="grid-item-3" style="display: none">
+				<!--google maps search-->
 				<div id="locationField">
 					<input id="autocomplete"
 						   placeholder="Enter your address"
 						   th:onFocus="'geolocate()'"
 						   type="text"/>
 				</div>
-				<!--Selected School Details-->
-				<h1 th:text="${schools[0].schoolName}">School of Rock</h1>
-				<p>3300 North Loop 1604 West,</p>
-				<p>Shavano Park, TX, 78231</p>
-				<p>Grades: PK-5</p>
-				<p>Total students enrolled: 500</p>
-				<p>Students per teacher: 18:1</p>
-				<p>District: Northside Independent School District (NISD)</p>
+				<!--selected school div-->
 			</div>
 		</div>
 
 		<div th:replace="fragments/scripts :: scripts"></div>
 		<div th:replace="fragments/maps-key :: maps-key"></div>
 		<div th:replace="fragments/footer :: footer"></div>
-		<script th:inline="javascript">
-			$(document).ready(
-				function(){
-					$(".show").click(function () {
-						$("#selected_school").show("slow");
-					});
-				});
-		</script>
 
 	</body>
 </html>
