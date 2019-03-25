@@ -17,7 +17,7 @@
         margin: 0;
     }
 </style>
-<body>
+<body class="mt-5">
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
@@ -67,6 +67,15 @@
                             <label for="address">Address</label>
                             <input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" />
                         </p>
+                        <!--<p id="locationField">-->
+                            <!--&lt;!&ndash;<div id="locationField">&ndash;&gt;-->
+                        <!--<label for="autocomplete">Address</label>-->
+                        <!--<input id="autocomplete"-->
+                                       <!--placeholder="Enter your address"-->
+                                       <!--th:onFocus="'geolocate()'"-->
+                                       <!--type="text"/>-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</p>-->
                         <!--<p>-->
                             <!--<label for="zipCode">Zip Code</label>-->
                             <!--<input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />-->
@@ -152,6 +161,7 @@
 
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="fragments/maps-key :: maps-key"></div>
     <script type="text/javascript" th:src="@{/js/search.js}"></script>
 
 </body>
