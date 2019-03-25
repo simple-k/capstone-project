@@ -1,3 +1,7 @@
+function filterDistricts(){
+    let district = document.getElementById("districtFilter").value;
+    console.log(district);
+}
 var mapOptions = {
     // Set the zoom level
     zoom: 5,
@@ -15,8 +19,8 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
 });
 
 // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-map.data.loadGeoJson(
-    '../Json/San_Antonio_Districts.geojson');
+// map.data.loadGeoJson(
+//     '../Json/San_Antonio_Districts.geojson');
 
 var geocoder = new google.maps.Geocoder();
 
@@ -107,19 +111,15 @@ function geolocate() {
     }
 }
 
-function findDistrict(address){
+function findDistrict(address, district){
     geocoder.geocode({"address": address}, function (results, status) {
-        let resultArray;
-        $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
-            resultArray = data.features;
+        let userAddress = results[0].geometry.location;
+        console.log('address: ' + userAddress.lng());
+        var marker = new google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map
         });
-        let districts = resultArray.properties.NAME;
-        let coordinates = resultArray.geometry.coordinates;
-        for(let i = 0; i < districts.length; i++){
-            for(coordinate of coordinates){
-                console.log(coordinate[0]);
-            }
-        }
+        console.log(google.maps.geometry.poly.containsLocation({lat: userAddress.lat, lng: userAddress.lng}, district));
     });
 }
 function testData(){
@@ -128,16 +128,31 @@ function testData(){
         let result = data.features;
         console.log(result);
         for(let item of result){
+            let coordinates = [];
             console.log(item.properties.NAME);
-            console.log(item.geometry.coordinates[0][0]);
+            // console.log(item.geometry.coordinates[0][0]);
             if(item.properties.NAME == "Lackland ISD" || item.properties.NAME == "San Antonio ISD") {
                 let secondResult = item.geometry.coordinates[0][0];
                 for (let coordinate of secondResult) {
-                    let lat = coordinate[0];
-                    let lng = coordinate[1];
-                    console.log(lat);
-                    console.log(lng);
+                    let lat = coordinate[1];
+                    let lng = coordinate[0];
+                    let districtCoordinate = {lat : lat, lng: lng};
+                    coordinates.push(districtCoordinate);
+                    // console.log(lat);
+                    // console.log(lng);
                 }
+                console.log(coordinates);
+                let district = new google.maps.Polygon({
+                    paths: coordinates,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35
+                });
+                district.setMap(map);
+                console.log(district);
+                findDistrict('1800 Dimsted Pl, Lackland AFB, TX 78236', district)
             }
             // else{
             //     let i = 0;
