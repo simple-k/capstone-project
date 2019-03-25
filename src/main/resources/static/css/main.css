@@ -35,10 +35,14 @@ header {
     top: 0;
 
 }
+#container {
+    max-width: 960px;
+    width: 100%;
+    margin-top: 7em;
+}
 .container {
     max-width: 960px;
     width: 100%;
-    padding: 0;
     text-align: center;
 }
 a:hover {
