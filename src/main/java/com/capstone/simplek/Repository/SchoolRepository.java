@@ -14,7 +14,10 @@ public interface SchoolRepository extends JpaRepository<School, String> {
     List<School> findSchoolsWithinDistrictById (@Param("district_id") long district_id);
 
     @Query(value = "SELECT * FROM schools WHERE id = :schoolId", nativeQuery = true)
-    School getById(@Param("schoolId") long schoolId);
+    School findById(@Param("schoolId") long schoolId);
+
+    @Query("FROM School s WHERE district.id = :districtId")
+    List<School> findAllSchoolsByDistrictId(@Param("districtId") long districtId);
 
 //    @Query(
 //            value = "SELECT * FROM schools WHERE ",

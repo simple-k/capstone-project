@@ -1,4 +1,5 @@
 package com.capstone.simplek.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class District {
     @Column
     private String url;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "district")
     private List<School> schools = new ArrayList<>();
 

@@ -20,42 +20,7 @@ map.data.loadGeoJson(
 
 var geocoder = new google.maps.Geocoder();
 
-function locate(address, id) {
-    console.log('thisworks!');
-
-    // CSRF token
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    // get selected school from database and return JSON
-    jQuery.ajax({
-        url: '/api/school/selected',
-        type: 'GET',
-        dataType: 'json',
-        data: {"schoolId": id},
-        cache:false,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(header, token);
-        },
-            success:function(array){
-                console.log(array);
-                $("#school").remove();
-                $('#selected_school').append("<div id='school'>" +
-                    "<h3>"+array[0].schoolName+"</h3>" +
-                    "<p>"+array[0].streetAddress+"</p>" +
-                    "<p>San Antonio, TX, <span>"+array[0].zipCode+"</span></p>" +
-                    "<p>Grades: PK-<span>"+array[0].high0rade+"</span></p>" +
-                    "<p>Total students enrolled: <span>"+array[0].students+"</span></p>" +
-                    "<p>Total teachers: <span>"+array[0].teachers+"</span></p>" +
-                    "<p>Students per teacher: <span>"+array[0].studentTeacherRatio+"</span></p>" +
-                    "<p>District: <a href='"+array[1][3]+"' target='_blank'><span>"+array[1][0]+"</span></a></p></div>");
-        },
-        error:function(jqXhr, textStatus, errorThrown){
-            console.log(jqXhr);
-            console.log(textStatus);
-            console.log(errorThrown);
-        }
-    });
-
+function locate(address) {
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result
