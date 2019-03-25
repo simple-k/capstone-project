@@ -154,31 +154,50 @@
 
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    <div id="jumbo-container" class="mt-5 mb-0 py-5 jumbotron jumbotron-fluid img-fluid">
-        <div class="pt-5 mt-5 container">
-            <h1 id="logo" class="pt-5 display-4 mt-5">Simple-K</h1>
+    <div id="jumbo-container" class="m-0 py-5 jumbotron jumbotron-fluid img-fluid">
+        <div class="py-2 my-3 container">
+            <h1 id="logo" class="pt-3 display-4 mt-5">Simple-K</h1>
             <p class="lead py-2">Pre-K Enrollment Made Easy</p>
             <!--<hr class="my-1 w-75"/>-->
-            <p class="px-4 pb-5 mx-2 my-3 text-center">Locate San Antonio schools and services that match your child's needs.</p>
+            <p class="px-4 pb-3 mx-2 my-3 text-center">Locate San Antonio schools and services that match your child's needs.</p>
             <div class="col-12 col-md-8 mx-auto my-2 px-3">
                 <a sec:authorize="!isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/login}" role="button">Login</a>
                 <a sec:authorize="!isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/register}" role="button">Register</a>
-                <a sec:authorize="isAuthenticated()" class="col mt-4 mb-2 btn-link btn-outline-warning btn-lg text-light" th:href="@{/user/profile}" role="button"> Profile</a>
+                <a sec:authorize="isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/user/profile}" role="button"> Profile</a>
                 <a class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/search/query}" role="button">Search Schools</a>
             </div>
         </div>
     </div>
-    <div id="landing-page-content" class="container">
+    <div id="landing-page-content" class="py-5 mb-5 container border-white rounded">
         <section class="row">
-            <div class="col-sm-12 col-md-4 my-2"> IMAGE GOES HERE </div>
-            <div class="col-sm-12 col-md-8 text-left ml-0 mr-auto"> CONTENT GOES HERE </div>
+            <div class="col-sm-12 col-md-4 my-2">
+                <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt=""/>
+            </div>
+            <div class="col-sm-12 col-md-8 text-left ml-0 mr-auto">
+                <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
         </section>
         <section class="row">
-            <div class="col-12 col-md-8 text-right ml-auto mr-0"> CONTENT GOES HERE </div>
-            <div class="col-12 col-md-4"> IMAGE GOES HERE </div>
+            <div class="col-12 col-md-8 text-right ml-auto mr-0">
+                <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt=""/>
+            </div>
         </section>
     </div>
 
+    <!--<section class="section-big">-->
+        <!--<div class="image-big">-->
+            <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+        <!--</div>-->
+        <!--<div class="text-big">-->
+            <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+            <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+        <!--</div>-->
+    <!--</section>-->
 
 
     <div th:replace="fragments/footer :: footer"></div>

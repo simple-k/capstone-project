@@ -57,7 +57,7 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Districts</a>
+                        <a class="nav-link" th:href="@{/search}">Districts</a>
                     </li>
                     <!--<li class="nav-item">-->
                         <!--<a class="nav-link" href="#">nf</a>-->
@@ -74,6 +74,12 @@
                         </div>
                     </li>
                 </ul>
+                    <div class="ml-auto">
+                        <form th:method="post" th:action="@{/login}" id="login">
+                            <a sec:authorize="!isAuthenticated()" class="col my-2 text-light" th:href="@{/login}" role="button">Login</a>
+                            <a sec:authorize="isAuthenticated()" class="col my-2 text-light" th:href="@{/login?logout}" role="button">Logout</a>
+                        </form>
+                    </div>
             </div>
         </div>
     </nav>

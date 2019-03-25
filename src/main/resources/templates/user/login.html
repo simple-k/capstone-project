@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header('Login')"></head>
 <!--<style>-->
 	<!--body {-->
@@ -103,34 +104,36 @@
 <!--</style>-->
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<div id="container">
-	<div class="p-2">
+<div id="container" class="row mx-auto">
 		<!--Login Form-->
-		<form th:action="@{/login}" method="POST">
-			<h3 class="text-center">Login Form</h3>
-			<div th:if="${param.error}">
-				<div class="alert alert-danger alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a>
-					<i class="fa fa-times-circle"></i>
-					<p>Invalid Username and Password.</p>
-				</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="alert alert-danger alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a>
-					<i class="fa fa-times-circle"></i>
-					<p>You have been logged out.</p>
-				</div>
-			</div>
-			<div class="form-wrapper">
-				<input type="text" name="username" placeholder="Username" class="form-control" required=""/>
+	<div class="col-11 col-md-4 bg-light border rounded p-3 mx-auto">
+		<form th:action="@{/login}" method="POST" class="mx-auto w-75">
+			<h3 class="m-2 p-2 text-center">Account Login</h3>
+			<div class="my-2 form-wrapper">
+				<input type="text" name="username" placeholder="Username" class=" form-control" required=""/>
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="form-wrapper">
+			<div class="my-2 form-wrapper">
 				<input type="password" name="password" placeholder="Password" class="form-control" required=""/>
 				<i class="fas fa-lock"></i>
 			</div>
-			<button type="submit" class="col my-2 btn btn-primary btn-lg text-light" role="button">Login</button>
+			<div th:if="${param.error}">
+				<div class="my-3 alert alert-danger alert-dismissable">
+					<a class="panel-close close" data-dismiss="alert">×</a>
+					<i class="fa fa-times-circle"></i>
+					<p class="m-auto">Invalid Username and Password.</p>
+				</div>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="my-3 alert alert-danger alert-dismissable">
+					<a class="panel-close close" data-dismiss="alert">×</a>
+					<i class="fa fa-times-circle"></i>
+					<p class="m-auto">You have been logged out.</p>
+				</div>
+			</div>
+			<div class="mx-auto form-wrapper">
+				<button type="submit" class="mx-auto my-2 w-100 btn btn-primary btn-lg text-light" role="button">Login</button>
+			</div>
 		</form>
 
 		</div>
