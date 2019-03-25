@@ -1,6 +1,5 @@
 package com.capstone.simplek.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +13,6 @@ public class School {
     @Column(nullable = false, length = 19)
     private String stateSchoolId;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;
