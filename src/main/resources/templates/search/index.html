@@ -56,7 +56,7 @@
 			<!--/*TODO fix display on smaller screens*/-->
 		<!--}-->
 	<!--</style>-->
-	<body class="mt-5">
+	<body>
 	<div th:replace="fragments/navbar :: navbar"></div>
 	<div class="container row">
 			<!--example check if session exist-->
@@ -65,7 +65,7 @@
 				<!--<p th:text="${session.queries.bus}"></p>-->
 				<!--<p th:text="${session.child.firstName}"></p>-->
 				<!--<p th:text="${session.queries.esl}"></p>-->
-				<!--<p th:text="${session.child.gender}"></p>-->
+				<!--<p th:text="${session.child.gender}"></p> -->
 				<!--<p th:text="${user.uFirstName}"></p>-->
 				<!--<p th:text="${user.uLastName}"></p>-->
 				<!--<p th:text="${user.address}"></p>-->
@@ -95,15 +95,44 @@
 		<div class="col-8">
 			<div id="map-canvas" class="mt-3 grid-item-2"></div>
 			<div id="selected_school" class="text-left grid-item-3" style="display: none">
-				<!--google maps search-->
-				<div id="locationField">
-					<input id="autocomplete"
-						   placeholder="Enter your address"
-						   th:onFocus="'geolocate()'"
-						   type="text"/>
-					<button th:onclick="'testData()'">Test json iteration</button>
+<!--=======-->
+						<!--<div class="flex-container mb-1">-->
+							<!--<div th:onload="'placeMarker(\'' + ${school.streetAddress} + ${school.zipCode} + '\')'">-->
+								<!--<p th:text="${school.streetAddress}"></p>-->
+								<!--<p><span>San Antonio, TX, </span><span th:text="${school.zipCode}"></span></p>-->
+								<!--<p th:text="${school.phone}"></p>-->
+							<!--</div>-->
+							<!--<div class="text-center">-->
+								<!--<a th:href="@{${school.district.url}}" target="_blank">-->
+									<!--<img th:src="@{${school.district.image}}" />-->
+								<!--</a>-->
+								<!--<p th:text="${school.district.name}"></p>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
 				</div>
-			</div>
+			<!--</section>-->
+			<!--<div id="map-canvas" class="grid-item-2"></div>-->
+			<!--<div id="selected_school" class="grid-item-3">-->
+<!--&gt;>>>>>> 810d682af2b5a710fffa6cef1de222816c9f81b3-->
+				<!--&lt;!&ndash;google maps search&ndash;&gt;-->
+				<!--<div id="locationField">-->
+					<!--<input id="autocomplete"-->
+						   <!--placeholder="Enter your address"-->
+						   <!--th:onFocus="'geolocate()'"-->
+						   <!--type="text"/>-->
+					<!--<button th:onclick="'testData()'">Test json iteration</button>-->
+				<!--</div>-->
+<!--<<<<<<< HEAD-->
+<!--=======-->
+				<!--&lt;!&ndash;show on initial load&ndash;&gt;-->
+				<!--<div id='school'>-->
+					<!--<h3>Select a school for more info.</h3>-->
+					<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>-->
+				<!--</div>-->
+				<!--&lt;!&ndash;selected school div&ndash;&gt;-->
+<!--&gt;>>>>>> 810d682af2b5a710fffa6cef1de222816c9f81b3-->
+			<!--</div>-->
 		</div>
 		</div>
 			<!--CSS GRID Layout-->
