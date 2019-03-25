@@ -22,6 +22,8 @@ public class SearchController {
     private SchoolRepository schoolDao;
     @Autowired
     private UserRepository userDao;
+    @Autowired
+    private DistrictRepository districtsDao;
 
      // requests that interact with our Dao Factory
     @GetMapping("/search")
@@ -32,6 +34,7 @@ public class SearchController {
 //        model.addAttribute("user", copyUser);
         model.addAttribute("user", new User());
         model.addAttribute("schools", schoolDao.findAll());
+        model.addAttribute("districts", districtsDao.findAll());
 
         // TODO Add filters here
 

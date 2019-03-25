@@ -79,6 +79,9 @@
 		<!--CSS GRID Layout-->
 		<div class="grid-container">
 			<section id="school-listing-scroll-box" class="py-1 grid-item-1">
+				<select th:onchange="'filterDistricts()'" id="districtFilter">
+					<option th:each="dis : ${districts}" th:value="${dis.name}" th:text="${dis.name}"></option>
+				</select>
 				<div th:each="school : ${schools}" class="school">
 					<div id="school-listing" class="text-left row mx-auto px-1">
 						<!--<a th:href="@{/schools/{id}(id=${post.id})}">-->
