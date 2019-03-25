@@ -21,6 +21,8 @@ public class SearchController {
     @Autowired
     private SchoolRepository schoolDao;
     @Autowired
+    private DistrictRepository districtDao;
+    @Autowired
     private UserRepository userDao;
     @Autowired
     private DistrictRepository districtsDao;
@@ -28,16 +30,22 @@ public class SearchController {
      // requests that interact with our Dao Factory
     @GetMapping("/search")
     public String all(Model model) {
-
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User copyUser = userDao.findOne(loggedInUser.getId());
-//        model.addAttribute("user", copyUser);
-        model.addAttribute("user", new User());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAuthenticated;
+        if (authentication != null) {
+            isAuthenticated = authentication instanceof AnonymousAuthenticationToken ? false
+                    : authentication.isAuthenticated();
+            if (isAuthenticated) {
+                User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User copyUser = userDao.findOne(loggedInUser.getId());
+                model.addAttribute("user", copyUser);
+                model.addAttribute("queries", new Query());
+            }
+        }
         model.addAttribute("schools", schoolDao.findAll());
-        model.addAttribute("districts", districtsDao.findAll());
+        model.addAttribute("districts", districtDao.findAll());
 
         // TODO Add filters here
-
 
         return "search/index";
     }
