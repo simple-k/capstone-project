@@ -30,28 +30,26 @@ $(document).ready(() => {
         console.log(error);
     };
 
+    // Grid Item 1
     // Get Request - Render School Index
     const renderSchoolIndex  = (schools) => {
         $('.loadingIndex').hide();
         schools.filter(({id, stateSchoolId, district, highGrade, schoolName, streetAddress, zipCode, phone, charter, titleISchool, title1SchoolWide, students, teachers, studentTeacherRatio}) => {
-            $('#school-listing-scroll-box').append(`
-                <div class='list_school'>
-                    <div class='school'>
-                        <div id='school-listing' class='text-left row mx-auto px-1'>
-                            <h5 class='select_school mt-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
-                            <div class='flex-container mb-1'>
-                                <div onload="placeMarker('${streetAddress} ${zipCode}')">
-                                    <p>${streetAddress}</p>
-                                    <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
-                                    <p>${phone}</p>
-                                </div>
-                                <div class='text-center'>
-                                    <a href='${district.url}' target="_blank">
-                                        <img src='${district.image}' />
-                                    </a>
-                                    <p>${district.name}</p>
-                                </div>
-                            </div>
+            $('.list_school').append(`
+                <div class='row school'>
+                    <div id='school-listing' class='text-left mx-auto px-1'>
+                        <h5 class='select_school my-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
+                        <div class='col-12'>
+                            <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
+                            <p>${streetAddress}</p>
+                            <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
+                            <p>${phone}</p>
+                        </div>
+                        <div class='text-center'>
+                            <a href='${district.url}' target="_blank">
+                                <img src='${district.image}' />
+                            </a>
+                            <p>${district.name}</p>
                         </div>
                     </div>
                 </div>
@@ -59,6 +57,7 @@ $(document).ready(() => {
         })
     };
 
+    //Grid Item 3
     // Get Request - Render Selected School
     const renderSelectedSchool  = (school) => {
         $('.loadingIndex').hide();
@@ -80,7 +79,7 @@ $(document).ready(() => {
     // getSchoolJson().then(renderSchoolIndex).catch(err);
 
     // Render Selected School and Recenter the map over the address On Click
-    $('#school-listing-scroll-box').on('click', ".select_school" ,(e) => {
+    $('.list_school').on('click', ".select_school" ,(e) => {
         let schoolId = $(e.target).data('schoolid');
         let schoolAddress = $(e.target).data('schooladdress');
         $("#school").remove();
@@ -93,7 +92,7 @@ $(document).ready(() => {
     $('#resetIndex').click(() => {
         $("#resetIndex").prop("disabled", true);
         $("#search-form")[0].reset();
-        $('.list_school').remove();
+        $('.school').remove();
         $('.grid-item-1 .loadingIndex').show();
         getSchoolJson().then(renderSchoolIndex)
             .then(() => $("#resetIndex").prop("disabled", false)).catch(err);
@@ -101,7 +100,7 @@ $(document).ready(() => {
 
     // Filter School By District On Select Option
     $('#search-district').on('input', () => {
-        $('.list_school').remove();
+        $('.school').remove();
         $('.grid-item-1 .loadingIndex').show();
         if($('#search-district option:selected').val() === `search by district...`){
             getSchoolJson().then(renderSchoolIndex).catch(err);

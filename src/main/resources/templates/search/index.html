@@ -3,124 +3,106 @@
 	<head th:replace="fragments/header :: header('test')"></head>
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
 	<style>
-		.grid-container {
-			display: grid;
-			grid-template-columns: 35% 65%;
-			grid-template-rows: 481px 300px;
-			margin: 0 0 50px 0;
-			width: 100%;
-			overflow: hidden;
-		}
-		.grid-item-1 {
-			grid-column: 1;
-			grid-row: 1/3;
-		}
-		.grid-item-2 {
-			grid-column: 2;
-			grid-row: 1/2;
-		}
-		.grid-item-3 {
-			grid-column: 2;
-			grid-row: 2/3;
-		}
-		#school-listing-scroll-box {
-			overflow: scroll;
-			width: auto;
-			height: 100%
-		}
-		.school {
-			border: 1px solid darkgray;
-			margin: 5px;
-		}
-		.flex-container {
-			display: flex;
-			flex-wrap: nowrap;
-			justify-content: space-between;
-			width: 100%;
-		}
-		.flex-container img {
-			height: 50px;
-		}
-		p {
-			margin: 0;
-		}
+		/*.grid-container {*/
+			/*display: grid;*/
+			/*grid-template-columns: 35% 65%;*/
+			/*grid-template-rows: 481px 300px;*/
+			/*margin: 0 0 50px 0;*/
+			/*width: 100%;*/
+			/*overflow: hidden;*/
+		/*}*/
+		/*.grid-item-1 {*/
+			/*grid-column: 1;*/
+			/*grid-row: 1/3;*/
+		/*}*/
+		/*.grid-item-2 {*/
+			/*grid-column: 2;*/
+			/*grid-row: 1/2;*/
+		/*}*/
+		/*.grid-item-3 {*/
+			/*grid-column: 2;*/
+			/*grid-row: 2/3;*/
+		/*}*/
+		/*#school-listing-scroll-box {*/
+			/*overflow: scroll;*/
+			/*width: auto;*/
+			/*height: 100%*/
+		/*}*/
+		/*.school {*/
+			/*border: 1px solid darkgray;*/
+			/*margin: 5px;*/
+		/*}*/
+		/*.flex-container {*/
+			/*display: flex;*/
+			/*flex-wrap: nowrap;*/
+			/*justify-content: space-between;*/
+			/*width: 100%;*/
+		/*}*/
+		/*.flex-container img {*/
+			/*height: 50px;*/
+		/*}*/
+		/*p {*/
+			/*margin: 0;*/
+		/*}*/
 		.cursor-pointer {
 			cursor: pointer;
 		}
 		.loadingIndex {
 			display: none;
 		}
-		@media only screen and (min-width: 1440px) {
-			/*TODO fix display on bigger screens*/
-		}
-		@media only screen and (max-width: 768px) {
-			/*TODO fix display on smaller screens*/
-		}
-		@media only screen and (max-width: 425px) {
-			/*TODO fix display on smaller screens*/
-			.grid-container {
-				display: grid;
-				grid-template-columns: 35% 65%;
-				grid-template-rows: 481px auto 600px;
-				margin: 0 0 50px 0;
-				width: 100%;
-				overflow: hidden;
-			}
-			.grid-item-3 {
-				grid-column: 1/3;
-				grid-row: 2/3;
-			}
-			.grid-item-2 {
-				grid-column: 1/3;
-				grid-row: 1/2;
-			}
-			.grid-item-1 {
-				grid-column: 1/3;
-				grid-row: 3/4;
-			}
-		}
+		/*@media only screen and (min-width: 1440px) {*/
+			/*!*TODO fix display on bigger screens*!*/
+		/*}*/
+		/*@media only screen and (max-width: 768px) {*/
+			/*!*TODO fix display on smaller screens*!*/
+		/*}*/
+		/*@media only screen and (max-width: 425px) {*/
+			/*!*TODO fix display on smaller screens*!*/
+			/*.grid-container {*/
+				/*display: grid;*/
+				/*grid-template-columns: 35% 65%;*/
+				/*grid-template-rows: 481px auto 600px;*/
+				/*margin: 0 0 50px 0;*/
+				/*width: 100%;*/
+				/*overflow: hidden;*/
+			/*}*/
+			/*.grid-item-3 {*/
+				/*grid-column: 1/3;*/
+				/*grid-row: 2/3;*/
+			/*}*/
+			/*.grid-item-2 {*/
+				/*grid-column: 1/3;*/
+				/*grid-row: 1/2;*/
+			/*}*/
+			/*.grid-item-1 {*/
+				/*grid-column: 1/3;*/
+				/*grid-row: 3/4;*/
+			/*}*/
+		/*}*/
 	</style>
 	<body>
 		<div th:replace="fragments/navbar :: navbar"></div>
 
-		<!--====================================================-->
-
 		<!--example check if session exist-->
-		<div class="container text-center" th:if="${session.queries != null and session.child != null}">
+		<div class="container text-center" th:if="${session.queries != null and session.child != null}"></div>
 
-			<!--<h3>THIS WILL SHOW IF THE FORM IS SUBMITTED!</h3>-->
-			<!--<p th:text="${session.queries.bus}"></p>-->
-			<!--<p th:text="${session.child.firstName}"></p>-->
-			<!--<p th:text="${session.queries.esl}"></p>-->
-			<!--<p th:text="${session.child.gender}"></p>-->
-			<!--<p th:text="${user.uFirstName}"></p>-->
-			<!--<p th:text="${user.uLastName}"></p>-->
-			<!--<p th:text="${user.address}"></p>-->
-
-		</div>
-
-		<!--====================================================-->
-
-
-		<!--CSS GRID Layout-->
-		<div class="grid-container">
-			<section id="school-listing-scroll-box" class="py-1 grid-item-1">
-				<div class="list_school">
-					<div th:each="school : ${schools}" class="school">
-						<div id="school-listing" class="text-left row mx-auto px-1">
-							<h5 class="select_school mt-1 text-primary cursor-pointer" th:text="${school.schoolName}" th:attr="data-schoolid=${school.id}, data-schooladdress=${school.streetAddress}+${school.zipCode}"></h5>
-							<div class="flex-container mb-1">
-								<div th:onload="'placeMarker(\'' + ${school.streetAddress} + ${school.zipCode} + '\')'">
-									<p th:text="${school.streetAddress}"></p>
-									<p><span>San Antonio, TX, </span><span th:text="${school.zipCode}"></span></p>
-									<p th:text="${school.phone}"></p>
-								</div>
-								<div class="text-center">
-									<a th:href="@{${school.district.url}}" target="_blank">
-										<img th:src="@{${school.district.image}}" />
-									</a>
-									<p th:text="${school.district.name}"></p>
-								</div>
+		<div class="container row">
+			<div class="col-4">
+				<div class="list_school" style="overflow: scroll; height: 50em">
+					<div th:each="school : ${schools}" class="row school">
+						<div id="school-listing" class="text-left mx-auto px-1">
+							<h5 class="select_school my-1 text-primary cursor-pointer" th:text="${school.schoolName}"  th:attr="data-schoolid=${school.id}, data-schooladdress=${school.streetAddress} + ${school.zipCode}"></h5>
+							<div class="col-12">
+								<div th:onload="'placeMarker(\'' + ${school.streetAddress} + ${school.zipCode} + '\')'"></div>
+								<p th:text="${school.streetAddress}"></p>
+								<p><span>San Antonio, TX, </span><span th:text="${school.zipCode}"></span></p>
+								<p th:text="${school.phone}"></p>
+							</div>
+							<div class="text-center">
+								<a th:href="@{${school.district.url}}" target="_blank">
+									<img th:src="@{${school.district.image}}" />
+								</a>
+								<p th:text="${school.district.name}"></p>
 							</div>
 						</div>
 					</div>
@@ -128,16 +110,18 @@
 				<div>
 					<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
 				</div>
-			</section>
-			<div id="map-canvas" class="grid-item-2"></div>
-			<div id="selected_school" class="grid-item-3">
-				<!--google maps search-->
-				<div id="locationField">
-					<input id="autocomplete"
-						   placeholder="Enter your address"
-						   th:onFocus="'geolocate()'"
-						   type="text"/>
-					<button th:onclick="'testData()'">Test json iteration</button>
+			</div>
+			<div class="col-8">
+				<div id="map-canvas" class="mt-3 grid-item-2"></div>
+				<div id="selected_school" class="text-left grid-item-3">
+					<!--google maps search-->
+					<div id="locationField">
+						<input id="autocomplete"
+							   placeholder="Enter your address"
+							   th:onFocus="'geolocate()'"
+							   type="text"/>
+						<button th:onclick="'testData()'">Test json iteration</button>
+					</div>
 					<!--school filters-->
 					<form id="search-form">
 						<select name="search-district" id="search-district">
@@ -152,7 +136,6 @@
 					<h3>Select a school for more info.</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
 				</div>
-				<!--selected school div-->
 				<div>
 					<img class="loadingIndex" src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif" alt="loading data" />
 				</div>
