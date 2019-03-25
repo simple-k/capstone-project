@@ -35,10 +35,13 @@ header {
     top: 0;
 
 }
+#container {
+    /*max-width: 960px;*/
+    width: 100%;
+    margin: 3em auto 2em auto}
 .container {
     max-width: 960px;
     width: 100%;
-    padding: 0;
     text-align: center;
 }
 a:hover {
@@ -75,6 +78,9 @@ footer {
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9)), url("../img/banner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+}
+#landing-page-content {
+    background-color: #FFFFFF;
 }
 .lead {
     font-family: 'Love Ya Like A Sister', cursive;
