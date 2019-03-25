@@ -24,6 +24,8 @@ public class SearchController {
     private DistrictRepository districtDao;
     @Autowired
     private UserRepository userDao;
+    @Autowired
+    private DistrictRepository districtsDao;
 
      // requests that interact with our Dao Factory
     @GetMapping("/search")
