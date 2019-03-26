@@ -67,6 +67,10 @@
                             <label for="address">Address</label>
                             <input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" />
                         </p>
+                        <p>
+                        <label for="zipCode">Zip Code</label>
+                        <input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />
+                        </p>
                         <!--<p id="locationField">-->
                         <!--&lt;!&ndash;<div id="locationField">&ndash;&gt;-->
                         <!--<label for="autocomplete">Address</label>-->
@@ -75,10 +79,6 @@
                         <!--th:onFocus="'geolocate()'"-->
                         <!--type="text"/>-->
                         <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--</p>-->
-                        <!--<p>-->
-                        <!--<label for="zipCode">Zip Code</label>-->
-                        <!--<input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />-->
                         <!--</p>-->
                     </fieldset>
                     <fieldset class="step" th:object="${child}">

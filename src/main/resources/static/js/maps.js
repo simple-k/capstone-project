@@ -2,6 +2,10 @@ function filterDistricts(){
     let district = document.getElementById("districtFilter").value;
     console.log(district);
 }
+$('#submitButton').click(function (){
+    findDistrict()
+});
+
 // let username = '<%= Session["UserName"]%>';
 // alert(username);
 let mapOptions = {
@@ -168,8 +172,8 @@ function findDistrict(){
             }
         }
     });
-    // let address = $('#address').val();
-    let address = '600 Navarro St #350 78205';
+    let address = $('#address').val();
+    address += ', ' + $('#zipCode').val();
     console.log(address);
     if (address == null){
         console.log('this only shows if youre not logged in');
@@ -183,6 +187,7 @@ function findDistrict(){
                     map: map
                 });
                 let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
+                console.log(addressCoord);
                 console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
                 console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
             } else {

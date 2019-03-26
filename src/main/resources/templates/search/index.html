@@ -81,12 +81,15 @@
 			/*}*/
 		/*}*/
 	</style>
-	<body>
+	<body th:onload="'findDistrict()'">
 		<div th:replace="fragments/navbar :: navbar"></div>
 
 		<!--example check if session exist-->
 		<div class="container text-center" th:if="${session.queries != null and session.child != null}"></div>
+		<!--hidden input for javascript address locator-->
 		<input sec:authorize="isAuthenticated()" id="address" type="hidden" th:value="${user.address}"/>
+		<input sec:authorize="isAuthenticated()" id="zipCode" type="hidden" th:value="${user.zipCode}"/>
+		<!---->
 		<div class="container row">
 			<div class="col-4">
 				<div class="list_school" style="overflow: scroll; height: 50em">
