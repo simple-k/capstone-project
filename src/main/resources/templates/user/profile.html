@@ -27,30 +27,13 @@
         </button>
     </form>
 
-
-
-    <!--<div id="user-profile">-->
-        <!--<form th:action="@{/user/profile/edit}" th:method="post">-->
-            <!--<h3>Your Profile</h3>-->
-            <!--<p>-->
-                <!--<label for="username">Username: </label>-->
-                <!--<input th:value="${user.username}" name="username" id="username"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="email">Email: </label>-->
-                <!--<input th:value="${user.email}" name="email" id="email"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="address">Address: </label>-->
-                <!--<input th:value="${user.address}" name="address" id="address"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="phone">Phone: </label>-->
-                <!--<input th:value="${user.phoneNumber}" name="phone" id="phone"/>-->
-            <!--</p>-->
-            <!--<button type="submit">Update Profile</button>-->
-        <!--</form>-->
-    <!--</div>-->
+    <div id="child-profile">
+        <h3 th:text="${child}"></h3>
+        <!--<hr/>-->
+        <p th:text="${user.email}"></p>
+        <p th:text="${user.address + ' ' + user.zipCode}"></p>
+        <p th:text="${user.phoneNumber}"></p>
+    </div>
 
 </div>
 <div th:replace="fragments/footer :: footer"></div>

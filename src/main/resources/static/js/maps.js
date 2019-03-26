@@ -38,6 +38,7 @@ const geocoder = new google.maps.Geocoder();
 
 
 function locate(address) {
+
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result

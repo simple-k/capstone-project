@@ -1,6 +1,9 @@
 package com.capstone.simplek.controllers;
+import com.capstone.simplek.Model.Children;
 import com.capstone.simplek.Model.User;
+import com.capstone.simplek.Repository.ChildrenRepository;
 import com.capstone.simplek.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    ChildrenRepository childrenDao;
 
     public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
@@ -68,7 +75,9 @@ public class UserController {
     public String viewProfile(Model model) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findOne(sessionUser.getId());
+        List<Children> usersChildren = childrenDao.getAllChildren(currentUser.getId());
         model.addAttribute("user", currentUser);
+        model.addAttribute("child", usersChildren);
         return "user/profile";
     }
 
@@ -84,11 +93,14 @@ public class UserController {
 
     @PostMapping("/user/edit")
     public String updateProfile (Model model, HttpSession session,
-                                 @ModelAttribute User user) {
+                                 @ModelAttribute User user,
+                                 @ModelAttribute Children children) {
 //        updateUser is necessary for Spring Boot Security to immediately register/display database changes
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User updateUser = userDao.findOne(sessionUser.getId());
+        List<Children> userChildren = childrenDao.findAll();
         model.addAttribute("user", updateUser);
+        model.addAttribute("child", userChildren);
 
 //        checks if user form inputs already exist in the database
         User userAlreadyExists = userDao.findByUsername(user.getUsername());
@@ -99,13 +111,9 @@ public class UserController {
                 || user.getZipCode().isEmpty()
                 || user.getPhoneNumber().isEmpty();
 
+        boolean inputHasErrors = (userAlreadyExists!=null || emailAlreadyRegistered!=null || emptyInput);
 
 //        creates error messages if any of the user form inputs are already taken
-        if (userAlreadyExists != null)  { session.setAttribute("userError", "This username is already taken");}
-        if (emailAlreadyRegistered != null)  {session.setAttribute("emailError", "This email address has already been registered");}
-        if (emptyInput){ session.setAttribute("emptyError", "One or more required fields is empty.");}
-
-        boolean inputHasErrors = (userAlreadyExists!=null || emailAlreadyRegistered!=null || emptyInput);
 
         if (!inputHasErrors){
                 updateUser.setUsername(user.getUsername());
@@ -116,6 +124,9 @@ public class UserController {
                 userDao.save(updateUser);
                 return "redirect:/user/profile";
         } else {
+            if (userAlreadyExists != null)  { session.setAttribute("userError", "This username is already taken");}
+            if (emailAlreadyRegistered != null)  {session.setAttribute("emailError", "This email address has already been registered");}
+            if (emptyInput){ session.setAttribute("emptyError", "One or more required fields is empty.");}
             return "redirect:/user/edit";
         }
     }
