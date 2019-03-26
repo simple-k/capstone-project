@@ -44,13 +44,13 @@ public class User {
     private String uLastName;
 
     @Column(name="address")
-    private String address;
+    private String address = "";
 
     @Column(name="zip_code", length = 5)
-    private String zipCode;
+    private String zipCode = "";
 
     @Column(name="phone_number", length = 14)
-    private String phoneNumber;
+    private String phoneNumber = "";
 
     @Column(name="is_admin", length = 5)
     private boolean isAdmin;
