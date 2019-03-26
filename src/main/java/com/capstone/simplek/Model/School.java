@@ -50,6 +50,21 @@ public class School {
     @Column
     private String studentTeacherRatio ;
 
+    @Column
+    private boolean languageService;
+
+    @Column
+    private boolean disabilityService;
+
+    @Column
+    private boolean transportationService;
+
+    @Column
+    private boolean financialService;
+
+    @Column
+    private boolean daycareService;
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -62,7 +77,7 @@ public class School {
     public School() {
     }
 
-    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, List<Services> services) {
+    public School(long id, String stateSchoolId, District district, String highGrade, String schoolName, String streetAddress, String zipCode, String phone, boolean charter, boolean titleISchool, boolean title1SchoolWide, String students, String teachers, String studentTeacherRatio, boolean languageService, boolean disabilityService, boolean transportationService, boolean financialService, boolean daycareService, List<Services> services) {
         this.id = id;
         this.stateSchoolId = stateSchoolId;
         this.district = district;
@@ -77,6 +92,11 @@ public class School {
         this.students = students;
         this.teachers = teachers;
         this.studentTeacherRatio = studentTeacherRatio;
+        this.languageService = languageService;
+        this.disabilityService = disabilityService;
+        this.transportationService = transportationService;
+        this.financialService = financialService;
+        this.daycareService = daycareService;
         this.services = services;
     }
 
@@ -182,6 +202,46 @@ public class School {
 
     public void setStudentTeacherRatio(String studentTeacherRatio) {
         this.studentTeacherRatio = studentTeacherRatio;
+    }
+
+    public boolean isLanguageService() {
+        return languageService;
+    }
+
+    public void setLanguageService(boolean languageService) {
+        this.languageService = languageService;
+    }
+
+    public boolean isDisabilityService() {
+        return disabilityService;
+    }
+
+    public void setDisabilityService(boolean disabilityService) {
+        this.disabilityService = disabilityService;
+    }
+
+    public boolean isTransportationService() {
+        return transportationService;
+    }
+
+    public void setTransportationService(boolean transportationService) {
+        this.transportationService = transportationService;
+    }
+
+    public boolean isFinancialService() {
+        return financialService;
+    }
+
+    public void setFinancialService(boolean financialService) {
+        this.financialService = financialService;
+    }
+
+    public boolean isDaycareService() {
+        return daycareService;
+    }
+
+    public void setDaycareService(boolean daycareService) {
+        this.daycareService = daycareService;
     }
 
     public District getDistrict() {
