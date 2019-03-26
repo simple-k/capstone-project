@@ -121,8 +121,8 @@ public class SearchController {
         boolean userInputHasErrors = user.getuFirstName().isEmpty()
                 || user.getuLastName().isEmpty()
                 || user.getAddress().isEmpty()
-                || user.getPhoneNumber().isEmpty();
-//                || user.getZipCode().isEmpty()
+                || user.getPhoneNumber().isEmpty()
+                || user.getZipCode().isEmpty();
 
         // check if user inputs are empty
         if (userInputHasErrors) {
@@ -135,7 +135,7 @@ public class SearchController {
         copyUser.setuLastName(user.getuLastName());
         copyUser.setPhoneNumber(user.getPhoneNumber());
         copyUser.setAddress(user.getAddress());
-//        copyUser.setZipCode(user.getZipCode());
+        copyUser.setZipCode(user.getZipCode());
         userDao.save(copyUser);
 
         boolean childInputHasErrors = child.getFirstName().isEmpty()
