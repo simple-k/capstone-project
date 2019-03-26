@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head th:replace="fragments/header :: header('test')"></head>
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
 	<style>
@@ -85,7 +86,7 @@
 
 		<!--example check if session exist-->
 		<div class="container text-center" th:if="${session.queries != null and session.child != null}"></div>
-
+		<input sec:authorize="isAuthenticated()" id="address" type="hidden" th:value="${user.address}"/>
 		<div class="container row">
 			<div class="col-4">
 				<div class="list_school" style="overflow: scroll; height: 50em">
@@ -120,7 +121,7 @@
 							   placeholder="Enter your address"
 							   th:onFocus="'geolocate()'"
 							   type="text"/>
-						<button th:onclick="'testData()'">Test json iteration</button>
+						<button th:onclick="'findDistrict()'">Test json iteration</button>
 					</div>
 					<!--school filters-->
 					<form id="search-form">

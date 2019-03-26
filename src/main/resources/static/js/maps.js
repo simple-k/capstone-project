@@ -2,8 +2,8 @@ function filterDistricts(){
     let district = document.getElementById("districtFilter").value;
     console.log(district);
 }
-let username = '<%= Session["UserName"]%>';
-alert(username);
+// let username = '<%= Session["UserName"]%>';
+// alert(username);
 let mapOptions = {
     // Set the zoom level
     zoom: 5,
@@ -120,7 +120,7 @@ function geolocate() {
     }
 }
 
-function findDistrict(address){
+function findDistrict(){
     let district;
     let district2;
     $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
@@ -143,12 +143,10 @@ function findDistrict(address){
                     let lat = coordinate[1];
                     let lng = coordinate[0];
                     let districtCoordinate = {lat: lat, lng: lng};
-                    console.log(districtCoordinate);
                     coordinates2.push(districtCoordinate);
                     // console.log(lat);
                     // console.log(lng);
                 }
-                console.log(coordinates);
                 district = new google.maps.Polygon({
                     paths: coordinates,
                     strokeColor: '#FF0000',
@@ -170,19 +168,26 @@ function findDistrict(address){
             }
         }
     });
-
-    geocoder.geocode({"address": address}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            let userAddress = results[0].geometry.location;
-            var marker = new google.maps.Marker({
-                position: results[0].geometry.location,
-                map: map
-            });
-            let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
-            console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
-            console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
-        } else {
-            alert("Geocoding was not successful - STATUS: " + status);
-        }
-    });
+    // let address = $('#address').val();
+    let address = '600 Navarro St #350 78205';
+    console.log(address);
+    if (address == null){
+        console.log('this only shows if youre not logged in');
+    }
+    else {
+        geocoder.geocode({"address": address}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                let userAddress = results[0].geometry.location;
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map
+                });
+                let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
+                console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
+                console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
+            } else {
+                alert("Geocoding was not successful - STATUS: " + status);
+            }
+        });
+    }
 }
