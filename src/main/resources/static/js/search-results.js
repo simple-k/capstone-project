@@ -60,6 +60,22 @@ $(document).ready(() => {
     //Grid Item 3
     // Get Request - Render Selected School
     const renderSelectedSchool  = (school) => {
+        let transportation = 'no', disability = 'no', daycare = 'no', financial = 'no', language = 'no';
+        if (school.transportationService) {
+            transportation = 'yes';
+        }
+        if (school.disabilityService) {
+            disability = 'yes';
+        }
+        if (school.daycareService) {
+            daycare = 'yes';
+        }
+        if (school.financialService) {
+            financial = 'yes';
+        }
+        if (school.languageService) {
+            language = 'yes';
+        }
         $('.loadingIndex').hide();
         $('#selected_school').append(`
             <div id='school'>
@@ -70,6 +86,11 @@ $(document).ready(() => {
                 <p>Total students enrolled: <span>${school.students}</span></p>
                 <p>Total teachers: <span>${school.teachers}</span></p>
                 <p>Students per teacher: <span>${school.studentTeacherRatio}</span></p>
+                <p>Transportation service :<span> ${transportation}</span></p>
+                <p>Daycare service: <span> ${daycare}</span></p>
+                <p>Financial service: <span> ${financial}</span></p>
+                <p>Disability service: <span> ${disability}</span></p>
+                <p>Language service: <span> ${language}</span></p>
                 <p>District: <a href='${school.district.url}' target='_blank'><span>${school.district.name}</span></a></p>
             </div>
         `);
@@ -109,6 +130,42 @@ $(document).ready(() => {
             console.log(districtId);
             getSelectedDistrictJson(districtId).then(renderSchoolIndex).catch(err);
         }
+    });
+
+    // Filter School By School Name on Search Bar
+    $('#search-school-name').on('input', () => {
+        getSchoolJson().then(schools => {
+            $('.list_school').empty();
+            $('.grid-item-1 .loadingIndex').show();
+            schools.map(school => {
+                $('#search-school-name').val().split(" ").map(word => {
+                    let id = school.id, stateSchoolId = school.stateSchoolId, district = school.district, highGrade = school.highGrade, schoolName = school.schoolName, streetAddress = school.streetAddress, zipCode = school.zipCode, phone = school.phone, charter = school.charter, titleISchool = school.titleISchool, title1SchoolWide = school.title1SchoolWide, students = school.students, teachers = school.teachers, studentTeacherRatio = school.studentTeacherRatio;
+
+                        if(schoolName.toLowerCase().indexOf(word.toLowerCase()) !== -1){
+                            console.log(word);
+                            $('.list_school').append(`
+                                <div class='row school'>
+                                    <div id='school-listing' class='text-left mx-auto px-1'>
+                                        <h5 class='select_school my-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
+                                        <div class='col-12'>
+                                            <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
+                                            <p>${streetAddress}</p>
+                                            <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
+                                            <p>${phone}</p>
+                                        </div>
+                                        <div class='text-center'>
+                                            <a href='${district.url}' target="_blank">
+                                                <img src='${district.image}' />
+                                            </a>
+                                            <p>${district.name}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                })
+            })
+        });
     });
 
 });// Ready

@@ -1,6 +1,7 @@
 package com.capstone.simplek.controllers;
 import com.capstone.simplek.Model.Children;
 import com.capstone.simplek.Model.Query;
+import com.capstone.simplek.Model.School;
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SearchController {
@@ -29,7 +32,7 @@ public class SearchController {
 
      // requests that interact with our Dao Factory
     @GetMapping("/search")
-    public String all(Model model) {
+    public String all(Model model, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated;
         if (authentication != null) {
@@ -39,13 +42,28 @@ public class SearchController {
                 User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 User copyUser = userDao.findOne(loggedInUser.getId());
                 model.addAttribute("user", copyUser);
-                model.addAttribute("queries", new Query());
             }
         }
-        model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("districts", districtDao.findAll());
 
         // TODO Add filters here
+        if (session.getAttribute("queries") != null) {
+            Query queries = (Query) session.getAttribute("queries");
+            boolean disability = queries.isDisability();
+            boolean daycare = queries.isDaycare();
+            boolean financial = queries.isFinancial();
+            boolean language = queries.isLanguage();
+            boolean transportation = queries.isTransportation();
+            List<School> allSchool = schoolDao.findAll();
+            List<School> filteredSchools = allSchool.stream().filter( s -> disability == s.isDisabilityService() && s.isDaycareService() == daycare && s.isFinancialService() == financial && s.isLanguageService() == language && s.isTransportationService() == transportation).collect(Collectors.toList());
+            model.addAttribute("schools", filteredSchools);
+            System.out.println(filteredSchools);
+        } else {
+            model.addAttribute("schools", schoolDao.findAll());
+        }
+
+
+
 
         return "search/index";
     }
