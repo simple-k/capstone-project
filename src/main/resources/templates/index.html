@@ -2,236 +2,404 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header('Welcome')"></head>
-<style th:inline="text">
-    section.banner {
-        width: 100%;
-        height: 100vh;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/img/banner.jpg");
-        background-size: auto, cover;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
-    .intro {
-        /*box-shadow: 3px 3px 5px #080808;*/
-        /*border: 5px solid #fff;*/
-        /*border-radius: 150px;*/
-        padding: 25px 150px;
-    }
-    .intro h1, .intro h2 {
-        font-size: 4em;
-        font-weight: 700;
-        color: #fff;
-        text-shadow: 3px 3px 5px #080808;
-        text-align: center;
-        padding: 0;
-        margin: 5px;
-    }
-    .intro span {
-        color: #fff;
-    }
-    .intro h2 {
-        font-size: 2em;
-    }
-    .intro a {
-        color: inherit;
-        text-decoration: inherit;
-    }
-    .flex {
-        display: flex;
-        justify-content: center;
-    }
-    .flex button {
-        background-color: Transparent;
-        border: 3px solid #fff;
-        border-radius: 10px;
-        margin: .25rem;
-        padding: .5rem;
-        cursor:pointer;
-        color: #fff;
-        font-size: x-large;
-        font-weight: bold;
-        text-shadow: 3px 3px 5px #080808;
-        box-shadow: 3px 3px 5px #080808;
-    }
-    .flex button:hover {
-        background-color: #CA8B3A;
-        border: 3px solid #fff;
-        border-radius: 10px;
-        margin: .25rem;
-        padding: .5rem;
-        cursor:pointer;
-        color: #fff;
-        font-size: x-large;
-        font-weight: bold;
-        text-shadow: 3px 3px 5px #080808;
-        box-shadow: 3px 3px 5px #080808;
-    }
-    main {
-        margin: 100px auto 50px auto;
-        padding-bottom: 50px;
-        width: 80%;
-        /*padding-bottom: 25px;*/
-    }
-    .section-big {
-        display: flex;
-    }
-    .section-big {
-        /*box-shadow: 5px 10px 8px #888888;*/
-        margin: 20px 0 20px 0;
-    }
-    .image-big {
-        flex: 1;
-    }
-    img {
-        max-width: 100%;
-        vertical-align: top;
-    }
-    .text-big {
-        flex: 2;
-    }
-    .text-big, .text-small {
-        background: #fff;
-        color: #080808;
-    }
-    .text-big a h3, .text-small a h3 {
-        text-align: center;
-        color: #CA8B3A;
-    }
-    .text-small a h3 {
-        margin: 0;
-        padding-top: 20px;
-    }
-    .text-big a, .text-small a {
-        text-decoration: none;
-    }
-    .text-big p, .text-small p {
-        text-align: justify;
-        padding: 10px;
-    }
-    .text-small p {
-        padding:  10px 10px 20px 10px;
-    }
-    .text-right {
-        text-align: right;
-    }
-    @media all and (min-width: 320px) and (max-width: 750px) {
-        .intro {
-            box-shadow: none;
-            border: none;
-            border-radius: 0;
-            padding: 0;
-            font-size: .9em;
-        }
-        .flex button, .flex button:hover {
-            font-size: large;
-        }
-    }
-    main a {
-        margin: 0;
-        padding: 0;
-    }
-    @media only screen and (max-width: 425px) {
-        main {
-            width: 80%;
-        }
-    }
-    @media only screen and (max-width: 1023px) {
-        .show-big {
-            display: none;
-        }
-    }
-    @media only screen and (min-width: 1024px) {
-        .show-small {
-            display: none;
-        }
-    }
-</style>
+
+<!--<style th:inline="text">-->
+    <!--section.banner {-->
+        <!--width: 100%;-->
+        <!--height: 100vh;-->
+        <!--background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/img/banner.jpg");-->
+        <!--background-size: auto, cover;-->
+        <!--background-position: center;-->
+        <!--display: flex;-->
+        <!--align-items: center;-->
+        <!--justify-content: center;-->
+        <!--background-attachment: fixed;-->
+        <!--background-repeat: no-repeat;-->
+    <!--}-->
+    <!--.intro {-->
+        <!--/*box-shadow: 3px 3px 5px #080808;*/-->
+        <!--/*border: 5px solid #fff;*/-->
+        <!--/*border-radius: 150px;*/-->
+        <!--padding: 25px 150px;-->
+    <!--}-->
+    <!--.intro h1, .intro h2 {-->
+        <!--font-size: 4em;-->
+        <!--font-weight: 700;-->
+        <!--color: #fff;-->
+        <!--text-shadow: 3px 3px 5px #080808;-->
+        <!--text-align: center;-->
+        <!--padding: 0;-->
+        <!--margin: 5px;-->
+    <!--}-->
+    <!--.intro span {-->
+        <!--color: #fff;-->
+    <!--}-->
+    <!--.intro h2 {-->
+        <!--font-size: 2em;-->
+    <!--}-->
+    <!--.intro a {-->
+        <!--color: inherit;-->
+        <!--text-decoration: inherit;-->
+    <!--}-->
+    <!--.flex {-->
+        <!--display: flex;-->
+        <!--justify-content: center;-->
+    <!--}-->
+    <!--.flex button {-->
+        <!--background-color: Transparent;-->
+        <!--border: 3px solid #fff;-->
+        <!--border-radius: 10px;-->
+        <!--margin: .25rem;-->
+        <!--padding: .5rem;-->
+        <!--cursor:pointer;-->
+        <!--color: #fff;-->
+        <!--font-size: x-large;-->
+        <!--font-weight: bold;-->
+        <!--text-shadow: 3px 3px 5px #080808;-->
+        <!--box-shadow: 3px 3px 5px #080808;-->
+    <!--}-->
+    <!--.flex button:hover {-->
+        <!--background-color: #CA8B3A;-->
+        <!--border: 3px solid #fff;-->
+        <!--border-radius: 10px;-->
+        <!--margin: .25rem;-->
+        <!--padding: .5rem;-->
+        <!--cursor:pointer;-->
+        <!--color: #fff;-->
+        <!--font-size: x-large;-->
+        <!--font-weight: bold;-->
+        <!--text-shadow: 3px 3px 5px #080808;-->
+        <!--box-shadow: 3px 3px 5px #080808;-->
+    <!--}-->
+    <!--main {-->
+        <!--margin: 100px auto 50px auto;-->
+        <!--padding-bottom: 50px;-->
+        <!--width: 80%;-->
+        <!--/*padding-bottom: 25px;*/-->
+    <!--}-->
+    <!--.section-big {-->
+        <!--display: flex;-->
+    <!--}-->
+    <!--.section-big {-->
+        <!--/*box-shadow: 5px 10px 8px #888888;*/-->
+        <!--margin: 20px 0 20px 0;-->
+    <!--}-->
+    <!--.image-big {-->
+        <!--flex: 1;-->
+    <!--}-->
+    <!--img {-->
+        <!--max-width: 100%;-->
+        <!--vertical-align: top;-->
+    <!--}-->
+    <!--.text-big {-->
+        <!--flex: 2;-->
+    <!--}-->
+    <!--.text-big, .text-small {-->
+        <!--background: #fff;-->
+        <!--color: #080808;-->
+    <!--}-->
+    <!--.text-big a h3, .text-small a h3 {-->
+        <!--text-align: center;-->
+        <!--color: #CA8B3A;-->
+    <!--}-->
+    <!--.text-small a h3 {-->
+        <!--margin: 0;-->
+        <!--padding-top: 20px;-->
+    <!--}-->
+    <!--.text-big a, .text-small a {-->
+        <!--text-decoration: none;-->
+    <!--}-->
+    <!--.text-big p, .text-small p {-->
+        <!--text-align: justify;-->
+        <!--padding: 10px;-->
+    <!--}-->
+    <!--.text-small p {-->
+        <!--padding:  10px 10px 20px 10px;-->
+    <!--}-->
+    <!--.text-right {-->
+        <!--text-align: right;-->
+    <!--}-->
+    <!--@media all and (min-width: 320px) and (max-width: 750px) {-->
+        <!--.intro {-->
+            <!--box-shadow: none;-->
+            <!--border: none;-->
+            <!--border-radius: 0;-->
+            <!--padding: 0;-->
+            <!--font-size: .9em;-->
+        <!--}-->
+        <!--.flex button, .flex button:hover {-->
+            <!--font-size: large;-->
+        <!--}-->
+    <!--}-->
+    <!--main a {-->
+        <!--margin: 0;-->
+        <!--padding: 0;-->
+    <!--}-->
+    <!--@media only screen and (max-width: 425px) {-->
+        <!--main {-->
+            <!--width: 80%;-->
+        <!--}-->
+    <!--}-->
+    <!--@media only screen and (max-width: 1023px) {-->
+        <!--.show-big {-->
+            <!--display: none;-->
+        <!--}-->
+    <!--}-->
+    <!--@media only screen and (min-width: 1024px) {-->
+        <!--.show-small {-->
+            <!--display: none;-->
+        <!--}-->
+    <!--}-->
+<!--</style>-->
+
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-
-    <section  class="banner">
-        <div  class="intro">
-            <h1><span>Explore Simple-K</span></h1>
-            <h2>Pre-K Enrollment Made Easy</h2>
-            <div class="flex">
-                <button sec:authorize="!isAuthenticated()" type="button"><a th:href="@{/register}"> Register <i class="fas fa-user ml-1"></i></a></button>
-                <button sec:authorize="isAuthenticated()" type="button"><a th:href="@{/user/profile}"> Profile <i class="fas fa-user ml-1"></i></a></button>
-
-                <button type="button"><a th:href="@{/search}"> Find Schools <i class="fas fa-search"></i></a></button>
+    <div id="jumbo-container" class="m-0 py-5 jumbotron jumbotron-fluid img-fluid">
+        <div class="py-2 my-3 container">
+            <h1 id="logo" class="pt-3 display-4 mt-5">Simple-K</h1>
+            <p class="lead py-2">Pre-K Enrollment Made Easy</p>
+            <!--<hr class="my-1 w-75"/>-->
+            <p class="px-4 pb-3 mx-2 my-3 text-center">Locate San Antonio schools and services that match your child's needs.</p>
+            <div class="col-12 col-md-8 mx-auto my-2 px-3">
+                <a sec:authorize="!isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/login}" role="button">Login</a>
+                <a sec:authorize="!isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/register}" role="button">Register</a>
+                <a sec:authorize="isAuthenticated()" class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/user/profile}" role="button"> Profile</a>
+                <a class="col my-2 btn btn-link btn-outline-warning btn-lg text-light" th:href="@{/search/query}" role="button">Search Schools</a>
             </div>
         </div>
-    </section>
+    </div>
+    <div id="landing-page-content" class="py-5 mb-5 container border-white rounded">
+        <section class="row">
+            <div class="col-sm-12 col-md-4 my-2">
+                <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt=""/>
+            </div>
+            <div class="col-sm-12 col-md-8 text-left ml-0 mr-auto">
+                <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12 col-md-8 text-right ml-auto mr-0">
+                <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt=""/>
+            </div>
+        </section>
+    </div>
 
-    <main>
-        <article class="show-big">
-            <section class="section-big">
-                <div class="image-big">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-                <div class="text-big">
-                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-            </section>
+    <!--<section class="section-big">-->
+        <!--<div class="image-big">-->
+            <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+        <!--</div>-->
+        <!--<div class="text-big">-->
+            <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+            <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+        <!--</div>-->
+    <!--</section>-->
 
-            <section class="section-big">
-                <div class="text-big">
-                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-                <div class="image-big text-right">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-            </section>
 
-            <section class="section-big">
-                <div class="image-big">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-                <div class="text-big">
-                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-            </section>
-        </article>
-
-        <article class="show-small">
-            <section class="section-small">
-                <div class="image-small">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-                <div class="text-small">
-                    <a th:href="@{/}" target="_blank" rel=""><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-            </section>
-
-            <section class="section-small">
-                <div class="image-small">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-                <div class="text-small">
-                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-            </section>
-
-            <section class="section-small">
-                <div class="image-small">
-                    <img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />
-                </div>
-                <div class="text-small">
-                    <a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-            </section>
-        </article>
-    </main>
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<body>-->
+    <!--<div th:replace="fragments/navbar :: navbar"></div>-->
+
+    <!--<section  class="banner">-->
+        <!--<div  class="intro">-->
+            <!--<h1><span>Simple-K</span></h1>-->
+            <!--<h2>Pre-K Enrollment Made Easy</h2>-->
+            <!--<div class="flex">-->
+                <!--<button type="button"><a th:href="@{/login}"> Login <i class="fas fa-search"></i></a></button>-->
+
+                <!--<button sec:authorize="!isAuthenticated()" type="button"><a th:href="@{/register}"> Register <i class="fas fa-user ml-1"></i></a></button>-->
+                <!--<br/>-->
+                <!--<button sec:authorize="isAuthenticated()" type="button"><a th:href="@{/user/profile}"> Profile <i class="fas fa-user ml-1"></i></a></button>-->
+
+                <!--<button type="button"><a th:href="@{/search/query}"> Find Schools <i class="fas fa-search"></i></a></button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+    <!--<main>-->
+        <!--<article class="show-big">-->
+            <!--<section class="section-big">-->
+                <!--<div class="image-big">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+                <!--<div class="text-big">-->
+                    <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+            <!--</section>-->
+
+            <!--<section class="section-big">-->
+                <!--<div class="text-big">-->
+                    <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+                <!--<div class="image-big text-right">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+            <!--</section>-->
+
+            <!--<section class="section-big">-->
+                <!--<div class="image-big">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+                <!--<div class="text-big">-->
+                    <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+            <!--</section>-->
+        <!--</article>-->
+
+        <!--<article class="show-small">-->
+            <!--<section class="section-small">-->
+                <!--<div class="image-small">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+                <!--<div class="text-small">-->
+                    <!--<a th:href="@{/}" target="_blank" rel=""><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+            <!--</section>-->
+
+            <!--<section class="section-small">-->
+                <!--<div class="image-small">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+                <!--<div class="text-small">-->
+                    <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+            <!--</section>-->
+
+            <!--<section class="section-small">-->
+                <!--<div class="image-small">-->
+                    <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+                <!--</div>-->
+                <!--<div class="text-small">-->
+                    <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                <!--</div>-->
+            <!--</section>-->
+        <!--</article>-->
+    <!--</main>-->
+    <!--<div th:replace="fragments/footer :: footer"></div>-->
+    <!--<div th:replace="fragments/scripts :: scripts"></div>-->
+<!--</body>-->
+<!--<body>-->
+<!--<div th:replace="fragments/navbar :: navbar"></div>-->
+
+<!--<section  class="banner">-->
+    <!--<div  class="intro">-->
+        <!--<h1><span>Simple-K</span></h1>-->
+        <!--<h2>Pre-K Enrollment Made Easy</h2>-->
+        <!--<div class="flex">-->
+            <!--<button type="button"><a th:href="@{/login}"> Login <i class="fas fa-search"></i></a></button>-->
+
+            <!--<button sec:authorize="!isAuthenticated()" type="button"><a th:href="@{/register}"> Register <i class="fas fa-user ml-1"></i></a></button>-->
+            <!--<br/>-->
+            <!--<button sec:authorize="isAuthenticated()" type="button"><a th:href="@{/user/profile}"> Profile <i class="fas fa-user ml-1"></i></a></button>-->
+
+            <!--<button type="button"><a th:href="@{/search/query}"> Find Schools <i class="fas fa-search"></i></a></button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</section>-->
+
+<!--<main>-->
+    <!--<article class="show-big">-->
+        <!--<section class="section-big">-->
+            <!--<div class="image-big">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+            <!--<div class="text-big">-->
+                <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section class="section-big">-->
+            <!--<div class="text-big">-->
+                <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+            <!--<div class="image-big text-right">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section class="section-big">-->
+            <!--<div class="image-big">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+            <!--<div class="text-big">-->
+                <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+        <!--</section>-->
+    <!--</article>-->
+
+    <!--<article class="show-small">-->
+        <!--<section class="section-small">-->
+            <!--<div class="image-small">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+            <!--<div class="text-small">-->
+                <!--<a th:href="@{/}" target="_blank" rel=""><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section class="section-small">-->
+            <!--<div class="image-small">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+            <!--<div class="text-small">-->
+                <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section class="section-small">-->
+            <!--<div class="image-small">-->
+                <!--<img th:src="@{http://www.wwacademy.org/wp-content/uploads/2015/06/Pre-K-pic.png}" alt="" />-->
+            <!--</div>-->
+            <!--<div class="text-small">-->
+                <!--<a th:href="@{/}" target="_blank" rel="noopener noreferrer"><h3>What is Lorem Ipsum?</h3></a>-->
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+            <!--</div>-->
+        <!--</section>-->
+    <!--</article>-->
+<!--</main>-->
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+<!--<div th:replace="fragments/scripts :: scripts"></div>-->
+<!--</body>-->
 </html>

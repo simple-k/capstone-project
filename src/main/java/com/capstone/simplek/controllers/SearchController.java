@@ -1,6 +1,7 @@
 package com.capstone.simplek.controllers;
 import com.capstone.simplek.Model.Children;
 import com.capstone.simplek.Model.Query;
+import com.capstone.simplek.Model.School;
 import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SearchController {
@@ -21,11 +24,15 @@ public class SearchController {
     @Autowired
     private SchoolRepository schoolDao;
     @Autowired
+    private DistrictRepository districtDao;
+    @Autowired
     private UserRepository userDao;
+    @Autowired
+    private DistrictRepository districtsDao;
 
      // requests that interact with our Dao Factory
     @GetMapping("/search")
-    public String all(Model model) {
+    public String all(Model model, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated;
         if (authentication != null) {
@@ -37,7 +44,44 @@ public class SearchController {
                 model.addAttribute("user", copyUser);
             }
         }
-        model.addAttribute("schools", schoolDao.findAll());
+        model.addAttribute("districts", districtDao.findAll());
+
+        // TODO Add filters here
+        if (session.getAttribute("queries") != null) {
+            Query queries = (Query) session.getAttribute("queries");
+            boolean disability = queries.isDisability();
+            boolean daycare = queries.isDaycare();
+            boolean financial = queries.isFinancial();
+            boolean language = queries.isLanguage();
+            boolean transportation = queries.isTransportation();
+            List<School> schools = schoolDao.findAll();
+
+            if (disability == true) {
+                schools = schools.stream().filter( s -> disability == s.isDisabilityService()).collect(Collectors.toList());
+            }
+
+            if (daycare == true) {
+                schools = schools.stream().filter( s -> daycare == s.isDaycareService()).collect(Collectors.toList());
+            }
+
+            if (financial == true) {
+                schools = schools.stream().filter( s -> financial == s.isFinancialService()).collect(Collectors.toList());
+            }
+
+            if (language == true) {
+                schools = schools.stream().filter( s -> language == s.isLanguageService()).collect(Collectors.toList());
+            }
+
+            if (transportation == true) {
+                schools = schools.stream().filter( s -> financial == s.isFinancialService()).collect(Collectors.toList());
+            }
+
+            model.addAttribute("schools", schools);
+            System.out.println(schools);
+        } else {
+            model.addAttribute("schools", schoolDao.findAll());
+        }
+
         return "search/index";
     }
 
@@ -61,7 +105,7 @@ public class SearchController {
                 }
             }
         }
-        return "search";
+        return "search/search";
     }// viewSearchQueryForm
 
     @PostMapping("/search/query")
@@ -137,10 +181,5 @@ public class SearchController {
         return "redirect:/search";
 
     }// createSearchQuery
-
-//    @GetMapping("school-results")
-//    public String schoolResults () {
-//        return "school-results";
-//    }
 
 }// class
