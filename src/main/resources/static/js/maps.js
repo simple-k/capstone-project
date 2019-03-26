@@ -21,6 +21,9 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
 // NOTE: This uses cross-domain XHR, and may not work on older browsers.
 map.data.loadGeoJson(
     '../Json/San_Antonio_Districts.geojson');
+map.data.setStyle({
+    fillOpacity: .10
+});
 
 // Color each letter gray. Change the color when the isColorful property
 // is set to true.
@@ -169,16 +172,16 @@ function testData(){
                         strokeColor: '#FF0000',
                         strokeOpacity: 0.8,
                         strokeWeight: 2,
-                        fillColor: '#FF0000',
-                        fillOpacity: 0.35
+                        fillColor: '#FFff00',
+                        fillOpacity: 0.05
                     });
                     let district2 = new google.maps.Polygon({
                         paths: coordinates2,
                         strokeColor: '#FF0000',
                         strokeOpacity: 0.8,
                         strokeWeight: 2,
-                        fillColor: '#FF0000',
-                        fillOpacity: 0.35
+                        fillColor: '#FFff00',
+                        fillOpacity: 0.05
                     });
                     district.setMap(map);
                     district2.setMap(map);
