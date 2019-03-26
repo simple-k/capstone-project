@@ -27,6 +27,14 @@
         </button>
     </form>
 
+    <div id="user-profile">
+        <h3 th:text="${user.username}"></h3>
+        <!--<hr/>-->
+        <p th:text="${user.email}"></p>
+        <p th:text="${user.address + ' ' + user.zipCode}"></p>
+        <p th:text="${user.phoneNumber}"></p>
+    </div>
+
 
 
     <!--<div id="user-profile">-->
