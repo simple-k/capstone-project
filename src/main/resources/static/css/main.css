@@ -79,9 +79,11 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
 }
-#landing-page-content {
+#landing-page-content, h3 {
     background-color: #FFFFFF;
+    font-family: 'Love Ya Like A Sister', cursive;
 }
+
 .lead {
     font-family: 'Love Ya Like A Sister', cursive;
 }
