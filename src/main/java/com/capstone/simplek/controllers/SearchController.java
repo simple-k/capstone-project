@@ -54,25 +54,36 @@ public class SearchController {
             boolean financial = queries.isFinancial();
             boolean language = queries.isLanguage();
             boolean transportation = queries.isTransportation();
-            List<School> allSchool = schoolDao.findAll();
-            List<School> filteredSchools = allSchool.stream().filter( s -> disability == s.isDisabilityService() && s.isDaycareService() == daycare && s.isFinancialService() == financial && s.isLanguageService() == language && s.isTransportationService() == transportation).collect(Collectors.toList());
-            model.addAttribute("schools", filteredSchools);
-            System.out.println(filteredSchools);
+            List<School> schools = schoolDao.findAll();
+
+            if (disability == true) {
+                schools = schools.stream().filter( s -> disability == s.isDisabilityService()).collect(Collectors.toList());
+            }
+
+            if (daycare == true) {
+                schools = schools.stream().filter( s -> daycare == s.isDaycareService()).collect(Collectors.toList());
+            }
+
+            if (financial == true) {
+                schools = schools.stream().filter( s -> financial == s.isFinancialService()).collect(Collectors.toList());
+            }
+
+            if (language == true) {
+                schools = schools.stream().filter( s -> language == s.isLanguageService()).collect(Collectors.toList());
+            }
+
+            if (transportation == true) {
+                schools = schools.stream().filter( s -> financial == s.isFinancialService()).collect(Collectors.toList());
+            }
+
+            model.addAttribute("schools", schools);
+            System.out.println(schools);
         } else {
             model.addAttribute("schools", schoolDao.findAll());
         }
 
-
-
-
         return "search/index";
     }
-
-//    @GetMapping("/search/{id}")
-//    public String getSchoolById(@PathVariable long id, Model model) {
-//
-//        return "search/index";
-//    }
 
     @GetMapping("/search/query")
     public String viewSearchQueryForm (Model model){
@@ -170,10 +181,5 @@ public class SearchController {
         return "redirect:/search";
 
     }// createSearchQuery
-
-//    @GetMapping("school-results")
-//    public String schoolResults () {
-//        return "school-results";
-//    }
 
 }// class
