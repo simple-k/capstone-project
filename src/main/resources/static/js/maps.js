@@ -2,7 +2,9 @@ function filterDistricts(){
     let district = document.getElementById("districtFilter").value;
     console.log(district);
 }
-var mapOptions = {
+let username = '<%= Session["UserName"]%>';
+alert(username);
+let mapOptions = {
     // Set the zoom level
     zoom: 5,
 
@@ -12,7 +14,7 @@ var mapOptions = {
         lng: -98.489602
     }
 };
-var map;
+let map;
 map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 9,
     center: {lat: 29.4241, lng: -98.4936}
@@ -28,7 +30,7 @@ map.data.setStyle({
 // Color each letter gray. Change the color when the isColorful property
 // is set to true.
 
-var geocoder = new google.maps.Geocoder();
+const geocoder = new google.maps.Geocoder();
 
 
 function locate(address) {
@@ -39,7 +41,7 @@ function locate(address) {
             // Recenter the map over the address
             map.setCenter(results[0].geometry.location);
             map.setZoom(15);
-            var marker = new google.maps.Marker({
+            let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
                 map: map
             });
@@ -56,7 +58,7 @@ function placeMarker(address){
 
         // Check for a successful result
         if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({
+            let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
                 map: map
             });
@@ -85,19 +87,19 @@ autocomplete.addListener('place_changed', fillInAddress);
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
+    for (let component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
     }
 
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-        var addressType = place.address_components[i].types[0];
+    for (let i = 0; i < place.address_components.length; i++) {
+        let addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
-            var val = place.address_components[i][componentForm[addressType]];
+            let val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
         }
     }
@@ -108,17 +110,67 @@ function fillInAddress() {
 function geolocate() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var geolocation = {
+            let geolocation = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            var circle = new google.maps.Circle(
+            let circle = new google.maps.Circle(
                 {center: geolocation, radius: position.coords.accuracy});
         });
     }
 }
 
-function findDistrict(address, district, district2){
+function findDistrict(address){
+    let district;
+    let district2;
+    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+        let result = data.features;
+        for (let item of result) {
+            let coordinates = [];
+            if (item.properties.NAME == "San Antonio ISD") {
+                let secondResult = item.geometry.coordinates[0][0];
+                let coordinates2 = [];
+                for (let coordinate of secondResult) {
+                    let lat = coordinate[1];
+                    let lng = coordinate[0];
+                    let districtCoordinate = {lat: lat, lng: lng};
+                    coordinates.push(districtCoordinate);
+                    // console.log(lat);
+                    // console.log(lng);
+                }
+                let thirdResult = item.geometry.coordinates[1][0];
+                for (let coordinate of thirdResult) {
+                    let lat = coordinate[1];
+                    let lng = coordinate[0];
+                    let districtCoordinate = {lat: lat, lng: lng};
+                    console.log(districtCoordinate);
+                    coordinates2.push(districtCoordinate);
+                    // console.log(lat);
+                    // console.log(lng);
+                }
+                console.log(coordinates);
+                district = new google.maps.Polygon({
+                    paths: coordinates,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FFff00',
+                    fillOpacity: 0.05
+                });
+                district2 = new google.maps.Polygon({
+                    paths: coordinates2,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FFff00',
+                    fillOpacity: 0.05
+                });
+            district.setMap(map);
+            district2.setMap(map);
+            }
+        }
+    });
+
     geocoder.geocode({"address": address}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             let userAddress = results[0].geometry.location;
@@ -129,91 +181,8 @@ function findDistrict(address, district, district2){
             let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
             console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
             console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
-        }
-        else{
+        } else {
             alert("Geocoding was not successful - STATUS: " + status);
         }
     });
-}
-function testData(){
-    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
-        console.log(data);
-        let result = data.features;
-        console.log(result);
-        for(let item of result){
-            let coordinates = [];
-            console.log(item.properties.NAME);
-            for(let coordinate of item.geometry.coordinates[0]){
-                console.log('test' , coordinate);
-                if(item.properties.NAME == "Lackland ISD" || item.properties.NAME == "San Antonio ISD" ) {
-                    let secondResult = item.geometry.coordinates[0][0];
-                    let coordinates2 = [];
-                    for (let coordinate of secondResult) {
-                        let lat = coordinate[1];
-                        let lng = coordinate[0];
-                        let districtCoordinate = {lat : lat, lng: lng};
-                        coordinates.push(districtCoordinate);
-                        // console.log(lat);
-                        // console.log(lng);
-                    }
-                    let thirdResult = item.geometry.coordinates[1][0];
-                    for (let coordinate of thirdResult) {
-                        let lat = coordinate[1];
-                        let lng = coordinate[0];
-                        let districtCoordinate = {lat : lat, lng: lng};
-                        console.log(districtCoordinate);
-                        coordinates2.push(districtCoordinate);
-                        // console.log(lat);
-                        // console.log(lng);
-                    }
-                    console.log(coordinates);
-                    let district = new google.maps.Polygon({
-                        paths: coordinates,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: '#FFff00',
-                        fillOpacity: 0.05
-                    });
-                    let district2 = new google.maps.Polygon({
-                        paths: coordinates2,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: '#FFff00',
-                        fillOpacity: 0.05
-                    });
-                    district.setMap(map);
-                    district2.setMap(map);
-                    // findDistrict('115 Medina Base Rd', district, district2);
-                    // findDistrict('1800 Dimsted Pl', district, district2);
-                    // findDistrict('600 Navarro St #350', district, district2);
-                    // findDistrict('1 Towers Park Ln', district, district2);
-                }
-                // let lat = coordinate[1];
-                // let lng = coordinate[0];
-                // let districtCoordinate = {lat : lat, lng: lng};
-                // coordinates.push(districtCoordinate);
-                // console.log(coordinates);
-                // let district = new google.maps.Polygon({
-                //     paths: coordinates,
-                //     strokeColor: '#FF0000',
-                //     strokeOpacity: 0.8,
-                //     strokeWeight: 2,
-                //     fillColor: '#FF0000',
-                //     fillOpacity: 0.35
-                // });
-                // district.setMap(map);
-            }
-
-            // else{
-            //     let i = 0;
-            //     let lat = item.geometry.coordinates[0][i][0];
-            //     let lng = item.geometry.coordinates[0][i++][1];
-            //     i++;
-            //     console.log(lat);
-            //     console.log(lng);
-            // }
-        }
-    })
 }
