@@ -22,7 +22,11 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
 map.data.loadGeoJson(
     '../Json/San_Antonio_Districts.geojson');
 
+// Color each letter gray. Change the color when the isColorful property
+// is set to true.
+
 var geocoder = new google.maps.Geocoder();
+
 
 function locate(address) {
     geocoder.geocode({"address": address}, function (results, status) {

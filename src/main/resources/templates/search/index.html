@@ -124,11 +124,12 @@
 					</div>
 					<!--school filters-->
 					<form id="search-form">
+						<input id="search-school-name" type="search" placeholder="search by school name..." />
 						<select name="search-district" id="search-district">
 							<option>search by district...</option>
 							<option th:each="district : ${districts}" th:value="${district.id}" th:text="${district.name}"></option>
 						</select>
-						<input id="resetIndex" class="btn btn-md" type="reset" value="Reset Index" />
+						<input id="resetIndex" class="btn btn-md" type="reset" value="Show All" />
 					</form>
 				</div>
 				<!--show on initial load-->
