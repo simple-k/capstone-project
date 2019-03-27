@@ -35,10 +35,6 @@ map.data.addListener('mouseout', function(event) {
     map.data.revertStyle();
 });
 
-const geocoder = new google.maps.Geocoder();
-
-
-
 function locate(address) {
 
     geocoder.geocode({"address": address}, function (results, status) {
