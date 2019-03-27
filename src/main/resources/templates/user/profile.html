@@ -10,37 +10,66 @@
     <!--Email: <span th:text="${#authentication.principal.email}"/>-->
 <!--</div>-->
 <head th:replace="fragments/header :: header('View User')"></head>
+<style>
+    .container {
+        text-align: left;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 300px auto;
+        margin: 0 auto;
+        width: 80%;
+        overflow: hidden;
+    }
+    .grid-item-1 {
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+    .grid-item-2 {
+        grid-column: 2;
+        grid-row: 2/3;
+    }
+    .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+</style>
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container">
-    <h1>View Profile</h1>
-    <div id="user-profile">
-        <h3 th:text="${user.username}"></h3>
-        <!--<hr/>-->
-        <p th:text="${user.email}"></p>
-        <p th:text="${user.address + ' ' + user.zipCode}"></p>
-        <p th:text="${user.phoneNumber}"></p>
+
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <h3 class="text-center">User Profile</h3>
+            <div id="user-profile" class="grid-container">
+                <div class="grid-item-1">
+                    <h3 class="d-inline-block" th:text="${user.username}"></h3>
+                    <form class="d-inline-block float-right mr-2" sec:authorize="isAuthenticated()" th:action="@{/user/edit}" th:method="GET">
+                        <button type="submit">
+                            Edit Profile
+                        </button>
+                    </form>
+
+                    <p th:text="${user.email}"></p>
+                    <p th:text="${user.address + ' ' + user.zipCode}"></p>
+                    <p th:text="${user.phoneNumber}"></p>
+                </div>
+                <th:block th:each="children : ${children}" class="grid-item-2">
+                    <div id="child-profile">
+                        <h3><span th:text="${children.firstName}"></span> <span th:text="${children.lastName}"></span></h3>
+                        <!--<hr/>-->
+                        <!--<p th:text="${user.email}"></p>-->
+                        <!--<p th:text="${user.address + ' ' + user.zipCode}"></p>-->
+                        <!--<p th:text="${user.phoneNumber}"></p>-->
+                    </div>
+                </th:block>
+            </div>
     </div>
-    <form sec:authorize="isAuthenticated()" th:action="@{/user/edit}" th:method="GET">
-        <button type="submit">
-            Edit Profile
-        </button>
-    </form>
-    <th:block th:each="children : ${children}">
-        <div id="child-profile">
-            <h3 th:text="${children}"></h3>
-            <h3 th:text="${children.firstName}"></h3>
-            <!--<hr/>-->
-            <!--<p th:text="${user.email}"></p>-->
-            <!--<p th:text="${user.address + ' ' + user.zipCode}"></p>-->
-            <!--<p th:text="${user.phoneNumber}"></p>-->
-        </div>
-    </th:block>
 
-
-</div>
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>
