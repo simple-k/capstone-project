@@ -15,12 +15,28 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: {lat: 29.4241, lng: -98.4936}
 });
 
+// ----------- geoJSON ------------
 // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-map.data.loadGeoJson(
-    '../Json/San_Antonio_Districts.geojson');
+map.data.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
+    idPropertyName: 'NAME2',
+    });
 map.data.setStyle({
-    fillOpacity: .10
+    fillOpacity: .10,
+    strokeWeight: 1
 });
+map.data.addListener('mouseover', function(event) {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {
+        zIndex:1,
+        strokeColor: 'yellow',
+        strokeWeight: 2});
+});
+map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
+});
+
+const geocoder = new google.maps.Geocoder();
+
 
 
 function locate(address) {
