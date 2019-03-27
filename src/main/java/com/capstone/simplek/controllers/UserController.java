@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -78,7 +80,14 @@ public class UserController {
         User currentUser = userDao.findOne(sessionUser.getId());
         model.addAttribute("user", currentUser);
         List<Children> userChildren = childrenDao.getAllChildren(currentUser.getId());
-        System.out.println(userChildren);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+
+        for (Children child : userChildren) {
+            Date dob = child.getDob();
+            child.setDobString(dateFormat.format(dob));
+        }
+
         model.addAttribute("children", userChildren);
         return "user/profile";
     }
