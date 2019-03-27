@@ -15,26 +15,6 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: {lat: 29.4241, lng: -98.4936}
 });
 
-// ----------- geoJSON ------------
-// NOTE: This uses cross-domain XHR, and may not work on older browsers.
-map.data.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
-    idPropertyName: 'NAME2',
-    });
-map.data.setStyle({
-    fillOpacity: .10,
-    strokeWeight: 1
-});
-map.data.addListener('mouseover', function(event) {
-    map.data.revertStyle();
-    map.data.overrideStyle(event.feature, {
-        zIndex:1,
-        strokeColor: 'yellow',
-        strokeWeight: 2});
-});
-map.data.addListener('mouseout', function(event) {
-    map.data.revertStyle();
-});
-
 function locate(address) {
 
     geocoder.geocode({"address": address}, function (results, status) {
@@ -192,3 +172,126 @@ function findDistrict(){
         });
     }
 }
+
+// ----------- geoJSON ------------
+// NOTE: This uses cross-domain XHR, and may not work on older browsers.
+// map.data.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
+//     idPropertyName: 'NAME2',
+//     });
+// map.data.setStyle({
+//     fillOpacity: .10,
+//     strokeWeight: 1
+// });
+// map.data.addListener('mouseover', function(event) {
+//     map.data.revertStyle();
+//     map.data.overrideStyle(event.feature, {
+//         zIndex:1,
+//         strokeColor: 'yellow',
+//         strokeWeight: 2});
+// });
+// map.data.addListener('mouseout', function(event) {
+//     map.data.revertStyle();
+// });
+
+    // let districtData = new google.maps.Data();
+let districtData = map.data;
+let districtPoly;
+districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
+    idPropertyName: 'NAME2'
+});
+map.data.setStyle({
+    fillOpacity: .10,
+    strokeWeight: 1,
+    clickable: true
+
+});
+
+// let sanAntonio =  districtData.getFeatureById('San Antonio');
+// let judson =  districtData.getFeatureById('Judson');
+// let lackland =  districtData.getFeatureById('Lackland');
+// let alamoHeights =  districtData.getFeatureById('Alamo Heights');
+// let eastCentral =  districtData.getFeatureById('East Central');
+// let fortSamHouston =  districtData.getFeatureById('Fort Sam Houston');
+// let edgewood =  districtData.getFeatureById('Edgewood (Bexar)');
+// let southSanAntonio =  districtData.getFeatureById('South San Antonio');
+// let floresville =  districtData.getFeatureById('Floresville');
+// let harlandale =  districtData.getFeatureById('Harlandale');
+// let medinaValley =  districtData.getFeatureById('Medina Valley');
+// let southwest =  districtData.getFeatureById('Southwest');
+// let southside =  districtData.getFeatureById('Southside');
+// let northEast =  districtData.getFeatureById('North East');
+// let northside =  districtData.getFeatureById('Northside (Bexar)');
+// let randolphField =  districtData.getFeatureById('Randolph Field');
+//
+//
+// let districtArray = [
+//     sanAntonio,
+//     judson,
+//     lackland,
+//     alamoHeights,
+//     eastCentral,
+//     fortSamHouston,
+//     edgewood,
+//     southSanAntonio,
+//     floresville,
+//     harlandale,
+//     medinaValley,
+//     southwest,
+//     southside,
+//     northEast,
+//     northside,
+//     randolphField
+// ];
+//
+// console.log(districtArray[3]);
+
+districtData.addListener('addfeature', function(evt) {
+        if (evt.feature.getId() == "Judson") {
+            let judson = districtData.getFeatureById('Judson');
+            let judsonGeo = judson.getGeometry();
+            // judsonGeo is the feature.geometry from the data layer
+            districtPoly = new google.maps.Polygon({
+                paths: judsonGeo.getAt(0).getArray(),
+                clickable: true
+            });
+        }
+    });
+    let infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(districtData, 'click', function(evt) {
+        infoWindow.setPosition(evt.latLng);
+        if (google.maps.geometry.poly.containsLocation(evt.latLng, districtPoly)) {
+            infoWindow.setContent("INSIDE DISTRICT<br>" + evt.latLng.toUrlValue(6));
+        } else {
+            infoWindow.setContent("OUTSIDE DISTRICT<br>" + evt.latLng.toUrlValue(6));
+        }
+        infoWindow.open(map);
+    });
+
+
+map.data.addListener('mouseover', function(event) {
+    // map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {
+        zIndex:1,
+        strokeColor: 'yellow',
+        strokeWeight: 2});
+});
+map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
+});
+    // districtData.setStyle({
+    //     clickable: true,
+    //     visible: false,
+    // });
+    districtData.setMap(map);
+
+    // var geocoder = new google.maps.Geocoder();
+    // geocoder.geocode({
+    //     'address': "334 Savannah Dr"
+    // }, function(results, status) {
+    //     if (status === google.maps.GeocoderStatus.OK) {
+    //         map.fitBounds(results[0].geometry.viewport);
+    //     } else {
+    //         alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    // });
+// google.maps.event.addDomListener(window, "load", initialize);
