@@ -82,6 +82,7 @@ $(document).ready(() => {
         $('#selected_school').append(`
             <div id='school'>
                 <h5 class="my-1 mx-1">${school.schoolName}</h5>
+                <button class="btn btn-secondary" id="findDirection" >Find Directions</button>
                 <div id='school-details-container'>
                     <div class="school-details-1 mx-1">
                         <p>${school.streetAddress}</p>
@@ -105,7 +106,13 @@ $(document).ready(() => {
                 </div>
             </div>
         `);
+        $('#selected_school').on('click', "#findDirection" , e => {
+            calculateAndDisplayRoute(`${school.streetAddress}, ${school.zipCode}`);
+        });
+
+
     };
+
 
     // Render School Index
     // getSchoolJson().then(renderSchoolIndex).catch(err);

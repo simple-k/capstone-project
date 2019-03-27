@@ -8,12 +8,17 @@ $('#find').click(function (){
 
 let theAddress;
 
+//variables for directions service function ------------------->Bryan Matta
+var directionsService = new google.maps.DirectionsService;
+var directionsDisplay = new google.maps.DirectionsRenderer;
+//<--------------------------------------------------------------
 let map;
 const geocoder = new google.maps.Geocoder();
 map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 13,
     center: {lat: 29.4241, lng: -98.4936}
 });
+directionsDisplay.setMap(map);
 
 function locate(address) {
 
@@ -295,3 +300,24 @@ map.data.addListener('mouseout', function(event) {
     //     }
     // });
 // google.maps.event.addDomListener(window, "load", initialize);
+
+// Directions service--------------------------> Bryan Matta
+
+
+
+function calculateAndDisplayRoute(schoolAddress) {
+    let userAddress = $('#address').val() + ', ' + $('#zipCode').val();
+    console.log(userAddress);
+    console.log(schoolAddress);
+    directionsService.route({
+        origin: userAddress,
+        destination: schoolAddress,
+        travelMode: 'DRIVING'
+    }, function (response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
