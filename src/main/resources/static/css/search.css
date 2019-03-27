@@ -206,3 +206,8 @@ span.error{
     color:#666;
     text-shadow:1px 1px 1px #fff;
 }
+.scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
+}
