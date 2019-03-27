@@ -31,7 +31,7 @@ function locate(address) {
         } else {
 
             // Show an error Message with the status if our request fails
-            alert("Geocoding was not successful - STATUS: " + status);
+            // alert("Geocoding was not successful - STATUS: " + status);
         }
     });
 }

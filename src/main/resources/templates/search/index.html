@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head th:replace="fragments/header :: header('test')"></head>
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
 	<style>
@@ -83,75 +83,87 @@
 	</style>
 	<!--<body th:onload="'findDistrict()'">-->
 	<body>
-		<div th:replace="fragments/navbar :: navbar"></div>
+	<div th:replace="fragments/navbar :: navbar"></div>
+	<div class="grid-item-filter">
+		<!--google maps search-->
+		<!--<div id="locationField">-->
+		<!--<input id="autocomplete"-->
+		<!--placeholder="Enter your address"-->
+		<!--th:onFocus="'geolocate()'"-->
+		<!--type="text"/>-->
+		<!--<button th:onclick="'findDistrict()'">Test json iteration</button>-->
+		<!--</div>-->
+		<!--school filters-->
+		<form id="search-form" class="flex-container">
+			<input id="search-school-name" class="form-control" type="search" placeholder="search by school name..." />
+			<select name="search-district" id="search-district">
+				<option>search by district...</option>
+				<option th:each="district : ${districts}" th:value="${district.id}" th:text="${district.name}"></option>
+			</select>
+			<input id="resetIndex" class="btn btn-sm btn-primary" type="reset" value="Reset" />
+		</form>
+	</div>
 
-		<!--example check if session exist-->
-		<div class="container text-center" th:if="${session.queries != null and session.child != null}"></div>
-		<!--hidden input for javascript address locator-->
-		<input sec:authorize="isAuthenticated()" id="address" type="hidden" th:value="${user.address}"/>
-		<input sec:authorize="isAuthenticated()" id="zipCode" type="hidden" th:value="${user.zipCode}"/>
-		<!---->
-		<div class="container row">
-			<div class="col-4">
-				<div class="list_school" style="overflow: scroll; height: 50em">
-					<div th:each="school : ${schools}" class="row school">
-						<div id="school-listing" class="text-left mx-auto px-1">
-							<h5 class="select_school my-1 text-primary cursor-pointer" th:text="${school.schoolName}"  th:attr="data-schoolid=${school.id}, data-schooladdress=${school.streetAddress} + ${school.zipCode}"></h5>
-							<div class="col-12">
+	<!--example check if session exist-->
+	<div class="container text-center" th:if="${session.queries != null and session.child != null}"></div>
+	<!--hidden input for javascript address locator-->
+	<input sec:authorize="isAuthenticated()" id="address" type="hidden" th:value="${user.address}"/>
+	<input sec:authorize="isAuthenticated()" id="zipCode" type="hidden" th:value="${user.zipCode}"/>
+	<!---->
+
+	<div class="grid-container">
+
+		<!--grid-item 1-->
+		<div id="map-canvas" class="grid-item-1"></div>
+
+		<!--grid-item 2-->
+		<div class="grid-item-2">
+			<div class="list_school">
+				<!--this is mirrored in search-results.js-->
+				<div th:each="school : ${schools}" class="row school">
+					<div id="school-listing" class="">
+						<h5 class="select_school my-1 mx-1 text-primary cursor-pointer" th:text="${school.schoolName}"  th:attr="data-schoolid=${school.id}, data-schooladdress=${school.streetAddress} + ${school.zipCode}"></h5>
+						<div class="flex-container mx-1">
+							<div class="">
 								<div th:onload="'placeMarker(\'' + ${school.streetAddress} + ${school.zipCode} + '\')'"></div>
 								<p th:text="${school.streetAddress}"></p>
 								<p><span>San Antonio, TX, </span><span th:text="${school.zipCode}"></span></p>
 								<p th:text="${school.phone}"></p>
+								<p th:text="${school.district.name}"></p>
 							</div>
-							<div class="text-center">
+							<div class="isd-logo">
 								<a th:href="@{${school.district.url}}" target="_blank">
 									<img th:src="@{${school.district.image}}" />
 								</a>
-								<p th:text="${school.district.name}"></p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div>
-					<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
-				</div>
+				<!---->
 			</div>
-			<div class="col-8">
-				<div id="map-canvas" class="mt-3 grid-item-2"></div>
-				<div id="selected_school" class="text-left grid-item-3">
-					<!--google maps search-->
-					<div id="locationField">
-						<input id="autocomplete"
-							   placeholder="Enter your address"
-							   th:onFocus="'geolocate()'"
-							   type="text"/>
-						<button th:onclick="'findDistrict()'">Test json iteration</button>
-					</div>
-					<!--school filters-->
-					<form id="search-form">
-						<input id="search-school-name" type="search" placeholder="search by school name..." />
-						<select name="search-district" id="search-district">
-							<option>search by district...</option>
-							<option th:each="district : ${districts}" th:value="${district.id}" th:text="${district.name}"></option>
-						</select>
-						<input id="resetIndex" class="btn btn-md" type="reset" value="Show All" />
-					</form>
-				</div>
-				<!--show on initial load-->
-				<div id='school'>
-					<h3>Select a school for more info.</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
-				</div>
-				<div>
-					<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
-				</div>
+			<div>
+				<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
 			</div>
 		</div>
 
-		<div th:replace="fragments/footer :: footer"></div>
-		<div th:replace="fragments/scripts :: scripts"></div>
-		<div th:replace="fragments/maps-key :: maps-key"></div>
-		<script type="text/javascript" th:src="@{/js/search-results.js}"></script>
+		<!--grid-item 3-->
+		<div id="selected_school" class="grid-item-3">
+			<!--show on initial load-->
+			<div id='school'>
+				<h5>Select a school for more info.</h5>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
+			</div>
+			<div>
+				<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
+			</div>
+		</div>
 
-	</body>
+	</div>// grid-container
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/scripts :: scripts"></div>
+	<div th:replace="fragments/maps-key :: maps-key"></div>
+	<script type="text/javascript" th:src="@{/js/search-results.js}"></script>
+
+</body>
 </html>
