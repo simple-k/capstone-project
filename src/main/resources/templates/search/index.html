@@ -123,9 +123,9 @@
 				<div th:each="school : ${schools}" class="row school">
 					<div id="school-listing" class="">
 						<h5 class="select_school my-1 mx-1 text-primary cursor-pointer" th:text="${school.schoolName}"  th:attr="data-schoolid=${school.id}, data-schooladdress=${school.streetAddress} + ${school.zipCode}"></h5>
+						
 						<div class="flex-container mx-1">
 							<div class="">
-								<div th:onload="'placeMarker(\'' + ${school.streetAddress} + ${school.zipCode} + '\')'"></div>
 								<p th:text="${school.streetAddress}"></p>
 								<p><span>San Antonio, TX, </span><span th:text="${school.zipCode}"></span></p>
 								<p th:text="${school.phone}"></p>
