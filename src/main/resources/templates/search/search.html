@@ -130,6 +130,8 @@
                             <label class="radio-inline"><input type="radio" th:field="*{financial}" th:value="true" />Yes</label>
                             <label class="radio-inline"><input type="radio" th:field="*{financial}" th:value="false" />No</label>
                         </p>
+                        <input type="hidden" id="userDistrict" th:field="*{district}"/>
+                        <button type="button" id="find">Find my district</button>
                     </fieldset>
                     <fieldset class="step">
                         <legend>Confirm</legend>
@@ -137,9 +139,7 @@
                             Everything in the form was correctly filled
                             if all the steps have a green checkmark icon.
                             A red checkmark icon indicates that some field
-                            is missing or filled out with invalid data. In this
-                            last step the user can confirm the submission of
-                            the form.
+                            is missing or filled out with invalid data.
                         </p>
                         <p class="submit">
                             <button id="submitButton" type="submit">Search Schools</button>

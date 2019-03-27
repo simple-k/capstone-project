@@ -4,6 +4,7 @@ import com.capstone.simplek.Model.User;
 import com.capstone.simplek.Repository.ChildrenRepository;
 import com.capstone.simplek.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -75,9 +76,10 @@ public class UserController {
     public String viewProfile(Model model) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findOne(sessionUser.getId());
-        List<Children> usersChildren = childrenDao.getAllChildren(currentUser.getId());
         model.addAttribute("user", currentUser);
-        model.addAttribute("child", usersChildren);
+        List<Children> userChildren = childrenDao.getAllChildren(currentUser.getId());
+        System.out.println(userChildren);
+        model.addAttribute("children", userChildren);
         return "user/profile";
     }
 

@@ -26,14 +26,16 @@
             Edit Profile
         </button>
     </form>
+    <th:block th:each="children : ${children}">
+        <div id="child-profile">
+            <h3 th:text="${children.firstName}"></h3>
+            <!--<hr/>-->
+            <!--<p th:text="${user.email}"></p>-->
+            <!--<p th:text="${user.address + ' ' + user.zipCode}"></p>-->
+            <!--<p th:text="${user.phoneNumber}"></p>-->
+        </div>
+    </th:block>
 
-    <div id="child-profile">
-        <h3 th:text="${child}"></h3>
-        <!--<hr/>-->
-        <p th:text="${user.email}"></p>
-        <p th:text="${user.address + ' ' + user.zipCode}"></p>
-        <p th:text="${user.phoneNumber}"></p>
-    </div>
 
 </div>
 <div th:replace="fragments/footer :: footer"></div>

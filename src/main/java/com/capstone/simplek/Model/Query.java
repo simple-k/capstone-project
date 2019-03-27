@@ -7,16 +7,18 @@ public class Query {
     private boolean disability;
     private boolean transportation;
     private boolean financial;
+    private String district;
 
     public Query() {
     }
 
-    public Query(boolean daycare, boolean language, boolean disability, boolean transportation, boolean financial) {
+    public Query(boolean daycare, boolean language, boolean disability, boolean transportation, boolean financial, String district) {
         this.daycare = daycare;
         this.language = language;
         this.disability = disability;
         this.transportation = transportation;
         this.financial = financial;
+        this.district = district;
     }
 
     public boolean isDaycare() {
@@ -59,4 +61,11 @@ public class Query {
         this.financial = financial;
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 }// class
