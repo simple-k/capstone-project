@@ -82,7 +82,7 @@ $(document).ready(() => {
         $('#selected_school').append(`
             <div id='school'>
                 <h5 class="my-1 mx-1">${school.schoolName}</h5>
-                <button class="btn btn-secondary" id="findDirection" >Find Directions</button>
+                <button sec:authorize="isAuthenticated()"  class="btn btn-secondary" id="findDirection" >Find Directions</button>
                 <div id='school-details-container'>
                     <div class="school-details-1 mx-1">
                         <p>${school.streetAddress}</p>

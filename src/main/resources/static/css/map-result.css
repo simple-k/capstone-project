@@ -25,7 +25,7 @@
     font-size: .7em;
     display: grid;
     grid-template-columns: 65% 35%;
-    grid-template-rows: 486px 260px;
+    grid-template-rows: 486px 280px;
     margin: 0 auto 25px auto;
     width: 80%;
     overflow: hidden;
@@ -44,7 +44,8 @@
 }
 .list_school {
     overflow: scroll;
-    height: 102%;
+    overflow-x: hidden;
+    height: 95%;
 }
 .school, #school {
     margin: 5px auto;
