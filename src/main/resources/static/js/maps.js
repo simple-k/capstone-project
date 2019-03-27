@@ -2,25 +2,16 @@ function filterDistricts(){
     let district = document.getElementById("districtFilter").value;
     console.log(district);
 }
-$('#submitButton').click(function (){
-    findDistrict()
+$('#find').click(function (){
+    findDistrict();
 });
 
-// let username = '<%= Session["UserName"]%>';
-// alert(username);
-let mapOptions = {
-    // Set the zoom level
-    zoom: 5,
+let theAddress;
 
-    // This sets the center of the map at our location
-    center: {
-        lat: 29.426791,
-        lng: -98.489602
-    }
-};
 let map;
+const geocoder = new google.maps.Geocoder();
 map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 9,
+    zoom: 13,
     center: {lat: 29.4241, lng: -98.4936}
 });
 
@@ -44,13 +35,7 @@ map.data.addListener('mouseout', function(event) {
     map.data.revertStyle();
 });
 
-
-
-// Color each letter gray. Change the color when the isColorful property
-// is set to true.
-
 const geocoder = new google.maps.Geocoder();
-
 
 function locate(address) {
 
@@ -60,7 +45,7 @@ function locate(address) {
         if (status == google.maps.GeocoderStatus.OK) {
             // Recenter the map over the address
             map.setCenter(results[0].geometry.location);
-            map.setZoom(15);
+            map.setZoom(12);
             let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
                 map: map
@@ -97,9 +82,6 @@ var placeSearch, autocomplete;
 // geographical location types.
 autocomplete = new google.maps.places.Autocomplete(
     document.getElementById('autocomplete'), {types: ['geocode']});
-
-// Avoid paying for data that you don't need by restricting the set of
-// place fields that are returned to just the address components.
 
 // When the user selects an address from the drop-down, populate the
 // address fields in the form.
@@ -143,11 +125,13 @@ function geolocate() {
 function findDistrict(){
     let district;
     let district2;
+    let userDistrict;
     $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
         let result = data.features;
         for (let item of result) {
             let coordinates = [];
             if (item.properties.NAME == "San Antonio ISD") {
+                userDistrict=item.properties.NAME;
                 let secondResult = item.geometry.coordinates[0][0];
                 let coordinates2 = [];
                 for (let coordinate of secondResult) {
@@ -155,8 +139,6 @@ function findDistrict(){
                     let lng = coordinate[0];
                     let districtCoordinate = {lat: lat, lng: lng};
                     coordinates.push(districtCoordinate);
-                    // console.log(lat);
-                    // console.log(lng);
                 }
                 let thirdResult = item.geometry.coordinates[1][0];
                 for (let coordinate of thirdResult) {
@@ -164,8 +146,6 @@ function findDistrict(){
                     let lng = coordinate[0];
                     let districtCoordinate = {lat: lat, lng: lng};
                     coordinates2.push(districtCoordinate);
-                    // console.log(lat);
-                    // console.log(lng);
                 }
                 district = new google.maps.Polygon({
                     paths: coordinates,
@@ -188,14 +168,14 @@ function findDistrict(){
             }
         }
     });
-    let address = $('#address').val();
-    address += ', ' + $('#zipCode').val();
-    console.log(address);
-    if (address == null){
-        console.log('this only shows if youre not logged in');
+    theAddress = $('#address').val();
+    theAddress += ', ' + $('#zipCode').val();
+    console.log(theAddress);
+    if (theAddress == null){
+        console.log('This only shows if you\'re not logged in');
     }
     else {
-        geocoder.geocode({"address": address}, function (results, status) {
+        geocoder.geocode({"address": theAddress}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 let userAddress = results[0].geometry.location;
                 var marker = new google.maps.Marker({
@@ -204,8 +184,10 @@ function findDistrict(){
                 });
                 let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
                 console.log(addressCoord);
-                console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
-                console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
+                if(google.maps.geometry.poly.containsLocation(addressCoord, district)|| google.maps.geometry.poly.containsLocation(addressCoord, district2));{
+                    alert(`Your district is: ${userDistrict}`);
+                    $('#userDistrict').val(userDistrict);
+                }
             } else {
                 alert("Geocoding was not successful - STATUS: " + status);
             }
