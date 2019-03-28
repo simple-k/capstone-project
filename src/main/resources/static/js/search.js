@@ -7,7 +7,7 @@ $(document).ready(() => {
         number of fieldsets
         */
         var fieldsetCount = $('#formElem').children().length;
-
+        console.log(fieldsetCount);
         /*
         current position of fieldset / navigation link
         */
@@ -144,6 +144,11 @@ $(document).ready(() => {
                 return false;
             }
         });
+    });
+
+    $('#phone').on('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
     });
 
 });// Ready
