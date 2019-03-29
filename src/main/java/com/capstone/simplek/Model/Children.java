@@ -21,6 +21,9 @@ public class Children {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
+    @Transient
+    private String dobString;
+
     @Column
     private char gender;
 
@@ -45,11 +48,12 @@ public class Children {
         this.user = user;
         this.services = services;
     }
-    public Children(long id, String firstName, String lastName, Date dob, char gender, User user, List<Services> services) {
+    public Children(long id, String firstName, String lastName, Date dob, String dobString, char gender, User user, List<Services> services) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
+        this.dobString = dobString;
         this.gender = gender;
         this.user = user;
         this.services = services;
@@ -85,6 +89,14 @@ public class Children {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public String getDobString() {
+        return dobString;
+    }
+
+    public void setDobString(String dobString) {
+        this.dobString = dobString;
     }
 
     public char getGender() {

@@ -4,8 +4,6 @@
 }
 body{
     color:#444444;
-    font-size:13px;
-    background: #f2f2f2;
     font-family:"Century Gothic", Helvetica, sans-serif;
 }
 #content{
@@ -26,16 +24,15 @@ body{
     background-color:#f9f9f9;
     width:600px;
     overflow:hidden;
+    font-size:13px;
 }
 #steps{
     width:600px;
-    /*height:320px;*/
     overflow:hidden;
 }
 .step{
     float:left;
     width:600px;
-    /*height:320px;*/
 }
 #navigation{
     height:45px;
@@ -205,4 +202,22 @@ span.error{
     background:#d8d8d8;
     color:#666;
     text-shadow:1px 1px 1px #fff;
+}
+h1{
+    color:#aaa;
+    font-size:36px;
+    text-shadow:1px 1px 1px #fff;
+    padding:20px;
+}
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+}
+.scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
 }

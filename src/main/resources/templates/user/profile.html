@@ -10,51 +10,83 @@
     <!--Email: <span th:text="${#authentication.principal.email}"/>-->
 <!--</div>-->
 <head th:replace="fragments/header :: header('View User')"></head>
+<style>
+    .container {
+        text-align: left;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 45% 10% 45%;
+        grid-template-rows: 500px auto;
+        margin: 10px auto 0 auto;
+        width: 80%;
+        overflow: hidden;
+    }
+    .grid-item-1 {
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+    .grid-item-2 {
+        grid-column: 3;
+        grid-row: 1/3;
+    }
+    .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+    p {
+        margin: 0;
+    }
+</style>
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container">
-    <h1>View Profile</h1>
-    <div id="user-profile">
-        <h3 th:text="${user.username}"></h3>
-        <!--<hr/>-->
-        <p th:text="${user.email}"></p>
-        <p th:text="${user.address + ' ' + user.zipCode}"></p>
-        <p th:text="${user.phoneNumber}"></p>
+
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <div id="user-profile" class="grid-container">
+            <div class="grid-item-1">
+                <h3 class="text-center">User Profile</h3>
+                <div class="card">
+                    <div class="card-header"><h5 th:text="${user.username}"></h5></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <span th:text="${user.uFirstName}"></span>
+                            <span th:text="${user.uLastName}"></span>
+                        </p>
+                        <p class="card-text" th:text="${user.email}"></p>
+                        <p class="card-text" th:text="${user.address + ' ' + user.zipCode}"></p>
+                        <p class="card-text" th:text="${user.phoneNumber}"></p>
+                        <form sec:authorize="isAuthenticated()" th:action="@{/user/edit}" th:method="GET">
+                            <button class="btn btn-sm btn-primary mt-1" type="submit">
+                                Edit Profile
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item-2 float-right">
+                <h3 class="text-center">Children</h3>
+
+                <div th:each="children : ${children}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <span th:text="${children.firstName}"></span>
+                                <span th:text="${children.lastName}"></span>
+                            </h5>
+                            <p class="card-text">Date of Birth: <span th:text="${children.dobString}"></span></p>
+                            <p class="card-text">Gender: <span th:text="${children.gender}"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form sec:authorize="isAuthenticated()" th:action="@{/user/edit}" th:method="GET">
-        <button type="submit">
-            Edit Profile
-        </button>
-    </form>
 
-
-
-    <!--<div id="user-profile">-->
-        <!--<form th:action="@{/user/profile/edit}" th:method="post">-->
-            <!--<h3>Your Profile</h3>-->
-            <!--<p>-->
-                <!--<label for="username">Username: </label>-->
-                <!--<input th:value="${user.username}" name="username" id="username"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="email">Email: </label>-->
-                <!--<input th:value="${user.email}" name="email" id="email"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="address">Address: </label>-->
-                <!--<input th:value="${user.address}" name="address" id="address"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label for="phone">Phone: </label>-->
-                <!--<input th:value="${user.phoneNumber}" name="phone" id="phone"/>-->
-            <!--</p>-->
-            <!--<button type="submit">Update Profile</button>-->
-        <!--</form>-->
-    <!--</div>-->
-
-</div>
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>

@@ -2,51 +2,41 @@ function filterDistricts(){
     let district = document.getElementById("districtFilter").value;
     console.log(district);
 }
-var mapOptions = {
-    // Set the zoom level
-    zoom: 5,
+$('#find').click(function (){
+    findDistrict();
+});
 
-    // This sets the center of the map at our location
-    center: {
-        lat: 29.426791,
-        lng: -98.489602
-    }
-};
-var map;
+let theAddress;
+
+//variables for directions service function ------------------->Bryan Matta
+var directionsService = new google.maps.DirectionsService;
+var directionsDisplay = new google.maps.DirectionsRenderer;
+//<--------------------------------------------------------------
+let map;
+const geocoder = new google.maps.Geocoder();
 map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 9,
+    zoom: 13,
     center: {lat: 29.4241, lng: -98.4936}
 });
-
-// NOTE: This uses cross-domain XHR, and may not work on older browsers.
-map.data.loadGeoJson(
-    '../Json/San_Antonio_Districts.geojson');
-map.data.setStyle({
-    fillOpacity: .10
-});
-
-// Color each letter gray. Change the color when the isColorful property
-// is set to true.
-
-var geocoder = new google.maps.Geocoder();
-
+directionsDisplay.setMap(map);
 
 function locate(address) {
+
     geocoder.geocode({"address": address}, function (results, status) {
 
         // Check for a successful result
         if (status == google.maps.GeocoderStatus.OK) {
             // Recenter the map over the address
             map.setCenter(results[0].geometry.location);
-            map.setZoom(15);
-            var marker = new google.maps.Marker({
+            map.setZoom(12);
+            let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
                 map: map
             });
         } else {
 
             // Show an error Message with the status if our request fails
-            alert("Geocoding was not successful - STATUS: " + status);
+            // alert("Geocoding was not successful - STATUS: " + status);
         }
     });
 }
@@ -56,7 +46,7 @@ function placeMarker(address){
 
         // Check for a successful result
         if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({
+            let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
                 map: map
             });
@@ -76,28 +66,25 @@ var placeSearch, autocomplete;
 autocomplete = new google.maps.places.Autocomplete(
     document.getElementById('autocomplete'), {types: ['geocode']});
 
-// Avoid paying for data that you don't need by restricting the set of
-// place fields that are returned to just the address components.
-
 // When the user selects an address from the drop-down, populate the
 // address fields in the form.
 autocomplete.addListener('place_changed', fillInAddress);
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
+    for (let component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
     }
 
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-        var addressType = place.address_components[i].types[0];
+    for (let i = 0; i < place.address_components.length; i++) {
+        let addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
-            var val = place.address_components[i][componentForm[addressType]];
+            let val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
         }
     }
@@ -108,112 +95,229 @@ function fillInAddress() {
 function geolocate() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var geolocation = {
+            let geolocation = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            var circle = new google.maps.Circle(
+            let circle = new google.maps.Circle(
                 {center: geolocation, radius: position.coords.accuracy});
         });
     }
 }
 
-function findDistrict(address, district, district2){
-    geocoder.geocode({"address": address}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            let userAddress = results[0].geometry.location;
-            var marker = new google.maps.Marker({
-                position: results[0].geometry.location,
-                map: map
-            });
-            let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
-            console.log(address, google.maps.geometry.poly.containsLocation(addressCoord, district));
-            console.log(address + '#2', google.maps.geometry.poly.containsLocation(addressCoord, district2));
-        }
-        else{
-            alert("Geocoding was not successful - STATUS: " + status);
+function findDistrict(){
+    let district;
+    let district2;
+    let userDistrict;
+    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
+        let result = data.features;
+        for (let item of result) {
+            let coordinates = [];
+            if (item.properties.NAME == "San Antonio ISD") {
+                userDistrict=item.properties.NAME;
+                let secondResult = item.geometry.coordinates[0][0];
+                let coordinates2 = [];
+                for (let coordinate of secondResult) {
+                    let lat = coordinate[1];
+                    let lng = coordinate[0];
+                    let districtCoordinate = {lat: lat, lng: lng};
+                    coordinates.push(districtCoordinate);
+                }
+                let thirdResult = item.geometry.coordinates[1][0];
+                for (let coordinate of thirdResult) {
+                    let lat = coordinate[1];
+                    let lng = coordinate[0];
+                    let districtCoordinate = {lat: lat, lng: lng};
+                    coordinates2.push(districtCoordinate);
+                }
+                district = new google.maps.Polygon({
+                    paths: coordinates,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FFff00',
+                    fillOpacity: 0.05
+                });
+                district2 = new google.maps.Polygon({
+                    paths: coordinates2,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FFff00',
+                    fillOpacity: 0.05
+                });
+            district.setMap(map);
+            district2.setMap(map);
+            }
         }
     });
-}
-function testData(){
-    $.getJSON('/Json/San_Antonio_Districts.geojson', function (data) {
-        console.log(data);
-        let result = data.features;
-        console.log(result);
-        for(let item of result){
-            let coordinates = [];
-            console.log(item.properties.NAME);
-            for(let coordinate of item.geometry.coordinates[0]){
-                console.log('test' , coordinate);
-                if(item.properties.NAME == "Lackland ISD" || item.properties.NAME == "San Antonio ISD" ) {
-                    let secondResult = item.geometry.coordinates[0][0];
-                    let coordinates2 = [];
-                    for (let coordinate of secondResult) {
-                        let lat = coordinate[1];
-                        let lng = coordinate[0];
-                        let districtCoordinate = {lat : lat, lng: lng};
-                        coordinates.push(districtCoordinate);
-                        // console.log(lat);
-                        // console.log(lng);
-                    }
-                    let thirdResult = item.geometry.coordinates[1][0];
-                    for (let coordinate of thirdResult) {
-                        let lat = coordinate[1];
-                        let lng = coordinate[0];
-                        let districtCoordinate = {lat : lat, lng: lng};
-                        console.log(districtCoordinate);
-                        coordinates2.push(districtCoordinate);
-                        // console.log(lat);
-                        // console.log(lng);
-                    }
-                    console.log(coordinates);
-                    let district = new google.maps.Polygon({
-                        paths: coordinates,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: '#FFff00',
-                        fillOpacity: 0.05
-                    });
-                    let district2 = new google.maps.Polygon({
-                        paths: coordinates2,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: '#FFff00',
-                        fillOpacity: 0.05
-                    });
-                    district.setMap(map);
-                    district2.setMap(map);
-                    // findDistrict('115 Medina Base Rd', district, district2);
-                    // findDistrict('1800 Dimsted Pl', district, district2);
-                    // findDistrict('600 Navarro St #350', district, district2);
-                    // findDistrict('1 Towers Park Ln', district, district2);
+    theAddress = $('#address').val();
+    theAddress += ', ' + $('#zipCode').val();
+    console.log(theAddress);
+    if (theAddress == null){
+        console.log('This only shows if you\'re not logged in');
+    }
+    else {
+        geocoder.geocode({"address": theAddress}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                let userAddress = results[0].geometry.location;
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map
+                });
+                let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
+                console.log(addressCoord);
+                if(google.maps.geometry.poly.containsLocation(addressCoord, district)|| google.maps.geometry.poly.containsLocation(addressCoord, district2));{
+                    // alert(`Your district is: ${userDistrict}`);
+                    $('#userDistrict').val(userDistrict);
                 }
-                // let lat = coordinate[1];
-                // let lng = coordinate[0];
-                // let districtCoordinate = {lat : lat, lng: lng};
-                // coordinates.push(districtCoordinate);
-                // console.log(coordinates);
-                // let district = new google.maps.Polygon({
-                //     paths: coordinates,
-                //     strokeColor: '#FF0000',
-                //     strokeOpacity: 0.8,
-                //     strokeWeight: 2,
-                //     fillColor: '#FF0000',
-                //     fillOpacity: 0.35
-                // });
-                // district.setMap(map);
+            } else {
+                alert("Geocoding was not successful - STATUS: " + status);
             }
+        });
+    }
+}
 
-            // else{
-            //     let i = 0;
-            //     let lat = item.geometry.coordinates[0][i][0];
-            //     let lng = item.geometry.coordinates[0][i++][1];
-            //     i++;
-            //     console.log(lat);
-            //     console.log(lng);
-            // }
+// ----------- geoJSON ------------
+// NOTE: This uses cross-domain XHR, and may not work on older browsers.
+// map.data.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
+//     idPropertyName: 'NAME2',
+//     });
+// map.data.setStyle({
+//     fillOpacity: .10,
+//     strokeWeight: 1
+// });
+// map.data.addListener('mouseover', function(event) {
+//     map.data.revertStyle();
+//     map.data.overrideStyle(event.feature, {
+//         zIndex:1,
+//         strokeColor: 'yellow',
+//         strokeWeight: 2});
+// });
+// map.data.addListener('mouseout', function(event) {
+//     map.data.revertStyle();
+// });
+
+    // let districtData = new google.maps.Data();
+let districtData = map.data;
+let districtPoly;
+districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
+    idPropertyName: 'NAME2'
+});
+map.data.setStyle({
+    fillOpacity: .10,
+    strokeWeight: 1,
+    clickable: true
+
+});
+
+// let sanAntonio =  districtData.getFeatureById('San Antonio');
+// let judson =  districtData.getFeatureById('Judson');
+// let lackland =  districtData.getFeatureById('Lackland');
+// let alamoHeights =  districtData.getFeatureById('Alamo Heights');
+// let eastCentral =  districtData.getFeatureById('East Central');
+// let fortSamHouston =  districtData.getFeatureById('Fort Sam Houston');
+// let edgewood =  districtData.getFeatureById('Edgewood (Bexar)');
+// let southSanAntonio =  districtData.getFeatureById('South San Antonio');
+// let floresville =  districtData.getFeatureById('Floresville');
+// let harlandale =  districtData.getFeatureById('Harlandale');
+// let medinaValley =  districtData.getFeatureById('Medina Valley');
+// let southwest =  districtData.getFeatureById('Southwest');
+// let southside =  districtData.getFeatureById('Southside');
+// let northEast =  districtData.getFeatureById('North East');
+// let northside =  districtData.getFeatureById('Northside (Bexar)');
+// let randolphField =  districtData.getFeatureById('Randolph Field');
+//
+//
+// let districtArray = [
+//     sanAntonio,
+//     judson,
+//     lackland,
+//     alamoHeights,
+//     eastCentral,
+//     fortSamHouston,
+//     edgewood,
+//     southSanAntonio,
+//     floresville,
+//     harlandale,
+//     medinaValley,
+//     southwest,
+//     southside,
+//     northEast,
+//     northside,
+//     randolphField
+// ];
+//
+// console.log(districtArray[3]);
+
+districtData.addListener('addfeature', function(evt) {
+        if (evt.feature.getId() == "Judson") {
+            let judson = districtData.getFeatureById('Judson');
+            let judsonGeo = judson.getGeometry();
+            // judsonGeo is the feature.geometry from the data layer
+            districtPoly = new google.maps.Polygon({
+                paths: judsonGeo.getAt(0).getArray(),
+                clickable: true
+            });
         }
-    })
+    });
+    let infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(districtData, 'click', function(evt) {
+        infoWindow.setPosition(evt.latLng);
+        if (google.maps.geometry.poly.containsLocation(evt.latLng, districtPoly)) {
+            infoWindow.setContent("INSIDE DISTRICT<br>" + evt.latLng.toUrlValue(6));
+        } else {
+            infoWindow.setContent("OUTSIDE DISTRICT<br>" + evt.latLng.toUrlValue(6));
+        }
+        infoWindow.open(map);
+    });
+
+
+map.data.addListener('mouseover', function(event) {
+    // map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {
+        zIndex:1,
+        strokeColor: 'yellow',
+        strokeWeight: 2});
+});
+map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
+});
+    // districtData.setStyle({
+    //     clickable: true,
+    //     visible: false,
+    // });
+    districtData.setMap(map);
+
+    // var geocoder = new google.maps.Geocoder();
+    // geocoder.geocode({
+    //     'address': "334 Savannah Dr"
+    // }, function(results, status) {
+    //     if (status === google.maps.GeocoderStatus.OK) {
+    //         map.fitBounds(results[0].geometry.viewport);
+    //     } else {
+    //         alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    // });
+// google.maps.event.addDomListener(window, "load", initialize);
+
+// Directions service--------------------------> Bryan Matta
+
+
+
+function calculateAndDisplayRoute(schoolAddress) {
+    let userAddress = $('#address').val() + ', ' + $('#zipCode').val();
+    console.log(userAddress);
+    console.log(schoolAddress);
+    directionsService.route({
+        origin: userAddress,
+        destination: schoolAddress,
+        travelMode: 'DRIVING'
+    }, function (response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
 }

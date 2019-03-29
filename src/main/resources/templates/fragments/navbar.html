@@ -76,9 +76,9 @@
                     </li>
                 </ul>
                     <div class="ml-auto">
-                        <form th:method="post" th:action="@{/login}" id="login">
-                            <a sec:authorize="!isAuthenticated()" class="col my-2 text-light" th:href="@{/login}" role="button">Login</a>
-                            <a sec:authorize="isAuthenticated()" class="col my-2 text-light" th:href="@{/login?logout}" role="button">Logout</a>
+                        <a sec:authorize="!isAuthenticated()" class="col my-2 text-light" th:href="@{/login}" role="button">Login</a>
+                        <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
+                            <button  class="my-2 btn rounded btn-link text-light" role="button">Logout</button>
                         </form>
                     </div>
             </div>

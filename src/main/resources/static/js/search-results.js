@@ -30,26 +30,28 @@ $(document).ready(() => {
         console.log(error);
     };
 
-    // Grid Item 1
+    // Grid Item 2
     // Get Request - Render School Index
     const renderSchoolIndex  = (schools) => {
         $('.loadingIndex').hide();
         schools.filter(({id, stateSchoolId, district, highGrade, schoolName, streetAddress, zipCode, phone, charter, titleISchool, title1SchoolWide, students, teachers, studentTeacherRatio}) => {
             $('.list_school').append(`
                 <div class='row school'>
-                    <div id='school-listing' class='text-left mx-auto px-1'>
-                        <h5 class='select_school my-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
-                        <div class='col-12'>
-                            <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
-                            <p>${streetAddress}</p>
-                            <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
-                            <p>${phone}</p>
-                        </div>
-                        <div class='text-center'>
-                            <a href='${district.url}' target="_blank">
-                                <img src='${district.image}' />
-                            </a>
-                            <p>${district.name}</p>
+                    <div id='school-listing' class=''>
+                        <h5 class='select_school my-1 mx-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
+                        <div class="flex-container mx-1">
+                            <div class=''>
+                                <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
+                                <p>${streetAddress}</p>
+                                <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
+                                <p>${phone}</p>
+                                <p>${district.name}</p>
+                            </div>
+                            <div class='isd-logo'>
+                                <a href='${district.url}' target="_blank">
+                                    <img src='${district.image}' />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,22 +81,37 @@ $(document).ready(() => {
         $('.loadingIndex').hide();
         $('#selected_school').append(`
             <div id='school'>
-                <h3>${school.schoolName}</h3>
-                <p>${school.streetAddress}</p>
-                <p>San Antonio, TX, <span>${school.zipCode}</span></p>
-                <p>Grades: PK-<span>${school.highGrade}</span></p>
-                <p>Total students enrolled: <span>${school.students}</span></p>
-                <p>Total teachers: <span>${school.teachers}</span></p>
-                <p>Students per teacher: <span>${school.studentTeacherRatio}</span></p>
-                <p>Transportation service :<span> ${transportation}</span></p>
-                <p>Daycare service: <span> ${daycare}</span></p>
-                <p>Financial service: <span> ${financial}</span></p>
-                <p>Disability service: <span> ${disability}</span></p>
-                <p>Language service: <span> ${language}</span></p>
-                <p>District: <a href='${school.district.url}' target='_blank'><span>${school.district.name}</span></a></p>
+                <h5 class="my-1 mx-1">${school.schoolName}</h5>
+                <div id='school-details-container'>
+                    <div class="school-details-1 mx-1">
+                        <p>${school.streetAddress}</p>
+                        <p>San Antonio, TX, <span>${school.zipCode}</span></p>
+                        <p>${school.phone}</p>
+                        <p>District: <a href='${school.district.url}' target='_blank'><span>${school.district.name}</span></a></p>
+                    </div>
+                    <div class="school-details-2 mx-1">
+                        <p>Grades: PK-<span>${school.highGrade}</span></p>
+                        <p>Total students enrolled: <span>${school.students}</span></p>
+                        <p>Total teachers: <span>${school.teachers}</span></p>
+                        <p>Students per teacher: <span>${school.studentTeacherRatio}</span></p>
+                    </div>
+                </div>
+                <div class="my-1 mx-1">
+                    <p>Transportation service :<span> ${transportation}</span></p>
+                    <p>Daycare service: <span> ${daycare}</span></p>
+                    <p>Financial service: <span> ${financial}</span></p>
+                    <p>Disability service: <span> ${disability}</span></p>
+                    <p>Language service: <span> ${language}</span></p>
+                </div>
             </div>
         `);
+        $('#selected_school').on('click', "#findDirection" , e => {
+            calculateAndDisplayRoute(`${school.streetAddress}, ${school.zipCode}`);
+        });
+
+
     };
+
 
     // Render School Index
     // getSchoolJson().then(renderSchoolIndex).catch(err);
@@ -145,19 +162,21 @@ $(document).ready(() => {
                             console.log(word);
                             $('.list_school').append(`
                                 <div class='row school'>
-                                    <div id='school-listing' class='text-left mx-auto px-1'>
-                                        <h5 class='select_school my-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
-                                        <div class='col-12'>
-                                            <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
-                                            <p>${streetAddress}</p>
-                                            <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
-                                            <p>${phone}</p>
-                                        </div>
-                                        <div class='text-center'>
-                                            <a href='${district.url}' target="_blank">
-                                                <img src='${district.image}' />
-                                            </a>
-                                            <p>${district.name}</p>
+                                    <div id='school-listing' class=''>
+                                        <h5 class='select_school my-1 mx-1 text-primary cursor-pointer' data-schoolId='${id}' data-schoolAddress='${streetAddress}${zipCode}'>${schoolName}</h5>
+                                        <div class="flex-container mx-1">
+                                            <div class=''>
+                                                <div onload="placeMarker('${streetAddress} ${zipCode}')"></div>
+                                                <p>${streetAddress}</p>
+                                                <p><span>San Antonio, TX, </span><span>${zipCode}</span></p>
+                                                <p>${phone}</p>
+                                                <p>${district.name}</p>
+                                            </div>
+                                            <div class='isd-logo'>
+                                                <a href='${district.url}' target="_blank">
+                                                    <img src='${district.image}' />
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
