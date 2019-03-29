@@ -168,7 +168,7 @@ function findDistrict(){
                 let addressCoord = {lat: userAddress.lat, lng: userAddress.lng};
                 console.log(addressCoord);
                 if(google.maps.geometry.poly.containsLocation(addressCoord, district)|| google.maps.geometry.poly.containsLocation(addressCoord, district2));{
-                    alert(`Your district is: ${userDistrict}`);
+                    // alert(`Your district is: ${userDistrict}`);
                     $('#userDistrict').val(userDistrict);
                 }
             } else {
