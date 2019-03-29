@@ -107,6 +107,7 @@ $(document).ready(() => {
         `);
         $('#selected_school').on('click', "#findDirection" , e => {
             calculateAndDisplayRoute(`${school.streetAddress}, ${school.zipCode}`);
+            $('.grid-item-4').show('slow');
         });
 
 

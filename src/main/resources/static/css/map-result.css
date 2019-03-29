@@ -1,11 +1,19 @@
+body {
+    margin-bottom: 50px !important;
+}
+.grid-container {
+    display: grid;
+    overflow: hidden;
+}
 #map-canvas {
     margin-top: 5px;
     border: 1px solid darkgray;
+    border-radius: 5px;
     width: 100%;
     height: 481px;
 }
 .grid-item-filter {
-    font-size: .7em;
+    font-size: 16px;
     height: 50px;
     background-color: #cccccc;
     border-bottom: 1px solid rgb(166, 166, 166);
@@ -22,38 +30,31 @@
     border-color: rgb(166, 166, 166);
 }
 .grid-container {
-    font-size: .7em;
+    font-size: 16px;
     display: grid;
     grid-template-columns: 65% 35%;
-    grid-template-rows: 486px 237px;
+    grid-template-rows: 487px 274px;
     margin: 0 auto 25px auto;
     width: 80%;
     overflow: hidden;
 }
-.grid-item-1 {
-    grid-column: 1;
-    grid-row: 1;
-}
-.grid-item-2 {
-    grid-column: 2;
-    grid-row: 1/3;
-}
-.grid-item-3 {
-    grid-column: 1;
-    grid-row: 2/3;
-}
 .list_school {
     overflow: scroll;
     overflow-x: hidden;
-    height: 95%;
+    height: 100%;
 }
 .school, #school {
     margin: 5px auto;
     border: 1px solid darkgray;
+    border-radius: 5px;
     padding: 5px;
+    background-color: #fff;
 }
 .school {
     width: 95%;
+}
+#school.school-placeholder, #school {
+    height: 268px;
 }
 #school {
     width: 100%;
@@ -99,7 +100,7 @@ p {
 .directions {
     float: right;
     margin-top: 12px;
-    margin-right: 12px;
+    margin-right: 11px;
 }
 input::placeholder {
     font-size: .7em;
@@ -107,18 +108,45 @@ input::placeholder {
 @media only screen and (min-width: 1440px) {
     /*TODO fix display on bigger screens*/
 }
-@media only screen and (max-width: 768px) {
-    /*TODO fix display on smaller screens*/
-}
-@media only screen and (max-width: 768px) {
-    /*TODO fix display on smaller screens*/
+@media (min-width: 1024px) and (max-width: 2560px) {
     .grid-container {
-        display: grid;
+        grid-template-columns: 65% 35%;
+        grid-template-rows: 487px 274px auto;
+        margin: 0 auto 25px auto;
+        width: 80%;
+    }
+    .grid-item-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .grid-item-2 {
+        grid-column: 2;
+        grid-row: 1/3;
+    }
+    .grid-item-3 {
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+    .grid-item-4 {
+        grid-column: 1;
+        grid-row: 3/4;
+        background-color: #fff;
+        margin: 5px 0;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        display: none;
+    }
+}
+@media (min-width: 601px) and (max-width: 1023px) {
+    /*TODO fix display on smaller screens*/
+    #map-canvas {
+        margin-top: 0;
+    }
+    .grid-container {
         grid-template-columns: 100%;
-        grid-template-rows: 486px 250px;
+        grid-template-rows: 482px 278px 100vh;
         margin-bottom: 25px;
         width: 100%;
-        overflow: hidden;
     }
     .grid-item-3 {
         grid-column: 1;
@@ -138,9 +166,69 @@ input::placeholder {
         display: none;
     }
     #school {
-        margin: 5px auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
     }
     .list_school {
         height: 100vh;
+    }
+    .directions {
+        margin-right: 26px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    /*TODO fix display on smaller screens*/
+    #map-canvas {
+        margin-top: 0;
+    }
+    .grid-container {
+        grid-template-columns: 100%;
+        grid-template-rows: 482px 395px 100vh;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+    .grid-item-3 {
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+    .grid-item-2 {
+        grid-column: 1;
+        grid-row: 3/4;
+    }
+    .grid-item-1 {
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+    .grid-item-filter {
+        /*grid-column: 1;*/
+        /*grid-row: 2/3;*/
+        display: none;
+    }
+    #school #school-details-container {
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+    }
+    .school-details-1 {
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+    .school-details-2 {
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+    #school {
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+    }
+    #school.school-placeholder, #school {
+        height: 385px;
+    }
+    .list_school {
+        height: 100vh;
+    }
+    .directions {
+        margin-right: 26px;
     }
 }

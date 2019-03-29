@@ -3,7 +3,6 @@
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head th:replace="fragments/header :: header('test')"></head>
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
-
 	<body th:onload="'findDistrict()'">
 	<!--<body>-->
 		<div th:replace="fragments/navbar :: navbar"></div>
@@ -72,7 +71,7 @@
 			<div id="selected_school" class="grid-item-3">
 				<button sec:authorize="isAuthenticated()" class="btn btn-primary btn-sm directions" id="findDirection" >Directions</button>
 				<!--show on initial load-->
-				<div id='school'>
+				<div id='school' class="school-placeholder">
 					<h5 class="mx-1 my-1">Select a school for more info.</h5>
 					<p class="mx-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
 				</div>

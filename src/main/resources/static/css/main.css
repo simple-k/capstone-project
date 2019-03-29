@@ -26,6 +26,7 @@ body{
     background-image: url("../img/dust_scratches.png");
     background-color: #F5F5F5;
     padding: 2em auto;
+    font-size: 16px !important;
 }
 
 /*---NAVBAR---*/
