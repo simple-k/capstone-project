@@ -41,7 +41,7 @@ body {
 .list_school {
     overflow: scroll;
     overflow-x: hidden;
-    height: 99.9%;
+    height: 100%;
 }
 .school, #school {
     margin: 5px auto;
@@ -111,7 +111,7 @@ input::placeholder {
 @media (min-width: 1024px) and (max-width: 2560px) {
     .grid-container {
         grid-template-columns: 65% 35%;
-        grid-template-rows: 487px 274px;
+        grid-template-rows: 487px 274px auto;
         margin: 0 auto 25px auto;
         width: 80%;
     }
@@ -126,6 +126,15 @@ input::placeholder {
     .grid-item-3 {
         grid-column: 1;
         grid-row: 2/3;
+    }
+    .grid-item-4 {
+        grid-column: 1;
+        grid-row: 3/4;
+        background-color: #fff;
+        margin: 5px 0;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        display: none;
     }
 }
 @media (min-width: 601px) and (max-width: 1023px) {
