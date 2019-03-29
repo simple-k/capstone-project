@@ -69,10 +69,11 @@
 
 			<!--grid-item 3-->
 			<div id="selected_school" class="grid-item-3">
+				<button sec:authorize="isAuthenticated()" class="btn btn-primary btn-sm directions" id="findDirection" >Directions</button>
 				<!--show on initial load-->
 				<div id='school'>
-					<h5>Select a school for more info.</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
+					<h5 class="mx-1 my-1">Select a school for more info.</h5>
+					<p class="mx-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis commodi consequuntur enim, eos et facere inventore ipsum iure magnam, minima minus nemo porro quas quis sequi ut veritatis vitae!</p>
 				</div>
 				<div>
 					<img class="loadingIndex" th:src="@{https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif}" alt="loading data" />
