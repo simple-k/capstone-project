@@ -19,6 +19,7 @@ map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: {lat: 29.4241, lng: -98.4936}
 });
 directionsDisplay.setMap(map);
+directionsDisplay.setPanel(document.getElementById('bottom-panel'));
 
 function locate(address) {
 
@@ -64,11 +65,10 @@ var placeSearch, autocomplete;
 // Create the autocomplete object, restricting the search predictions to
 // geographical location types.
 autocomplete = new google.maps.places.Autocomplete(
-    document.getElementById('autocomplete'), {types: ['geocode']});
-
+    document.getElementsByClassName('autocomplete'), {types: ['geocode']});
 // When the user selects an address from the drop-down, populate the
 // address fields in the form.
-autocomplete.addListener('place_changed', fillInAddress);
+autocomplete.addListener('place_changed', fillInAddress());
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
@@ -177,26 +177,6 @@ function findDistrict(){
         });
     }
 }
-
-// ----------- geoJSON ------------
-// NOTE: This uses cross-domain XHR, and may not work on older browsers.
-// map.data.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
-//     idPropertyName: 'NAME2',
-//     });
-// map.data.setStyle({
-//     fillOpacity: .10,
-//     strokeWeight: 1
-// });
-// map.data.addListener('mouseover', function(event) {
-//     map.data.revertStyle();
-//     map.data.overrideStyle(event.feature, {
-//         zIndex:1,
-//         strokeColor: 'yellow',
-//         strokeWeight: 2});
-// });
-// map.data.addListener('mouseout', function(event) {
-//     map.data.revertStyle();
-// });
 
     // let districtData = new google.maps.Data();
 let districtData = map.data;
