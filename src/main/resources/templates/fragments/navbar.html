@@ -45,10 +45,10 @@
 <th:block th:fragment="navbar">
     <nav class="simple-k-nav">
         <div class="navbar navbar-expand-lg navbar-dark py-2">
-            <div class="navbar-brand">
+            <div id="logo" class="navbar-brand">
                 <a class="text-light" th:href="@{/}">
-                    <img src="/static/img/apple_logo.png" width="30" height="30" class="d-inline-block align-top" alt="Simple-K Logo"/>
-                    Simple-K
+                    <img th:src="@{../img/apple_logo.png}" width="30" height="30" class="d-inline-block align-top" alt="Simple-K Logo"/>
+                    <span class="px-1">Simple-K</span>
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" th:href="@{/about}">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/search}">Districts</a>
@@ -79,9 +79,9 @@
                     </li>
                 </ul>
                     <div class="ml-auto">
-                        <a sec:authorize="!isAuthenticated()" class="col my-2 text-light" th:href="@{/login}" role="button">Login</a>
+                        <a sec:authorize="!isAuthenticated()" class="col my-3 pl-0 py-1 text-light" th:href="@{/login}" role="button">Login</a>
                         <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
-                            <button  class="my-2 btn rounded btn-link text-light" role="button">Logout</button>
+                            <button  class="my-3 pl-0 py-1 btn rounded btn-link text-light" role="button">Logout</button>
                         </form>
                     </div>
             </div>

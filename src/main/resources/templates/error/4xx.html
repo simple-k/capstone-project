@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('400 Error')"></head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div id="container">
+    <h1 class="py-3 my-3 text-center">400 Error</h1>
+    <h5 class="text-center">Page Not Found!</h5>
+        <img th:src="@{../img/4XX_error.png}" class="d-block mx-auto border-bottom border-dark" />
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

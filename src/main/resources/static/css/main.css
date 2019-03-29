@@ -12,28 +12,25 @@
 .dd {color: #715C56;}
 .ee {color: #283230;}
 
+@font-face { font-family: Cartoon_Six; src: url('../font/Carton_Six.ttf'); }
+@font-face { font-family: Dimbo_Regular; src: url('../font/Dimbo_Regular.ttf'); }
+@font-face { font-family: Schoolbell; src: url('../font/Schoolbell.ttf'); }
 
 * {
     box-sizing: border-box;
-
 }
 html {
     position: relative;
     min-height: 100%;
-
 }
 body{
     background-image: url("../img/dust_scratches.png");
     background-color: #F5F5F5;
     padding: 2em auto;
 }
-
-/*---NAVBAR---*/
-header {
-    position: absolute;
-    width: 100%;
-    top: 0;
-
+a:hover {
+    cursor:pointer;
+    color: #e0a800;
 }
 #container {
     /*max-width: 960px;*/
@@ -44,10 +41,12 @@ header {
     width: 100%;
     text-align: center;
 }
-a:hover {
-    cursor:pointer;
+/*---NAVBAR---*/
+header {
+    position: absolute;
+    width: 100%;
+    top: 0;
 }
-
 .simple-k-nav {
     background-color: #482d71;
 }
@@ -65,8 +64,17 @@ footer {
     bottom: 0;
 }
 
+/*---INDEX---*/
+#logo {
+    /*font-family: Cartoon_Six, cursive;*/
+    /*font-family: Schoolbell, cursive;*/
+    /*font-family: Dimbo_Regular, cursive;*/
+    font-family: "Love Ya Like A Sister", cursive;
+}
+.lead {
     /*font-family: 'Love Ya Like A Sister', cursive;*/
-    /*font-family: 'Schoolbell', cursive;*/
+    font-family: Schoolbell, cursive;
+}
 #primary-window {
     margin: 0 auto 0 auto;
     padding: 0;
@@ -79,129 +87,20 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
 }
-#landing-page-content, h3 {
+#landing-page-content {
     background-color: #FFFFFF;
-    font-family: 'Love Ya Like A Sister', cursive;
 }
-
-.lead {
-    font-family: 'Love Ya Like A Sister', cursive;
+#landing-page-content h3 {
+    /*font-family: Dimbo_Regular, cursive;*/
+    padding: 1em;
+    margin: auto;
 }
-#logo {
-
+/*--ABOUT--*/
+#aboutCarousel {
+    height: 300px;
 }
-.navbar-brand, a {
-    color: azure;
-}
-
-/*---NavBar---*/
-/*.navbar {*/
-    /*background-color: #283230;*/
-    /*!*position: fixed;*!*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*display: flex;*/
-    /*width: 100%;*/
-    /*color: #fff;*/
-    /*font-size: 1em;*/
-    /*font-weight: 700;*/
-/*}*/
-
-/*.nav-logo-c {*/
-    /*padding-left: 15px;*/
-/*}*/
-/*.nav-link-toggle-c {*/
-    /*display: none;*/
-/*}*/
-/*.nav-items-c {*/
-    /*display: flex;*/
-    /*margin-left: auto;*/
-/*}*/
-/*.nav-link-c {*/
-    /*padding-right: 20px;*/
-/*}*/
-/*.nav-logo-c a, .nav-items-c a {*/
-    /*color: #fff;*/
-    /*text-decoration: none;*/
-/*}*/
-/*.nav-logo-c a.active, .nav-items-c a.active {*/
-    /*color: #f00;*/
-/*}*/
-/*.navbar.scrolled {*/
-    /*background-color: #fff;*/
-    /*box-shadow: 0 2px 6px -4px #080808;*/
-    /*transition: background-color 200ms linear;*/
-    /*color: #080808;*/
-/*}*/
-/*.nav-logo-c a.scrolld, .nav-items-c a.scrolld {*/
-    /*color: #fff;*/
-/*}*/
-/*.nav-logo-c a.active.scroll, .nav-items-c a.active.scroll {*/
-    /*color: #f00;*/
-/*}*/
-
-
-
-
-
-
-
-
-
-/*.footer p {*/
-    /*margin-top: 1em;*/
-/*}*/
-/*---Media Queries---*/
-/*@media only screen and (max-width: 375px) {*/
-    /*#banner-window {*/
-        /*height: 198px;*/
-    /*}*/
-    /*footer {*/
-        /*font-size: .7em;*/
-    /*}*/
-/*}*/
-/*@media only screen and (min-width: 376px) and (max-width: 1024px) {*/
-    /*#banner-window {*/
-        /*height: 396px;*/
-    /*}*/
-    /*.container {*/
-        /*width: 100%;*/
-    /*}*/
-    /*!*.navbar {*!*/
-        /*!*align-items: normal;*!*/
-    /*!*}*!*/
-    /*.nav-items-c,*/
-    /*!*.navbar{*!*/
-        /*!*flex-direction: column;*!*/
-    /*!*}*!*/
-    /*.nav-items-c {*/
-        /*display: none;*/
-        /*margin-left: 0;*/
-        /*!*padding-left: 15px;*!*/
-    /*}*/
-    /*.nav-link-c {*/
-        /*padding-left: 15px;*/
-    /*}*/
-    /*.nav-logo-c a:hover, .nav-items-c a:hover {*/
-        /*border-left: 3px solid #CA8B3A;*/
-    /*}*/
-    /*.nav-toggle-show-c {*/
-        /*display: flex;*/
-    /*}*/
-    /*.nav-link-toggle-c {*/
-        /*align-self: flex-end;*/
-        /*display: initial;*/
-        /*position: absolute;*/
-        /*cursor: pointer;*/
-    /*}*/
-/*}*/
-
-/*@media only screen and (min-width: 1024px) {*/
-    /*#banner-window {*/
-        /*height: 396px;*/
-    /*}*/
-    /*.nav-logo-c a:hover, .nav-items-c a:hover {*/
-        /*border-bottom: 3px solid #CA8B3A;*/
-        /*padding-bottom: 8px;*/
-    /*}*/
+/*#thank-you-logos a {*/
+    /*height: 120px;*/
+    /*padding: auto;*/
+    /*margin: auto;*/
 /*}*/
