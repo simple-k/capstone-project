@@ -45,14 +45,22 @@
 <th:block th:fragment="navbar">
     <nav class="simple-k-nav">
         <div class="navbar navbar-expand-lg navbar-dark py-2">
-            <div id="logo" class="navbar-brand">
+            <div id="logo" class="mx-2 navbar-brand">
                 <a class="text-light" th:href="@{/}">
                     <img th:src="@{../img/apple_logo.png}" width="30" height="30" class="d-inline-block align-top" alt="Simple-K Logo"/>
                     <!--<span class="px-1">Simple-K</span>-->
                 </a>
             </div>
-                <div class="d-inline mr-auto my-2">
-                    <a sec:authorize="!isAuthenticated()" class="pl-0 py-1 text-light" th:href="@{/login}" role="button">Login</a>
+            <div class="mx-2 d-none d-sm-none d-md-block d-lg-block my-2 form-wrapper">
+                <input type="text" name="username" placeholder="Username" class="mx-2 form-control" required=""/>
+                <!--<i class="fas fa-user"></i>-->
+            </div>
+            <div class="mx-2 d-none d-sm-none d-md-block d-lg-block my-2 form-wrapper">
+                <input type="password" name="password" placeholder="Password" class="mx-2 form-control" required=""/>
+                <!--<i class="fas fa-lock"></i>-->
+            </div>
+                <div class="mx-2 d-inline mr-auto my-2">
+                    <a sec:authorize="!isAuthenticated()" class="pl-0 py-1 mx-3 text-light" th:href="@{/login}" role="button">Login</a>
                     <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
                         <button  class="pl-0 py-1 btn rounded btn-link text-light" role="button">Logout</button>
                     </form>
@@ -61,8 +69,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="allnav-item dropdown">
+                <ul class="navbar-nav ml-auto px-3">
+                    <li class="mx-2 allnav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Resources
                         </a>
@@ -74,10 +82,10 @@
                             <a class="dropdown-item" href="#">Special Needs &amp; Disabilities</a>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="mx-2 nav-item">
                         <a class="nav-link" th:href="@{/search}">District Map</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="mx-2 nav-item">
                         <a class="nav-link" th:href="@{/about}">About</a>
                     </li>
                     <!--<li class="nav-item">-->
