@@ -3,55 +3,104 @@
 <head th:replace="fragments/header :: header('Register')"></head>
 <link rel="stylesheet" th:href="@{/css/user-register-form.css}"/>
 <body>
-	<div th:replace="fragments/navbar :: navbar"></div>
-
-	<div class="wrapper">
-		<div class="inner">
-
-			<div class="image-holder">
-				<img class="vertical-center" th:src="@{/img/registration.jpg}" alt="" />
-			</div>
-			
-			<!--Register Form-->
-			<form th:action="@{/register}" method="POST" th:object="${user}">
-				<h3>Registration Form</h3>
-				<!--Input Error Messages-->
-				<div th:if="${session.inputErrors != null}">
-					<div class="alert alert-danger alert-dismissable">
-						<a class="panel-close close" data-dismiss="alert">×</a>
-						<i class="fa fa-times-circle"></i>
-						<span th:text="${session.inputErrors}"></span>
-					</div>
-				</div>
-				<div class="form-group">
-					<input type="text" th:field="*{uFirstName}" placeholder="First Name" class="form-control" />
-					<input type="text" th:field="*{uLastName}" placeholder="Last Name" class="form-control" />
-				</div>
-				<div class="form-wrapper">
-					<input type="text" th:field="*{username}" placeholder="Username" class="form-control" required=""/>
-					<i class="fas fa-user"></i>
-				</div>
-				<div class="form-wrapper">
-					<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>
-					<i class="fas fa-envelope"></i>
-				</div>
-				<div class="form-wrapper">
-					<input type="password" th:field="*{password}" placeholder="Password" class="form-control" required=""/>
-					<i class="fas fa-lock"></i>
-				</div>
-				<div class="form-wrapper">
-					<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" />
-					<i class="fas fa-lock"></i>
-				</div>
-				<button type="submit">Register
-					<i class="fas fa-arrow-right"></i>
-				</button>
-			</form>
-
-		</div>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container">
+	<div id="registration-form" class="order-sm-last order-lg-first my-3">
+		<img class="d-inline img-fluid vertical-center" th:src="@{/img/registration.jpg}" alt="Register" />
 	</div>
-
+<!--Register Form-->
+	<form th:action="@{/register}" method="POST" th:object="${user}">
+		<h3>Registration Form</h3>
+		<!--Input Error Messages-->
+		<div th:if="${session.inputErrors != null}">
+			<div class="alert alert-danger alert-dismissable">
+				<a class="panel-close close" data-dismiss="alert">×</a>
+				<i class="fa fa-times-circle"></i>
+				<span th:text="${session.inputErrors}"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<input type="text" th:field="*{uFirstName}" placeholder="First Name" class="col-6 px-2 mx-0 form-control" />
+			<input type="text" th:field="*{uLastName}" placeholder="Last Name" class="col-6 px-2 mx-0 form-control" />
+		</div>
+®		<div class="form-wrapper">
+			<input type="text" th:field="*{username}" placeholder="Username" class="form-control" required=""/>
+			<i class="fas fa-user"></i>
+		</div>
+		<div class="form-wrapper">
+			<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>
+			<i class="fas fa-envelope"></i>
+		</div>
+		<div class="form-wrapper">
+			<input type="password" th:field="*{password}" placeholder="Password" class="form-control" required=""/>
+			<i class="fas fa-lock"></i>
+		</div>
+		<div class="form-wrapper">
+			<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" />
+			<i class="fas fa-lock"></i>
+		</div>
+		<button type="submit">Register
+			<i class="fas fa-arrow-right"></i>
+		</button>
+	</form>
+</div>
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+<!--RON'S ORIGINAL CODE -->
+<!--<div class="wrapper">-->
+	<!--<div class="inner">-->
+		<!--<div class="image-holder">-->
+			<!--<img class="vertical-center" th:src="@{/img/registration.jpg}" alt="" />-->
+		<!--</div>-->
+
+		<!--&lt;!&ndash;Register Form&ndash;&gt;-->
+		<!--<form th:action="@{/register}" method="POST" th:object="${user}">-->
+			<!--<h3>Registration Form</h3>-->
+			<!--&lt;!&ndash;Input Error Messages&ndash;&gt;-->
+			<!--<div th:if="${session.inputErrors != null}">-->
+				<!--<div class="alert alert-danger alert-dismissable">-->
+					<!--<a class="panel-close close" data-dismiss="alert">×</a>-->
+					<!--<i class="fa fa-times-circle"></i>-->
+					<!--<span th:text="${session.inputErrors}"></span>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="form-group">-->
+				<!--<input type="text" th:field="*{uFirstName}" placeholder="First Name" class="form-control" />-->
+				<!--<input type="text" th:field="*{uLastName}" placeholder="Last Name" class="form-control" />-->
+			<!--</div>-->
+			<!--®		<div class="form-wrapper">-->
+			<!--<input type="text" th:field="*{username}" placeholder="Username" class="form-control" required=""/>-->
+			<!--<i class="fas fa-user"></i>-->
+		<!--</div>-->
+			<!--<div class="form-wrapper">-->
+				<!--<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>-->
+				<!--<i class="fas fa-envelope"></i>-->
+			<!--</div>-->
+			<!--<div class="form-wrapper">-->
+				<!--<input type="password" th:field="*{password}" placeholder="Password" class="form-control" required=""/>-->
+				<!--<i class="fas fa-lock"></i>-->
+			<!--</div>-->
+			<!--<div class="form-wrapper">-->
+				<!--<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" />-->
+				<!--<i class="fas fa-lock"></i>-->
+			<!--</div>-->
+			<!--<button type="submit">Register-->
+				<!--<i class="fas fa-arrow-right"></i>-->
+			<!--</button>-->
+		<!--</form>-->
+
+	<!--</div>-->
+<!--</div>-->
