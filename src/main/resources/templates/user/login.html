@@ -2,113 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header('Login')"></head>
-<!--<style>-->
-	<!--body {-->
-		<!--color: #333;-->
-		<!--/*background-image: url("/img/school.png");*/-->
-		<!--margin: 0;-->
-	<!--}-->
-	<!--.wrapper {-->
-		<!--min-height: 50vh;-->
-		<!--background-size: cover;-->
-		<!--background-repeat: no-repeat;-->
-		<!--display: flex;-->
-		<!--align-items: center;-->
-	<!--}-->
-	<!--.inner {-->
-		<!--padding: 20px;-->
-		<!--background: #fff;-->
-		<!--width: 400px;-->
-		<!--margin: auto;-->
-		<!--display: flex;-->
-	<!--}-->
-	<!--.inner form {-->
-		<!--width: 100%;-->
-		<!--padding-top: 36px;-->
-		<!--padding-left: 45px;-->
-		<!--padding-right: 45px;-->
-	<!--}-->
-	<!--.inner h3 {-->
-		<!--text-transform: uppercase;-->
-		<!--font-size: 25px;-->
-		<!--text-align: center;-->
-		<!--margin-bottom: 28px;-->
-	<!--}-->
-	<!--.form-control {-->
-		<!--border: 1px solid #333;-->
-		<!--border-top: none;-->
-		<!--border-right: none;-->
-		<!--border-left: none;-->
-		<!--border-radius: unset;-->
-		<!--display: block;-->
-		<!--height: 30px;-->
-		<!--padding: 0;-->
-		<!--margin-bottom: 25px;-->
-	<!--}-->
-	<!--input, button {-->
-		<!--color: #333;-->
-		<!--font-size: 13px;-->
-	<!--}-->
-	<!--.form-wrapper {-->
-		<!--position: relative;-->
-	<!--}-->
-	<!--.form-wrapper i {-->
-		<!--position: absolute;-->
-		<!--bottom: 9px;-->
-		<!--right: 0;-->
-	<!--}-->
-	<!--button {-->
-		<!--border: none;-->
-		<!--width: 164px;-->
-		<!--height: 51px;-->
-		<!--margin: auto;-->
-		<!--margin-top: 40px;-->
-		<!--cursor: pointer;-->
-		<!--display: flex;-->
-		<!--align-items: center;-->
-		<!--justify-content: center;-->
-		<!--padding: 0;-->
-		<!--background: #333;-->
-		<!--border-radius: 10px;-->
-		<!--font-size: 15px;-->
-		<!--color: #fff;-->
-		<!--vertical-align: middle;-->
-		<!-- -webkit-transform: perspective(1px) translateZ(0);-->
-		<!--transform: perspective(1px) translateZ(0);-->
-		<!-- -webkit-transition-duration: 0.3s;-->
-		<!--transition-duration: 0.3s;-->
-	<!--}-->
-	<!--button i {-->
-		<!--margin-left: 10px;-->
-	<!--}-->
-	<!--@media (max-width: 1199px) {-->
-		<!--.wrapper {-->
-			<!--background-position: right center;-->
-		<!--}-->
-	<!--}-->
-	<!--@media (max-width: 767px) {-->
-		<!--.inner {-->
-			<!--display: block;-->
-		<!--}-->
-		<!--.inner {-->
-			<!--width: 100%;-->
-		<!--}-->
-		<!--.inner form {-->
-			<!--width: 100%;-->
-			<!--padding: 40px 0 30px;-->
-		<!--}-->
-		<!--button {-->
-			<!--margin-top: 60px;-->
-		<!--}-->
-	<!--}-->
-<!--</style>-->
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div id="container" class="row mx-auto">
 		<!--Login Form-->
-	<div class="col-11 col-md-4 bg-light border rounded p-3 mx-auto">
-		<form th:action="@{/login}" method="POST" class="mx-auto w-75">
-			<h3 class="m-2 p-2 text-center">Account Login</h3>
+	<div class="col-11 col-md-8 col-lg-7 w-80 bg-light border rounded p-3 mx-auto">
+		<form th:action="@{/login}" method="POST" class="col-sm-12 col-md-10 mx-auto w-80">
+			<h3 class="mb-2 py-2 text-center">Account Login</h3>
 			<div class="my-2 form-wrapper">
 				<input type="text" name="username" placeholder="Username" class=" form-control" required=""/>
 				<!--<i class="fas fa-user"></i>-->
@@ -135,10 +35,13 @@
 				<button type="submit" class="mx-auto my-2 w-100 btn btn-primary btn-lg text-light" role="button">Login</button>
 			</div>
 		</form>
+		<div class="hr-nav">or</div>
+		<form th:action="@{/register}" method="get" class="row px-2">
+			<button type="submit" class="col-6 mx-auto my-4 btn btn-success btn-lg text-light" role="button">Register</button>
+		</form>
 
 		</div>
 	</div>
-
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/scripts :: scripts"></div>
 
