@@ -59,10 +59,10 @@ body {
 #school {
     width: 100%;
 }
-#school #school-details-container {
+#school .school-details-container {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
+    grid-template-rows: 50% 50%;
 }
 .school-details-1 {
     grid-column: 1/2;
@@ -71,6 +71,14 @@ body {
 .school-details-2 {
     grid-column: 2/3;
     grid-row: 1/2;
+}
+.school-details-3 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+.school-details-4 {
+    grid-column: 2/3;
+    grid-row: 2/3;
 }
 #school-listing {
     width: 100%;
@@ -165,10 +173,16 @@ input::placeholder {
         /*grid-row: 2/3;*/
         display: none;
     }
+    .school {
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    }
     #school {
         margin-left: auto;
         margin-right: auto;
         width: 95%;
+    }
+    #school.school-placeholder, #school {
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
     }
     .list_school {
         height: 100vh;
@@ -184,7 +198,7 @@ input::placeholder {
     }
     .grid-container {
         grid-template-columns: 100%;
-        grid-template-rows: 482px 395px 100vh;
+        grid-template-rows: 482px 475px 100vh;
         margin-bottom: 25px;
         width: 100%;
     }
@@ -205,9 +219,12 @@ input::placeholder {
         /*grid-row: 2/3;*/
         display: none;
     }
-    #school #school-details-container {
+    .school {
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    }
+    #school .school-details-container {
         grid-template-columns: 100%;
-        grid-template-rows: 50% 50%;
+        grid-template-rows: 18% 25% 30% 30%;
     }
     .school-details-1 {
         grid-column: 1;
@@ -217,13 +234,22 @@ input::placeholder {
         grid-column: 1;
         grid-row: 2/3;
     }
+    .school-details-3 {
+        grid-column: 1;
+        grid-row: 3/4;
+    }
+    .school-details-4 {
+        grid-column: 1;
+        grid-row: 4/5;
+    }
     #school {
         margin-left: auto;
         margin-right: auto;
         width: 95%;
     }
     #school.school-placeholder, #school {
-        height: 385px;
+        height: 465px;
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
     }
     .list_school {
         height: 100vh;
