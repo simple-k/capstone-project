@@ -62,46 +62,83 @@ $(document).ready(() => {
     //Grid Item 3
     // Get Request - Render Selected School
     const renderSelectedSchool  = (school) => {
-        let transportation = 'no', disability = 'no', daycare = 'no', financial = 'no', language = 'no';
+        let no = '<i class="fas fa-times-circle text-danger pr-2"></i>';
+        let yes = '<i class="fas fa-check-circle text-success pr-2"></i>';
+        let transportation = no, disability = no, daycare = no, financial = no, language = no;
+        let transportationLink ='', daycarePdf = '', languagePdf = '', disabilityPdf = '', financialPdf = '', enrollLink = '', calendarPdf = '', immunizationsPdf = '', mobileAppLink = '';
+        let teachers = Math.round(parseFloat(school.teachers));
         if (school.transportationService) {
-            transportation = 'yes';
+            transportation = yes;
         }
+        if (school.district.name == 'SAN ANTONIO ISD' && transportation == yes) {
+            transportationLink = '<a href="https://www.infofinderi.com/ifi/?cid=SAI2PDRU8K2M" target="_blank">Bus Routes</a>'
+        };
         if (school.disabilityService) {
-            disability = 'yes';
+            disability = yes;
         }
+        if (school.district.name == 'SAN ANTONIO ISD' && disability == yes) {
+            disabilityPdf = '<a href="/doc/tea_special_ed.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a>'
+        };
         if (school.daycareService) {
-            daycare = 'yes';
+            daycare = yes;
         }
+        if (school.district.name == 'SAN ANTONIO ISD' && daycare == yes) {
+            daycarePdf = '<a href="/doc/saisd/daycare.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a><a href="/doc/challenge_fees.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a>'
+        };
         if (school.financialService) {
-            financial = 'yes';
+            financial = yes;
         }
+        if (school.district.name == 'SAN ANTONIO ISD' && financial == yes) {
+            financialPdf = '<a href="/doc/saisd/CEP_food.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a><a href="/doc/Pre-K4SAGrant.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a>'
+        };
         if (school.languageService) {
-            language = 'yes';
+            language = yes;
         }
+        if (school.district.name == 'SAN ANTONIO ISD' && language == yes) {
+            languagePdf = '<a href="/doc/saisd/language.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a><a href="/doc/saisd/language_spanish.pdf" target="_blank"><i class="far fa-file-pdf text-danger"></i></a>'
+        };
+        if (school.district.name == 'SAN ANTONIO ISD') {
+            calendarPdf = '<a href="/doc/saisd/calendar.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a>'
+        };
+        if (school.district.name == 'SAN ANTONIO ISD') {
+            enrollLink = '<a href="https://saisdenroll.schoolmint.net/signin" target="_blank">Enroll</a>'
+        };
+        if (school.district.name == 'SAN ANTONIO ISD') {
+            immunizationsPdf = '<a href="/doc/saisd/immunizations.pdf" target="_blank"><i class="far fa-file-pdf text-danger pr-2"></i></a>'
+        };
+        if (school.district.name == 'SAN ANTONIO ISD') {
+            mobileAppLink = '<a href="https://www.saisd.net/main/index.php?option=com_content&view=article&id=3685:saisd-launches-mobile-app-get-it-now&catid=3:news&Itemid=151" target="_blank">Apps</a>'
+        };
         $('.loadingIndex').hide();
         $('#selected_school').append(`
             <div id='school'>
                 <h5 class="my-1 mx-1">${school.schoolName}</h5>
-                <div id='school-details-container'>
+                <div class='school-details-container'>
                     <div class="school-details-1 mx-1">
                         <p>${school.streetAddress}</p>
                         <p>San Antonio, TX, <span>${school.zipCode}</span></p>
                         <p>${school.phone}</p>
-                        <p>District: <a href='${school.district.url}' target='_blank'><span>${school.district.name}</span></a></p>
                     </div>
                     <div class="school-details-2 mx-1">
                         <p>Grades: PK-<span>${school.highGrade}</span></p>
                         <p>Total students enrolled: <span>${school.students}</span></p>
-                        <p>Total teachers: <span>${school.teachers}</span></p>
+                        <p>Total teachers: <span>${teachers}</span></p>
                         <p>Students per teacher: <span>${school.studentTeacherRatio}</span></p>
                     </div>
-                </div>
-                <div class="my-1 mx-1">
-                    <p>Transportation service :<span> ${transportation}</span></p>
-                    <p>Daycare service: <span> ${daycare}</span></p>
-                    <p>Financial service: <span> ${financial}</span></p>
-                    <p>Disability service: <span> ${disability}</span></p>
-                    <p>Language service: <span> ${language}</span></p>
+                    <div class="school-details-3 mx-1">
+                        <p>District: <span class="pr-2"><img src="${school.district.image}" alt="district logo" height="16px" style="vertical-align: baseline; padding-top: 2px"/></span><a href='${school.district.url}' target='_blank'><span>${school.district.name}</span></a></p>
+                        <p>Pre-k enrollment: <span>${enrollLink}</span></p>
+                        <p>Calendar: <span> ${calendarPdf}</span></p>
+                        <p>Immunizations: <span> ${immunizationsPdf}</span></p>
+                        <p>Mobile App: <span>${mobileAppLink}</span></p>
+                    </div>
+                    <div class="school-details-4 mx-1">
+                        <p>Transportation: <span> ${transportation}${transportationLink}</span></p>
+                        <p>Daycare: <span> ${daycare}${daycarePdf}</span></p>
+                        <p>Financial: <span> ${financial}${financialPdf}</span></p>
+                        <p>Disability: <span> ${disability}${disabilityPdf}</span></p>
+                        <p>Language: <span> ${language}${languagePdf}</span></p>
+                    </div>
                 </div>
             </div>
         `);
