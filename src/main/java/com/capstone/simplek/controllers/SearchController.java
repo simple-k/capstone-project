@@ -122,6 +122,7 @@ public class SearchController {
                 || user.getuLastName().isEmpty()
                 || user.getAddress().isEmpty()
                 || user.getPhoneNumber().isEmpty()
+                || user.getEmail().isEmpty()
                 || user.getZipCode().isEmpty();
 
         // check if user inputs are empty
@@ -130,10 +131,30 @@ public class SearchController {
             return "redirect:/search/query";
         }
 
+
+        // check if email already exist in the users table
+        User checkEmail = userDao.findByEmail(user.getEmail());
+        if (checkEmail != null) {
+            // update user with same email
+            if (user.getEmail().equals(copyUser.getEmail())) {
+                copyUser.setuFirstName(user.getuFirstName());
+                copyUser.setuLastName(user.getuLastName());
+                copyUser.setPhoneNumber(user.getPhoneNumber());
+                copyUser.setEmail(user.getEmail());
+                copyUser.setAddress(user.getAddress());
+                copyUser.setZipCode(user.getZipCode());
+                userDao.save(copyUser);
+            } else {
+                session.setAttribute("inputErrors", "Email already exist!");
+                return "redirect:/search/query";
+            }
+        }
+
         // update user
         copyUser.setuFirstName(user.getuFirstName());
         copyUser.setuLastName(user.getuLastName());
         copyUser.setPhoneNumber(user.getPhoneNumber());
+        copyUser.setEmail(user.getEmail());
         copyUser.setAddress(user.getAddress());
         copyUser.setZipCode(user.getZipCode());
         userDao.save(copyUser);
