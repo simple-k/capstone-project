@@ -25,7 +25,7 @@ geocoder.geocode({'address': userAddress}, function (results, status) {
 // --- GEOJSON LAYER---
 let districtData = new google.maps.Data();
 districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {idPropertyName: 'NAME2'});
-let districtPoly;
+let districtPoly = [];
 let districtName = [
     'San Antonio',
     'Judson',
@@ -61,7 +61,7 @@ districtData.addListener('addfeature', function(evt) {
                 // creates polygon
                 toArray.forEach(function (item){
                     let coords= item.getAt(0).getArray();
-                    districtPoly = new google.maps.Polygon({
+                    districtPoly.push(new google.maps.Polygon({
                         paths: coords,
                         map: map,
                         clickable: true,
@@ -70,7 +70,7 @@ districtData.addListener('addfeature', function(evt) {
                         zIndex: 1,
                         fillOpacity: 0.1
 
-                    });
+                    }));
                     // if (google.maps.geometry.poly.containsLocation(, districtPoly)){
                     //     console.log(`user belongs in: ${districtName[i]}`)
                     // }
@@ -78,7 +78,7 @@ districtData.addListener('addfeature', function(evt) {
             }
             // after checking for data.MultiPolygon we create all of the regular polygons
             else {
-                districtPoly = new google.maps.Polygon({
+                districtPoly.push(new google.maps.Polygon({
                     paths: districtGeo.getAt(0).getArray(),
                     map: map,
                     clickable: true,
@@ -86,7 +86,7 @@ districtData.addListener('addfeature', function(evt) {
                     strokeOpacity: 1,
                     zIndex: 1,
                     fillOpacity: 0.1
-                });
+                }));
                 // if (google.maps.geometry.poly.containsLocation({lat:userAddress.lat, lng:userAddress.lng}, districtPoly)){
                 //     console.log(`user belongs in: ${districtName[i]}`)
                 // }
@@ -96,6 +96,7 @@ districtData.addListener('addfeature', function(evt) {
 
     }
 });
+console.log(districtPoly[0]);
 // GEOJSON: CONTAINS LOCATION
 var infoWindow = new google.maps.InfoWindow();
 google.maps.event.addListener(map, 'click', function(evt) {
