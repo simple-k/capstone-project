@@ -3,8 +3,7 @@
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head th:replace="fragments/header :: header('School Results')"></head>
 	<link rel="stylesheet" th:href="@{/css/map-result.css}"/>
-	<body th:onload="'findDistrict()'">
-	<!--<body>-->
+	<body>
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div class="grid-item-filter">
 			<!--google maps search-->
