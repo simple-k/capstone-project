@@ -2,45 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
-<!--<th:block th:fragment="navbar">-->
-    <!--<div class="navbar">-->
-        <!--<div class="nav-logo-c">-->
-            <!--<a th:href="@{/}">S-K</a>-->
-        <!--</div>-->
-        <!--<div class="nav-link-toggle-c">-->
-            <!--<i class="fas fa-bars"></i>-->
-        <!--</div>-->
-        <!--<nav class="nav-items-c">-->
-            <!--<div class="nav-link-c">-->
-                <!--<a th:href="@{/}"></a>-->
-            <!--</div>-->
-
-            <!--<div class="nav-link-c">-->
-                <!--<a th:href="@{/}"></a>-->
-            <!--</div>-->
-
-            <!--<div class="nav-link-c">-->
-                <!--<a th:href="@{/}"></a>-->
-            <!--</div>-->
-
-            <!--<div sec:authorize="!isAuthenticated()"  class="nav-link-c">-->
-                <!--<a th:href="@{/register}">Register</a>-->
-            <!--</div>-->
-
-            <!--<div sec:authorize="!isAuthenticated()"  class="nav-link-c">-->
-                <!--<a th:href="@{/login}">Log In</a>-->
-            <!--</div>-->
-
-            <!--<div sec:authorize="isAuthenticated()" >-->
-                <!--<form id="logout" th:action="@{/logout}" th:method="post">-->
-                    <!--<a class="logout">Log Out</a>-->
-                <!--</form>-->
-            <!--</div>-->
-        <!--</nav>-->
-    <!--</div>-->
-<!--</th:block>-->
-
-
 <!--BOOTSTRAP NAV TESTING-->
 <th:block th:fragment="navbar">
     <nav class="simple-k-nav">
@@ -80,11 +41,11 @@
                             Resources
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">After-School Programs</a>
-                            <a class="dropdown-item" href="#">Bus Transportation</a>
-                            <a class="dropdown-item" href="#">Income Assistance</a>
-                            <a class="dropdown-item" href="#">Language Services</a>
-                            <a class="dropdown-item" href="#">Special Needs &amp; Disabilities</a>
+                            <a class="dropdown-item" href="http://fun4alamokids.com/Education-Childcare/Before-After-School-Care/" target="_blank">After-School Programs</a>
+                            <a class="dropdown-item" href="">Bus Transportation</a>
+                            <a class="dropdown-item" href="https://saheadstart.org/en/how-to-apply/#sahs-how-to-apply-eligibility" target="_blank">Income Assistance</a>
+                            <a class="dropdown-item" href="http://fun4alamokids.com/Programs-Classes/Language-Classes/" target="_blank">Language Services</a>
+                            <a class="dropdown-item" href=" ">Special Needs &amp; Disabilities</a>
                         </div>
                     </li>
                     <li class="mx-2 nav-item">
