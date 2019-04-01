@@ -45,29 +45,39 @@
 <th:block th:fragment="navbar">
     <nav class="simple-k-nav">
         <div class="navbar navbar-expand-lg navbar-dark py-2">
-            <div id="logo" class="navbar-brand">
+            <div id="logo" class="mx-2 navbar-brand">
                 <a class="text-light" th:href="@{/}">
                     <img th:src="@{../img/apple_logo.png}" width="30" height="30" class="d-inline-block align-top" alt="Simple-K Logo"/>
-                    <span class="px-1">Simple-K</span>
+                    <!--<span class="px-1">Simple-K</span>-->
                 </a>
             </div>
+            <form sec:authorize="!isAuthenticated()" th:method="post" th:action="@{/login}" id="login" class="navbar-nav">
+                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block my-2 form-wrapper">
+                    <input type="text" name="username" placeholder="Username" class="mx-2 form-control" required=""/>
+                <!--<i class="fas fa-user"></i>-->
+                </div>
+                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block d-xl-block my-2 form-wrapper">
+                    <input type="password" name="password" placeholder="Password" class="mx-2 form-control" required=""/>
+                <!--<i class="fas fa-lock"></i>-->
+                </div>
+                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block d-xl-block mr-auto my-2">
+                        <button type="submit" class="pl-0 py-1 btn rounded btn-link text-light" role="button">Login</button>
+                </div>
+                <div class="mx-2 d-block d-lg-none d-xl-none mr-auto my-2">
+                    <a th:href="@{/login}" class="pl-0 py-1 btn rounded btn-link text-light">Login</a>
+                </div>
+            </form>
+            <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
+                <button type="submit" class="pl-0 py-1 btn rounded btn-link text-light" role="button">Logout</button>
+            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/about}">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/search}">Districts</a>
-                    </li>
-                    <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" href="#">nf</a>-->
-                    <!--</li>-->
-                    <li class="nav-item dropdown">
+                <ul class="navbar-nav ml-auto px-3">
+                    <li class="mx-2 allnav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Education
+                            Resources
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">After-School Programs</a>
@@ -77,13 +87,16 @@
                             <a class="dropdown-item" href="#">Special Needs &amp; Disabilities</a>
                         </div>
                     </li>
+                    <li class="mx-2 nav-item">
+                        <a class="nav-link" th:href="@{/search}">District Map</a>
+                    </li>
+                    <li class="mx-2 nav-item">
+                        <a class="nav-link" th:href="@{/about}">About</a>
+                    </li>
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="#">nf</a>-->
+                    <!--</li>-->
                 </ul>
-                    <div class="ml-auto">
-                        <a sec:authorize="!isAuthenticated()" class="col my-3 pl-0 py-1 text-light" th:href="@{/login}" role="button">Login</a>
-                        <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
-                            <button  class="my-3 pl-0 py-1 btn rounded btn-link text-light" role="button">Logout</button>
-                        </form>
-                    </div>
             </div>
         </div>
     </nav>

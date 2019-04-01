@@ -51,6 +51,22 @@ header {
 .simple-k-nav {
     background-color: #482d71;
 }
+.hr-nav {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.35);
+    margin: 1em 0;
+}
+.hr-nav::before,
+.hr-nav::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    line-height: 0;
+    margin: 0 1em;
+}
 
 /*---FOOTER---*/
 footer {
@@ -65,7 +81,6 @@ footer {
     bottom: 0;
     font-size: 12px;
 }
-
 /*---INDEX---*/
 #logo {
     /*font-family: Cartoon_Six, cursive;*/
@@ -97,7 +112,11 @@ footer {
     padding: 1em;
     margin: auto;
 }
-/*--ABOUT--*/
+
+/*---REGISTER---*/
+
+
+/*---ABOUT---*/
 #aboutCarousel {
     height: 300px;
 }
