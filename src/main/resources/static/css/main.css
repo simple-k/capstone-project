@@ -117,8 +117,8 @@ footer {
 
 
 /*---ABOUT---*/
-#aboutCarousel {
-    height: 300px;
+#aboutCarousel hr {
+    color: white;
 }
 /*#thank-you-logos a {*/
     /*height: 120px;*/
