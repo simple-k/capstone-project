@@ -6,30 +6,25 @@ let map = new google.maps.Map(
         // defaults map to "roadmap" graphic display
         mapTypeId: google.maps.MapTypeId.ROADMAP
 });
-//---ADDRESS GEOCODER---
+//---USER ADDRESS GEOCODER---
 const geocoder = new google.maps.Geocoder();
 let userAddress = $('#address').val() + ', ' + $('#zipCode').val();
 placeMarker(userAddress);
-let userCoord;
-geocoder.geocode({"address": userAddress}, function (results, status) {
+let userLatLng;
+geocoder.geocode({'address': userAddress}, function (results, status) {
     // Check for a successful result
     if (status == google.maps.GeocoderStatus.OK) {
-        userCoord = results[0].geometry.location;
-        userCoord = {lat:userCoord.lat(), lng:userCoord.lng()};
-        console.log(userCoord.lat);
+        let latitude = results[0].geometry.location.lat();
+        let longitude = results[0].geometry.location.lng();
+        console.log(latitude + ' ' + longitude);
     } else {
         // Show an error Message with the status if our request fails
         alert("Geocoding was not successful - STATUS: " + status);
     }
 });
-
-
-
-// ---AARON'S GEOJSON LAYER---
+// --- GEOJSON LAYER---
 let districtData = new google.maps.Data();
-districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {
-    idPropertyName: 'NAME2'
-});
+districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {idPropertyName: 'NAME2'});
 let districtPoly;
 let districtName = [
     'San Antonio',
@@ -49,30 +44,36 @@ let districtName = [
     'Northside (Bexar)',
     'Randolph Field'
 ];
-// GEOJSON: POLYGON CREATION
+// POLYGON CREATION
 districtData.addListener('addfeature', function(evt) {
     // loop iterates through array of district names
     for (let i=0; i<districtName.length;i++){
         if (evt.feature.getId() == districtName[i]) {
             let district = districtData.getFeatureById(districtName[i]);
             let districtGeo = district.getGeometry();
-            //districtGeo is the feature.geometry from districtData
+
             // checks for data.MultiPolygon type in districtData
             if (districtGeo.getType()=="MultiPolygon") {
-                // converts data.Multipolygon into a single array
+
+                // converts data.MultiPolygon into a single array
                 let toArray = districtGeo.getArray();
+
                 // creates polygon
                 toArray.forEach(function (item){
                     let coords= item.getAt(0).getArray();
                     districtPoly = new google.maps.Polygon({
                         paths: coords,
                         map: map,
-                        clickable: false
+                        clickable: true,
+                        strokeWeight: 2,
+                        strokeOpacity: 1,
+                        zIndex: 1,
+                        fillOpacity: 0.1
+
                     });
                     // if (google.maps.geometry.poly.containsLocation(, districtPoly)){
                     //     console.log(`user belongs in: ${districtName[i]}`)
                     // }
-
                 })
             }
             // after checking for data.MultiPolygon we create all of the regular polygons
@@ -80,13 +81,19 @@ districtData.addListener('addfeature', function(evt) {
                 districtPoly = new google.maps.Polygon({
                     paths: districtGeo.getAt(0).getArray(),
                     map: map,
-                    clickable: false
+                    clickable: true,
+                    strokeWeight:  2,
+                    strokeOpacity: 1,
+                    zIndex: 1,
+                    fillOpacity: 0.1
                 });
                 // if (google.maps.geometry.poly.containsLocation({lat:userAddress.lat, lng:userAddress.lng}, districtPoly)){
                 //     console.log(`user belongs in: ${districtName[i]}`)
                 // }
             }
         }
+
+
     }
 });
 // GEOJSON: CONTAINS LOCATION
@@ -155,7 +162,7 @@ function placeMarker(address){
                 position: results[0].geometry.location,
                 map: map
             });
-            console.log('done with' + address);
+            // console.log('done with ' + address);
         } else {
 
             // Show an error Message with the status if our request fails
