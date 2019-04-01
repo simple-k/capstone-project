@@ -18,10 +18,10 @@
     }
     .content{
         margin: 0 auto;
-        width: 500px;
+        width: 90%;
     }
     h3 {
-        margin-top: 5px;
+        padding-top: 5px;
         text-align: center;
         font-weight: bold;
     }
@@ -34,7 +34,16 @@
     .submit-button-wrapper {
         display: flex;
         justify-content: center;
-        margin-bottom: 15px;
+        margin: 20px 0;
+    }
+    .queries {
+        margin: 0 auto;
+        text-align: center;
+    }
+    @media (max-width: 930px) {
+        .container {
+            width: 95%;
+        }
     }
 </style>
 <body>
@@ -254,6 +263,7 @@
             </div>
             <div class="content" th:object="${queries}">
                     <h3>Services</h3>
+                <div class="queries">
                     <div class="">
                         <p class="margin-bottom-two">Will your child need bus transportation services?</p>
                         <label class="margin-right"><input type="radio" th:name="*{transportation}" th:value="true" />Yes</label>
@@ -282,7 +292,7 @@
                     <div class="submit-button-wrapper">
                         <button id="submitButton2" type="submit" class="btn btn-primary btn-md">Search Schools</button>
                     </div>
-
+                </div>
             </div>
             <!--<div class="content">-->
                 <!--<h3>Confirm</h3>-->
