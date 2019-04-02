@@ -10,39 +10,42 @@ let map = new google.maps.Map(
 const geocoder = new google.maps.Geocoder();
 let userAddress = $('#address').val() + ', ' + $('#zipCode').val();
 placeMarker(userAddress);
-let userLatLng;
+let userLatLng = new google.maps.LatLng();
 geocoder.geocode({'address': userAddress}, function (results, status) {
     // Check for a successful result
     if (status == google.maps.GeocoderStatus.OK) {
         let latitude = results[0].geometry.location.lat();
         let longitude = results[0].geometry.location.lng();
-        console.log(latitude + ' ' + longitude);
+        let userLatLng = {lat: latitude, lng: longitude};
+        console.log(userLatLng);
     } else {
         // Show an error Message with the status if our request fails
         alert("Geocoding was not successful - STATUS: " + status);
     }
 });
+
 // --- GEOJSON LAYER---
 let districtData = new google.maps.Data();
 districtData.loadGeoJson('../Json/San_Antonio_Districts.geojson', {idPropertyName: 'NAME2'});
+let polygon;
 let districtPoly = [];
 let districtName = [
     'San Antonio',
-    'Judson',
-    'Lackland',
-    'Alamo Heights',
-    'East Central',
-    'Fort Sam Houston',
-    'Edgewood (Bexar)',
-    'South San Antonio',
-    'Floresville',
-    'Harlandale',
-    'Medina Valley',
-    'Southwest',
-    'Southside',
-    'North East',
-    'Northside (Bexar)',
-    'Randolph Field'
+    // 'Lackland',
+    // 'Judson',
+    // 'Alamo Heights',
+    // 'East Central',
+    // 'Fort Sam Houston',
+    // 'Edgewood (Bexar)',
+    // 'South San Antonio',
+    // 'Floresville',
+    // 'Harlandale',
+    // 'Medina Valley',
+    // 'Southwest',
+    // 'Southside',
+    // 'North East',
+    // 'Northside (Bexar)',
+    // 'Randolph Field'
 ];
 // POLYGON CREATION
 districtData.addListener('addfeature', function(evt) {
@@ -64,55 +67,70 @@ districtData.addListener('addfeature', function(evt) {
                     districtPoly.push(new google.maps.Polygon({
                         paths: coords,
                         map: map,
-                        clickable: true,
+                        clickable: false,
                         strokeWeight: 2,
+                        strokeColor: 'red',
                         strokeOpacity: 1,
                         zIndex: 1,
-                        fillOpacity: 0.1
-
+                        fillOpacity: 0
                     }));
-                    // if (google.maps.geometry.poly.containsLocation(, districtPoly)){
+                    // console.log(google.maps.geometry.poly.containsLocation(userLatLng, districtData.getFeatureById(districtName[0].getGeometry().getAt(0).getArray())));
+                    // if (google.maps.geometry.poly.containsLocation(userLatLng, coords)){
                     //     console.log(`user belongs in: ${districtName[i]}`)
                     // }
-                })
+                });
+                console.log(districtPoly[0].getPaths());
             }
             // after checking for data.MultiPolygon we create all of the regular polygons
             else {
+                let coords = districtGeo.getAt(0).getArray();
                 districtPoly.push(new google.maps.Polygon({
-                    paths: districtGeo.getAt(0).getArray(),
+                    paths: coords,
                     map: map,
-                    clickable: true,
+                    clickable: false,
                     strokeWeight:  2,
+                    strokeColor: 'black',
                     strokeOpacity: 1,
                     zIndex: 1,
-                    fillOpacity: 0.1
+                    fillOpacity: 0
                 }));
-                // if (google.maps.geometry.poly.containsLocation({lat:userAddress.lat, lng:userAddress.lng}, districtPoly)){
+                // console.log(google.maps.geometry.poly.containsLocation(userLatLng, districtPoly[0].getPaths()));
+                // if (google.maps.geometry.poly.containsLocation(userLatLng, coords)){
                 //     console.log(`user belongs in: ${districtName[i]}`)
                 // }
+
+                // var infoWindow = new google.maps.InfoWindow();
+                // google.maps.event.addListener(map, 'click', function(evt) {
+                //     infoWindow.setPosition(evt.latLng);
+                //     if (google.maps.geometry.poly.containsLocation(evt.latLng, districtPoly)) {
+                //         infoWindow.setContent("INSIDE POLY<br>" + evt.latLng.toUrlValue(6));
+                //     } else {
+                //         infoWindow.setContent("OUTSIDE POLY<br>" + evt.latLng.toUrlValue(6));
+                //     }
+                //     infoWindow.open(map);
+                // });
+
             }
+
         }
-
-
     }
 });
-console.log(districtPoly[0]);
-// GEOJSON: CONTAINS LOCATION
-var infoWindow = new google.maps.InfoWindow();
-google.maps.event.addListener(map, 'click', function(evt) {
-    infoWindow.setPosition(evt.latLng);
-    if (google.maps.geometry.poly.containsLocation(evt.latLng, districtPoly)) {
-        infoWindow.setContent("INSIDE POLY<br>" + evt.latLng.toUrlValue(6));
-    } else {
-        infoWindow.setContent("OUTSIDE POLY<br>" + evt.latLng.toUrlValue(6));
-    }
-    infoWindow.open(map);
+map.data.addListener('mouseover', function(event) {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {strokeWeight: 3, zIndex:4, strokeColor: 'yellow'});
+});
+
+map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
 });
 districtData.setStyle({
-    clickable: false,
-    visible: false,
+    strokeWeight: 1,
+    clickable: true,
+    visible: true,
+    zIndex:0
 });
 districtData.setMap(map);
+// GEOJSON: CONTAINS LOCATION
 
 
 function filterDistricts(){
@@ -156,12 +174,18 @@ function locate(address) {
 
 function placeMarker(address){
     geocoder.geocode({"address": address}, function (results, status) {
-
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         // Check for a successful result
         if (status == google.maps.GeocoderStatus.OK) {
             let marker = new google.maps.Marker({
                 position: results[0].geometry.location,
-                map: map
+                map: map,
+                // icon: {
+                //     url: "../img/google_maps/house_icon.png", // url
+                //     scaledSize: new google.maps.Size(30, 30), // scaled size
+                //     origin: new google.maps.Point(0,0), // origin
+                    // anchor: new google.maps.Point(0, 0) // anchor
+                // }
             });
             // console.log('done with ' + address);
         } else {
