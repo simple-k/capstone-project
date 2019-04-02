@@ -54,6 +54,9 @@ public class SearchController {
             boolean financial = queries.isFinancial();
             boolean language = queries.isLanguage();
             boolean transportation = queries.isTransportation();
+//            String district = queries.getDistrict();
+            String district = "SAN ANTONIO ISD";
+
             List<School> schools = schoolDao.findAll();
 
             if (disability == true) {
@@ -74,6 +77,11 @@ public class SearchController {
 
             if (transportation == true) {
                 schools = schools.stream().filter( s -> financial == s.isFinancialService()).collect(Collectors.toList());
+            }
+
+
+            if (district.equals("SAN ANTONIO ISD")) {
+                schools = schools.stream().filter( s -> district.equals(s.getDistrict().getName())).collect(Collectors.toList());
             }
 
             model.addAttribute("schools", schools);
