@@ -11,7 +11,7 @@
 		</div>
 
 		<!--Register Form-->
-		<form th:action="@{/register}" method="POST" th:object="${user}">
+		<form id="register-form" th:action="@{/register}" method="POST" th:object="${user}">
 			<h3>Registration Form</h3>
 			<!--Input Error Messages-->
 			<div th:if="${session.inputErrors != null}">
@@ -22,26 +22,26 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<input type="text" th:field="*{uFirstName}" placeholder="First Name" class="form-control" />
-				<input type="text" th:field="*{uLastName}" placeholder="Last Name" class="form-control" />
+				<input type="text" th:field="*{uFirstName}" placeholder="First Name" class="form-control-r register-input" />
+				<input type="text" th:field="*{uLastName}" placeholder="Last Name" class="form-control-r register-input" />
 			</div>
 			<div class="form-wrapper">
-			<input type="text" th:field="*{username}" placeholder="Username" class="form-control" required=""/>
+			<input type="text" th:field="*{username}" placeholder="Username" class="form-control-r register-input" required=""/>
 			<i class="fas fa-user"></i>
 		</div>
 			<div class="form-wrapper">
-				<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required=""/>
+				<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control-r register-input" required=""/>
 				<i class="fas fa-envelope"></i>
 			</div>
 			<div class="form-wrapper">
-				<input type="password" th:field="*{password}" placeholder="Password" class="form-control" required=""/>
+				<input type="password" th:field="*{password}" placeholder="Password" class="form-control-r register-input" required=""/>
 				<i class="fas fa-lock"></i>
 			</div>
 			<div class="form-wrapper">
-				<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" />
+				<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control-r register-input" />
 				<i class="fas fa-lock"></i>
 			</div>
-			<button type="submit">Register
+			<button id="register-button" type="submit">Register
 				<i class="fas fa-arrow-right"></i>
 			</button>
 		</form>

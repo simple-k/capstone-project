@@ -31,7 +31,7 @@ img {
     left: 50%;
     transform: translate(-50%,-50%);
 }
-.inner form {
+.inner #register-form {
     width: 50%;
     padding-top: 36px;
     padding-left: 45px;
@@ -46,13 +46,13 @@ img {
 .form-group {
     display: flex;
 }
-.form-group input:first-child {
+.form-group .register-input:first-child {
     margin-right: 25px;
 }
-.form-group input {
+.form-group .register-input {
     width: 50%;
 }
-.form-control {
+.form-control-r {
     border: 1px solid #333;
     border-top: none;
     border-right: none;
@@ -63,9 +63,8 @@ img {
     padding: 0;
     margin-bottom: 25px;
 }
-input, button {
+.register-input, #register-button {
     color: #333;
-    font-size: 13px;
 }
 .form-wrapper {
     position: relative;
@@ -75,7 +74,7 @@ input, button {
     bottom: 9px;
     right: 0;
 }
-button {
+#register-button {
     border: none;
     width: 164px;
     height: 51px;
@@ -96,7 +95,7 @@ button {
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
 }
-button i {
+#register-button i {
     margin-left: 10px;
 }
 @media (max-width: 1199px) {
@@ -112,11 +111,11 @@ button i {
         width: 100%;
         display: none;
     }
-    .inner form {
+    .inner #register-form {
         width: 100%;
         padding: 40px 0 30px;
     }
-    button {
+    #register-button {
         margin-top: 60px;
     }
     .vertical-center {
