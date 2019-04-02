@@ -127,7 +127,8 @@ districtData.setStyle({
     strokeWeight: 1,
     clickable: true,
     visible: true,
-    zIndex:0
+    zIndex:0,
+    fillOpacity: 0.1
 });
 districtData.setMap(map);
 // GEOJSON: CONTAINS LOCATION
