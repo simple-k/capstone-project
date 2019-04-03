@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header('About')"></head>
+<style>
+    @media (min-width: 1024px) and (max-width: 2560px) {
+        .display-4 {
+            text-align: left;
+        }
+        p {
+            text-align: left;
+        }
+        h5 {
+            text-align: left;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .col-md-6 {
+            max-width: 100%;
+        }
+        .py-5 {
+            padding-bottom: 0px !important;
+        }
+        .p-5 {
+            padding: 0px !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .container {
+            width: 100%;
+            padding-bottom: 0px !important;
+        }
+        .display-4 {
+            font-size: 2.5em;
+        }
+        .px-5 {
+            padding: 0px !important;
+        }
+        p {
+            text-align: justify !important;
+        }
+        h5 {
+            text-align: center;
+        }
+        .py-5 {
+            padding-bottom: 0px !important;
+        }
+        .p-5 {
+            padding: 0px !important;
+        }
+    }
+</style>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div id="container my-0 ">
@@ -8,45 +56,45 @@
         <div class="carousel-inner bg-dark">
             <div class="carousel-item p-5 active">
                 <div class="container py-5 mx-auto">
-                    <img class="col-6 d-inline-block w-50 float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Aaron.jpg}" alt="First slide"/>
-                    <div class="col-6 d-inline-block px-3">
-                        <h3 class="d-inline-block col-12 display-4 text-left my-3 text-light"> Aaron Boehle </h3>
-                        <p class="d-inline-block col-12 my-3 text-left font-italic text-light">"Hope for the best, and prepare for the worst. Expect nothing, yet give everything."</p>
+                    <img class="col-md-6 col-sm-12 d-inline-block float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Aaron.jpg}" alt="First slide"/>
+                    <div class="col-md-6 col-sm-12 d-inline-block px-5">
+                        <h3 class="d-inline-block col-12 display-4 my-3 text-light"> Aaron Boehle </h3>
+                        <p class="d-inline-block col-12 my-3 font-italic text-light">"Hope for the best, and prepare for the worst. Expect nothing, yet give everything."</p>
                         <hr class="px-3 text-white"/>
-                        <div class="pb-3 mb-3 text-left">
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{mailto:boehle.aaron@gmail.com}"><i class="fa fa-envelope"></i> Email</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://github.com/AaronBoehle}"><i class="fab fa-github"></i> Github</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://linkedin.com/in/aaron-boehle/}"><i class="fab fa-linkedin"> </i> LinkedIn</a></h5>
+                        <div class="pb-3 mb-3">
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{mailto:boehle.aaron@gmail.com}"><i class=" px-1 fa fa-envelope text-danger"></i> Email</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://github.com/AaronBoehle}"><i class=" px-1 fab fa-github text-light"></i> Github</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://linkedin.com/in/aaron-boehle/}"><i class=" px-1 text-primary fab fa-linkedin"> </i> LinkedIn</a></h5>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="carousel-item p-5">
                 <div class="container py-5 mx-auto">
-                    <img class="col-6 d-inline-block w-50 float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Ron.jpg}" alt="Second slide"/>
-                    <div class="col-6 d-inline-block px-5">
-                        <h3 class="d-inline-block col-12 display-4 text-left my-3 text-light"> Ron Soeum </h3>
-                        <p class="d-inline-block col-12 my-3 text-left font-italic text-light">"Don't cry because it's over, smile because it happened." <br/> - Dr. Seuss</p>
+                    <img class="col-md-6 col-sm-12 d-inline-block float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Ron.jpg}" alt="Second slide"/>
+                    <div class="col-md-6 col-sm-12 d-inline-block px-5">
+                        <h3 class="d-inline-block col-12 display-4 my-3 text-light"> Ron Soeum </h3>
+                        <p class="d-inline-block col-12 my-3 font-italic text-light">"Don't cry because it's over, smile because it happened." <spanc class="pl-2"> - Dr. Seuss</spanc></p>
                         <hr class="px-3 text-white"/>
-                        <div class="pb-3 mb-3 text-left">
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{mailto:ronsoeum@gmail.com}"><i class="fa fa-envelope"></i> Email</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://github.com/ronsoeum}"><i class="fab fa-github"></i> Github</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://linkedin.com/in/Ron-Soeum/}"><i class="fab fa-linkedin"> </i> LinkedIn</a></h5>
+                        <div class="pb-3 mb-3">
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{mailto:ronsoeum@gmail.com}"><i class=" px-1 fa fa-envelope text-danger"></i> Email</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://github.com/ronsoeum}"><i class=" px-1 fab fa-github text-light"></i> Github</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://linkedin.com/in/Ron-Soeum/}"><i class=" px-1 text-primary fab fa-linkedin"> </i> LinkedIn</a></h5>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="carousel-item p-5">
                 <div class="container py-5 mx-auto">
-                    <img class="col-6 d-inline-block w-50 float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Bryan.jpg}" alt="Third slide"/>
-                    <div class="col-6 d-inline-block px-5">
-                        <h3 class="d-inline-block col-12 display-4 text-left my-3 text-light"> Bryan Matta </h3>
-                        <p class="d-inline-block col-12 my-3 text-left font-italic text-light">"Shoot for the moon. Even if you miss, you'll land among the stars." - Norman Vincent Peale</p>
+                    <img class="col-md-6 col-sm-12 d-inline-block float-left d-block img-fluid img-thumbnail p-0" th:src="@{../img/profile_Bryan.jpg}" alt="Third slide"/>
+                    <div class="col-md-6 col-sm-12 d-inline-block px-5">
+                        <h3 class="d-inline-block col-12 display-4 my-3 text-light"> Bryan Matta </h3>
+                        <p class="d-inline-block col-12 my-3 font-italic text-light">"Shoot for the moon. Even if you miss, you'll land among the stars." - Norman Vincent Peale</p>
                         <hr class="px-3 text-white"/>
-                        <div class="pb-3 mb-3 text-left">
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{mailto:soukbry@gmail.com}"><i class="fa fa-envelope"></i> Email</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://github.com/BryanMatta}"><i class="fab fa-github"></i> Github</a></h5>
-                            <h5 class="col-12 my-4"><a target="_blank"  th:href="@{https://linkedin.com/in/bryan-matta/}"><i class="fab fa-linkedin"> </i> LinkedIn</a></h5>
+                        <div class="pb-3 mb-3">
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{mailto:soukbry@gmail.com}"><i class=" px-1 fa fa-envelope text-danger"></i> Email</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://github.com/BryanMatta}"><i class=" px-1 fab fa-github text-light"></i> Github</a></h5>
+                            <h5 class="col-12 my-4"><a class="text-light" target="_blank"  th:href="@{https://linkedin.com/in/bryan-matta/}"><i class=" px-1 text-primary fab fa-linkedin"> </i> LinkedIn</a></h5>
                         </div>
                     </div>
                 </div>
@@ -62,11 +110,11 @@
         </a>
     </div>
     <div class="text-center mb-5">
-        <div id="thank-you-logos row" class="row img-fluid mx-5 pb-5 px-5 bg-white">
-            <h5 class="col-12 text-center m-auto my-2 p-5 font-italic">Simple-K thanks the following organizations</h5>
-            <a class="col-4" target="_blank"  th:href="@{https://www.sanantonio.gov/Pre-K-4-San-Antonio}"><img class="w-80 img-fluid m-auto px-2" th:src="@{../img/pre-k_4_sa_logo.png}" alt="Texas Education Agency Logo"/></a>
-            <a class="col-4" target="_blank"  th:href="@{https://tea.texas.gov/}"><img class="w-75 img-fluid m-auto px-2" th:src="@{../img/tea_logo.png}" alt="Texas Education Agency Logo"/></a>
-            <a class="col-4 " target="_blank"  th:href="@{https://www.wegopublic.com/}"><img class="w-50 img-fluid m-auto px-2" th:src="@{../img/GoPublic_Logo.png}" alt="Texas Education Agency Logo"/></a>
+        <div id="thank-you-logos row" class="row img-fluid mx-auto pb-5 px-5 bg-white">
+            <h5 class="col-12 text-center m-auto my-2 py-3 font-italic">Simple-K thanks the following organizations</h5>
+            <a class="col-md-4 col-sm-12" target="_blank"  th:href="@{https://www.sanantonio.gov/Pre-K-4-San-Antonio}"><img class="w-80 img-fluid m-auto px-2" th:src="@{../img/pre-k_4_sa_logo.png}" alt="Texas Education Agency Logo"/></a>
+            <a class="col-md-4 col-sm-6" target="_blank"  th:href="@{https://tea.texas.gov/}"><img class="w-75 img-fluid m-auto px-2" th:src="@{../img/tea_logo.png}" alt="Texas Education Agency Logo"/></a>
+            <a class="col-md-4 col-sm-6" target="_blank"  th:href="@{https://www.wegopublic.com/}"><img class="w-50 img-fluid m-auto px-2" th:src="@{../img/GoPublic_Logo.png}" alt="Texas Education Agency Logo"/></a>
         </div>
     </div>
 
