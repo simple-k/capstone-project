@@ -28,9 +28,6 @@
                     <a th:href="@{/login}" class="pl-0 py-1 btn rounded btn-link text-light">Login</a>
                 </div>
             </form>
-            <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
-                <button type="submit" class="px-3 py-1 btn rounded btn-link text-light" role="button">Logout</button>
-            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,11 +51,17 @@
                     <li class="mx-2 nav-item">
                         <a class="nav-link" th:href="@{/about}">About</a>
                     </li>
+                    <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout-collapse">
+                        <button type="submit" class="pl-2 py-1 btn rounded btn-link text-light" role="button">Logout</button>
+                    </form>
                     <!--<li class="nav-item">-->
                         <!--<a class="nav-link" href="#">nf</a>-->
                     <!--</li>-->
                 </ul>
             </div>
+            <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
+                <button type="submit" class="px-3 py-1 btn rounded btn-link text-light" role="button">Logout</button>
+            </form>
         </div>
     </nav>
 </th:block>
