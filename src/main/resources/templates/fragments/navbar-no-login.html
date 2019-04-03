@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 <!--BOOTSTRAP NAV TESTING-->
-<th:block th:fragment="navbar">
+<th:block th:fragment="navbar-no-login">
     <nav class="simple-k-nav">
         <div class="navbar navbar-expand-lg navbar-dark py-2">
             <div class="mx-2 navbar-brand">
@@ -13,24 +13,11 @@
                 </a>
             </div>
             <p id="logo" class="my-auto px-1"><a class="text-light" th:href="@{/}">Simple-K</a></p>
-            <form sec:authorize="!isAuthenticated()" th:method="post" th:action="@{/login}" id="login" class="navbar-nav ml-auto px-3">
-                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block my-2 form-wrapper">
-                    <input type="text" name="username" placeholder="Username" class="mx-2 form-control" required=""/>
-                <!--<i class="fas fa-user"></i>-->
-                </div>
-                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block d-xl-block my-2 form-wrapper">
-                    <input type="password" name="password" placeholder="Password" class="mx-2 form-control" required=""/>
-                <!--<i class="fas fa-lock"></i>-->
-                </div>
-                <div class="mx-2 d-none d-sm-none d-md-none d-lg-block d-xl-block mr-auto my-2">
-                        <button type="submit" class="pl-0 py-1 btn rounded btn-link text-light" role="button">Login</button>
-                </div>
-                <div class="mx-2 d-block d-lg-none d-xl-none mr-auto my-2">
-                    <a th:href="@{/login}" class="pl-0 py-1 btn rounded btn-link text-light">Login</a>
-                </div>
-            </form>
+            <div class="mx-2 d-block d-lg-none d-xl-none ml-auto my-2">
+                <a th:href="@{/login}" class="pl-0 py-1 btn rounded btn-link text-light">Login</a>
+            </div>
             <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/logout}" id="logout">
-                <button type="submit" class="px-3 py-1 btn rounded btn-link text-light" role="button">Logout</button>
+                <button type="submit" class="pl-0 py-1 btn rounded btn-link text-light" role="button">Logout</button>
             </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
