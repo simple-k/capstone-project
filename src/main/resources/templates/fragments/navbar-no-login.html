@@ -7,12 +7,11 @@
     <nav class="simple-k-nav">
         <div class="navbar navbar-expand-lg navbar-dark py-2">
             <div class="mx-2 navbar-brand">
-                <a class="text-light" th:href="@{/}">
+                <a id="logo" class="text-light" th:href="@{/}">
                     <img th:src="@{../img/apple_logo.png}" width="30" height="30" class="d-inline-block align-top" alt="Simple-K Logo"/>
-                    <!--<span class="px-1">Simple-K</span>-->
+                    <span class="px-1">Simple-K</span>
                 </a>
             </div>
-            <p id="logo" class="my-auto px-1"><a class="text-light" th:href="@{/}">Simple-K</a></p>
             <div class="mx-2 d-block d-lg-none d-xl-none ml-auto my-2">
                 <a th:href="@{/login}" class="pl-0 py-1 btn rounded btn-link text-light">Login</a>
             </div>
