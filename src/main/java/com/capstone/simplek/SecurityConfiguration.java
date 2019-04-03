@@ -51,7 +51,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/search/query", "/user/profile", "/user/edit", "/search"
+                        "/search/query", "/user/profile", "/user/edit", // only authenticated users can create ads
+                        "/search" // only authenticated users can edit ads
                 )
                 .authenticated()
         ;
