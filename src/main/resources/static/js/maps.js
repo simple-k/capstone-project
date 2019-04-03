@@ -71,7 +71,7 @@ districtData.addListener('addfeature', function(evt) {
                         strokeWeight: 2,
                         strokeColor: 'red',
                         strokeOpacity: 1,
-                        zIndex: 1,
+                        zIndex: 2,
                         fillOpacity: 0
                     }));
                     // console.log(google.maps.geometry.poly.containsLocation(userLatLng, districtData.getFeatureById(districtName[0].getGeometry().getAt(0).getArray())));
@@ -91,7 +91,7 @@ districtData.addListener('addfeature', function(evt) {
                     strokeWeight:  2,
                     strokeColor: 'black',
                     strokeOpacity: 1,
-                    zIndex: 1,
+                    zIndex: 2,
                     fillOpacity: 0
                 }));
                 // console.log(google.maps.geometry.poly.containsLocation(userLatLng, districtPoly[0].getPaths()));
@@ -115,14 +115,6 @@ districtData.addListener('addfeature', function(evt) {
         }
     }
 });
-map.data.addListener('mouseover', function(event) {
-    map.data.revertStyle();
-    map.data.overrideStyle(event.feature, {strokeWeight: 3, zIndex:4, strokeColor: 'yellow'});
-});
-
-map.data.addListener('mouseout', function(event) {
-    map.data.revertStyle();
-});
 districtData.setStyle({
     strokeWeight: 1,
     clickable: true,
@@ -131,6 +123,14 @@ districtData.setStyle({
     fillOpacity: 0.1
 });
 districtData.setMap(map);
+map.data.addListener(districtData, 'mouseover', function(event) {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {strokeWeight: 3, zIndex:3, strokeColor: 'yellow'});
+});
+map.data.addListener(districtData,'mouseout', function(event) {
+    map.data.revertStyle();
+});
+
 // GEOJSON: CONTAINS LOCATION
 
 
