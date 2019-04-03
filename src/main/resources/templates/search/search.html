@@ -51,133 +51,6 @@
 
     <input type="hidden" id="userDistrict" th:field="${queries.district}"/>
 
-    <!--<div class="container">-->
-        <!--<div id="content">-->
-            <!--<h1>Find Your School</h1>-->
-            <!--<div th:if="${session.inputErrors != null}">-->
-                <!--<div class="alert alert-danger alert-dismissable">-->
-                    <!--<a class="panel-close close" data-dismiss="alert">×</a>-->
-                    <!--<i class="fa fa-times-circle"></i>-->
-                    <!--<span th:text="${session.inputErrors}"></span>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div id="wrapper">-->
-                <!--<div id="steps">-->
-                    <!--<form id="formElem" th:action="@{/search/query/}" th:method="post" th:object="${user}">-->
-                        <!--<fieldset class="step">-->
-                            <!--<legend>Personal Details</legend>-->
-                            <!--<p>-->
-                                <!--<label for="ufirstName">First Name</label>-->
-                                <!--<input id="ufirstName" th:field="*{uFirstName}" type="text" AUTOCOMPLETE="OFF" />-->
-
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="ulastName">Last Name</label>-->
-                                <!--<input id="ulastName" th:field="*{uLastName}" type="text" AUTOCOMPLETE="OFF" />-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="phone">Phone</label>-->
-                                <!--<input id="phone" th:field="*{phoneNumber}" placeholder="e.g. (351)215-5555" type="text" AUTOCOMPLETE="OFF" />-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="address">Address</label>-->
-                                <!--<input id="address" th:field="*{address}" placeholder="600 Navarro St #350" type="text" AUTOCOMPLETE="OFF" class="autocomplete"/>-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="zipCode">Zip Code</label>-->
-                                <!--<input id="zipCode" th:field="*{zipCode}" placeholder="78205" type="text" AUTOCOMPLETE="OFF" />-->
-                            <!--</p>-->
-                            <!---->
-                            <!---->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="step" th:object="${child}">-->
-                            <!--<legend>Child Info</legend>-->
-                            <!--<p>-->
-                                <!--<label for="firstName">First Name</label>-->
-                                <!--<input id="firstName" th:field="*{firstName}" type="text" AUTOCOMPLETE="OFF" />-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="lastName">Last Name</label>-->
-                                <!--<input id="lastName" th:field="*{lastName}" type="text" AUTOCOMPLETE="OFF" />-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="dob">Date of Birth</label>-->
-                                <!--<input id="dob" th:field="*{dob}" type="date" min="2013-09-01" max="2015-09-01" />-->
-                            <!--</p>-->
-                            <!--<p>-->
-                                <!--<label for="gender">Gender</label>-->
-                                <!--<select id="gender" th:field="*{gender}">-->
-                                    <!--<option th:value="M" th:text="Male"></option>-->
-                                    <!--<option th:value="F" th:text="Female"></option>-->
-                                <!--</select>-->
-                            <!--</p>-->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="step" th:object="${queries}">-->
-                            <!--<div class="scroll">-->
-                                <!--<legend>Services</legend>-->
-                                <!--<p>-->
-                                    <!--<span class="d-inline-block">Will your child need bus transportation services?</span>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{transportation}" th:value="true" />Yes</label>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{transportation}" th:value="false" />No</label>-->
-                                <!--</p>-->
-                                <!--<p>-->
-                                    <!--<span class="d-inline-block">Is English your child's primary language?</span>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{language}" th:value="true" />Yes</label>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{language}" th:value="false" />No</label>-->
-                                <!--</p>-->
-                                <!--<p>-->
-                                    <!--<span class="d-inline-block">Does your child have a disability or health impairments?</span>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="true" />Yes</label>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="false" />No</label>-->
-                                <!--</p>-->
-                                <!--<p>-->
-                                    <!--<span class="d-inline-block">Do you need afterschool daycare services?</span>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{daycare}" th:value="true" />Yes</label>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{daycare}" th:value="false" />No</label>-->
-                                <!--</p>-->
-                                <!--<p>-->
-                                    <!--<span class="d-inline-block">Do you need financial services like grants and/or free lunch?</span>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{financial}" th:value="true" />Yes</label>-->
-                                    <!--<label class="radio-inline"><input type="radio" th:field="*{financial}" th:value="false" />No</label>-->
-                                <!--</p>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="step">-->
-                            <!--<legend>Confirm</legend>-->
-                            <!--<p>-->
-                                <!--Everything in the form was correctly filled-->
-                                <!--if all the steps have a green checkmark icon.-->
-                                <!--A red checkmark icon indicates that some field-->
-                                <!--is missing or filled out with invalid data.-->
-                            <!--</p>-->
-                            <!--<p class="submit">-->
-                                <!--<button id="submitButton" type="submit">Search Schools</button>-->
-                            <!--</p>-->
-                        <!--</fieldset>-->
-                    <!--</form>-->
-                <!--</div>-->
-                <!--<div id="navigation" style="display:none;">-->
-                    <!--<ul class="flex-container">-->
-                        <!--<li class="selected">-->
-                            <!--<a href="#">Personal Details</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="#">Child Info</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="#">Services</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="#">Confirm</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--==================================================TEST CODE==================================================-->
-
     <div class="container">
         <div th:if="${session.inputErrors != null}">
             <div class="alert alert-danger alert-dismissable mt-2">
@@ -266,52 +139,39 @@
                 <div class="queries">
                     <div class="">
                         <p class="margin-bottom-two">Will your child need bus transportation services?</p>
-                        <label class="margin-right"><input type="radio" th:name="*{transportation}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:name="*{transportation}" th:value="false" />No</label>
+                        <label class="radio-inline margin-right"><input class="mr-2" type="radio" th:field="*{transportation}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input class="mr-2" type="radio" th:field="*{transportation}" th:value="false" />No</label>
                     </div>
                     <div class="">
                         <p class="margin-bottom-two">Is English your child's primary language?</p>
-                        <label class="radio-inline margin-right"><input type="radio" th:field="*{language}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{language}" th:value="false" />No</label>
+                        <label class="radio-inline margin-right"><input class="mr-2" type="radio" th:field="*{language}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input class="mr-2" type="radio" th:field="*{language}" th:value="false" />No</label>
                     </div>
                     <div class="">
                         <p class="margin-bottom-two">Does your child have a disability or health impairments?</p>
-                        <label class="radio-inline margin-right"><input type="radio" th:field="*{disability}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{disability}" th:value="false" />No</label>
+                        <label class="radio-inline margin-right"><input class="mr-2" type="radio" th:field="*{disability}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input class="mr-2" type="radio" th:field="*{disability}" th:value="false" />No</label>
                     </div>
                     <div class="">
                         <p class="margin-bottom-two">Do you need afterschool daycare services?</p>
-                        <label class="radio-inline margin-right"><input type="radio" th:field="*{daycare}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{daycare}" th:value="false" />No</label>
+                        <label class="radio-inline margin-right"><input class="mr-2" type="radio" th:field="*{daycare}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input class="mr-2" type="radio" th:field="*{daycare}" th:value="false" />No</label>
                     </div>
                     <div class="">
                         <p class="margin-bottom-two">Do you need financial services like grants and/or free lunch?</p>
-                        <label class="radio-inline margin-right"><input type="radio" th:field="*{financial}" th:value="true" />Yes</label>
-                        <label class="radio-inline"><input type="radio" th:field="*{financial}" th:value="false" />No</label>
+                        <label class="radio-inline margin-right"><input class="mr-2" type="radio" th:field="*{financial}" th:value="true" />Yes</label>
+                        <label class="radio-inline"><input class="mr-2" type="radio" th:field="*{financial}" th:value="false" />No</label>
                     </div>
                     <div class="submit-button-wrapper">
                         <button id="submitButton2" type="submit" class="btn btn-primary btn-md">Search Schools</button>
                     </div>
                 </div>
             </div>
-            <!--<div class="content">-->
-                <!--<h3>Confirm</h3>-->
-                <!--<p>-->
-                    <!--Everything in the form was correctly filled-->
-                    <!--if all the steps have a green checkmark icon.-->
-                    <!--A red checkmark icon indicates that some field-->
-                    <!--is missing or filled out with invalid data.-->
-                <!--</p>-->
-                <!--<p class="submit">-->
-                <!--</p>-->
-            <!--</div>-->
         </form>
         <nav>
             <ul class="pagination justify-content-center pagination-sm"></ul>
         </nav>
     </div>
-
-    <!--==================================================TEST CODE==================================================-->
 
     <div th:replace="fragments/footer :: footer"></div>
     <div th:replace="fragments/scripts :: scripts"></div>

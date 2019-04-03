@@ -9,6 +9,20 @@
 	<div class="col-11 col-md-8 col-lg-7 w-80 bg-light border rounded p-3 mx-auto">
 		<form th:action="@{/login}" method="POST" class="col-sm-12 col-md-10 mx-auto w-80">
 			<h3 class="mb-2 py-2 text-center">Account Login</h3>
+			<div th:if="${param.error}">
+				<div class="alert alert-danger alert-dismissable">
+					<a class="panel-close close" data-dismiss="alert">×</a>
+					<i class="fa fa-times-circle"></i>
+					<span>Invalid Username and Password.</span>
+				</div>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="alert alert-danger alert-dismissable">
+					<a class="panel-close close" data-dismiss="alert">×</a>
+					<i class="fa fa-times-circle"></i>
+					<span>You have been logged out.</span>
+				</div>
+			</div>
 			<div class="my-2 form-wrapper">
 				<input type="text" name="username" placeholder="Username" class=" form-control" required=""/>
 				<!--<i class="fas fa-user"></i>-->
@@ -16,20 +30,6 @@
 			<div class="my-2 form-wrapper">
 				<input type="password" name="password" placeholder="Password" class="form-control" required=""/>
 				<!--<i class="fas fa-lock"></i>-->
-			</div>
-			<div th:if="${param.error}">
-				<div class="my-3 alert alert-danger alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a>
-					<i class="fa fa-times-circle"></i>
-					<p class="m-auto">Invalid Username and Password.</p>
-				</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="my-3 alert alert-danger alert-dismissable">
-					<a class="panel-close close" data-dismiss="alert">×</a>
-					<i class="fa fa-times-circle"></i>
-					<p class="m-auto">You have been logged out.</p>
-				</div>
 			</div>
 			<div class="mx-auto form-wrapper">
 				<button type="submit" class="mx-auto my-2 w-100 btn btn-primary btn-lg text-light" role="button">Login</button>
